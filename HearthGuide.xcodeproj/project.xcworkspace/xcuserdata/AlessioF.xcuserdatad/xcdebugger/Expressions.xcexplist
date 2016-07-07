@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DeckSlideController.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():DeckSlideController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Dimmable&lt;A where ...&gt;.dim(Direction, color : UIColor, alpha : CGFloat, speed : Double, viewController : UIViewController) -&gt; ():PopupController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
