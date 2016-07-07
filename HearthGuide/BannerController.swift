@@ -18,6 +18,9 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   @IBOutlet var topCon: NSLayoutConstraint!
 
   override func viewDidLoad() {
+    
+    //test github da cancellare 
+    
     super.viewDidLoad()
     
     vwBanner.delegate           = self
