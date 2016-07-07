@@ -19,8 +19,6 @@ class BannerController: UIViewController, GADBannerViewDelegate {
 
   override func viewDidLoad() {
     
-    //test github da cancellare 
-    
     super.viewDidLoad()
     
     vwBanner.delegate           = self
