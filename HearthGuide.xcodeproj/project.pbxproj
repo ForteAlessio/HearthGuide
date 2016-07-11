@@ -15,6 +15,7 @@
 		E209CFA21CF72BAC0069E9F0 /* HeroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209CFA11CF72BAC0069E9F0 /* HeroCell.swift */; };
 		E2106CD01D184574001B70A4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2106CC81D184574001B70A4 /* Lato-Light.ttf */; };
 		E2106CD11D184574001B70A4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2106CC91D184574001B70A4 /* Lato-Regular.ttf */; };
+		E2154C681D339C6B004115DF /* BannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154C671D339C6B004115DF /* BannerController.swift */; };
 		E22A2BA61D056F39006628DF /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A2BA51D056F39006628DF /* MIBadgeButton.swift */; };
 		E233A3C51D058DF500E2F43E /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E233A3C41D058DF500E2F43E /* SwiftLoader.swift */; };
 		E24A251F1D216523006EA7D9 /* DecodeHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A251E1D216522006EA7D9 /* DecodeHTML.swift */; };
@@ -83,7 +84,6 @@
 		E2EA27491D2BC4E60012331A /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA27481D2BC4E60012331A /* GoogleMobileAds.framework */; };
 		E2ED29001D018FF7005B02F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2ED28FF1D018FF7005B02F5 /* Assets.xcassets */; };
 		E2F29A6D1D266A4500D95F6F /* Crediti.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E2F29A6C1D266A4500D95F6F /* Crediti.rtf */; };
-		E2FDA60F1D2BBF9800794A0B /* BannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDA60E1D2BBF9800794A0B /* BannerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +97,7 @@
 		E209CFA11CF72BAC0069E9F0 /* HeroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroCell.swift; sourceTree = "<group>"; };
 		E2106CC81D184574001B70A4 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		E2106CC91D184574001B70A4 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		E2154C671D339C6B004115DF /* BannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerController.swift; sourceTree = "<group>"; };
 		E22A2BA51D056F39006628DF /* MIBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIBadgeButton.swift; sourceTree = "<group>"; };
 		E233A3C41D058DF500E2F43E /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		E24A251E1D216522006EA7D9 /* DecodeHTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeHTML.swift; sourceTree = "<group>"; };
@@ -167,7 +168,6 @@
 		E2EA27481D2BC4E60012331A /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		E2ED28FF1D018FF7005B02F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2F29A6C1D266A4500D95F6F /* Crediti.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Crediti.rtf; sourceTree = "<group>"; };
-		E2FDA60E1D2BBF9800794A0B /* BannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +208,7 @@
 				E2D483991CF83ABF00D686FF /* Librerie */,
 				E209CF9C1CF7236C0069E9F0 /* Font */,
 				E209CF881CF7092D0069E9F0 /* AppDelegate.swift */,
-				E2FDA60E1D2BBF9800794A0B /* BannerController.swift */,
+				E2154C671D339C6B004115DF /* BannerController.swift */,
 				E209CF9F1CF72B350069E9F0 /* HeroController.swift */,
 				E2D483E01CF8B41400D686FF /* DeckSlideController.swift */,
 				E26778F81D1D5B5900D9EABF /* ListDeckController.swift */,
@@ -485,12 +485,12 @@
 				E2D4839B1CF83B2600D686FF /* DeckModel.swift in Sources */,
 				E296C97E1D13E40600EA6183 /* InfoCardController.swift in Sources */,
 				E2D483CB1CF8755E00D686FF /* ManagedRelationship.swift in Sources */,
-				E2FDA60F1D2BBF9800794A0B /* BannerController.swift in Sources */,
 				E26779091D1D880700D9EABF /* GuideDeckController.swift in Sources */,
 				E2D483951CF83ABC00D686FF /* Stream.swift in Sources */,
 				E29D89601D192C5F0055B27E /* UIColorExtension.swift in Sources */,
 				E233A3C51D058DF500E2F43E /* SwiftLoader.swift in Sources */,
 				E2D483BD1CF8755E00D686FF /* Graph.swift in Sources */,
+				E2154C681D339C6B004115DF /* BannerController.swift in Sources */,
 				E26778F91D1D5B5A00D9EABF /* ListDeckController.swift in Sources */,
 				E2D483C41CF8755E00D686FF /* ManagedActionProperty.swift in Sources */,
 				E2D4839F1CF83BF500D686FF /* CardModel.swift in Sources */,
