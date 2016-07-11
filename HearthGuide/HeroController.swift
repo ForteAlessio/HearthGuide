@@ -24,8 +24,6 @@ class HeroController: UITableViewController {
     
     DataManager.shared.startGraph()
     
-    notifyAlert()
-    
     //controlla se ci sono aggiornamenti da fare, se si, imposta il badge sul button refresh
     let defaults = NSUserDefaults.standardUserDefaults()
     if let alr = defaults.stringForKey("alert") {
@@ -144,37 +142,6 @@ class HeroController: UITableViewController {
     presentViewController(alertVC, animated: true, completion: nil)
   }
   
-  //ALLO START DELL'APP CHIEDIAMO ALL'UTENTE SE VUOLE LE NOTIFICHE DI AGGIORNAMENTO
-  func notifyAlert () {
-    //se è il primo avvio chiediamo l'autorizzazione per le notifiche
-    if DataManager.shared.Eroi.count == 0 {
-      
-      DataManager.shared.creaEroi()
-      
-      let alertVC = PMAlertController(title: "Notifiche Aggiornamenti",
-                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, potrai aggiornare manualmente i mazzi.",
-                                      image: UIImage(named: "permission.png"), style: .Alert)
-      
-      alertVC.addAction(PMAlertAction(title: "Avanti", style: .Cancel, action: { () -> Void in
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-          
-          _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
-          
-          DataManager.shared.startDataManager([])
-        });
-      }))
-      
-      presentViewController(alertVC, animated: true, completion: nil)
-    }
-    //altrimenti controlliamo se nelle impostazioni l'utente ha attivato le notifiche, se si impostiamo l'app per ricerverle
-    else {
-      let notificationType = UIApplication.sharedApplication().currentUserNotificationSettings()!.types
-      
-      if notificationType != UIUserNotificationType.None {
-        _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
-      }
-    }
-  }
   
   //CONFIGURA LA VIEW CHE GIRA PER IL LOADING 
   func configLoading() {

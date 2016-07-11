@@ -34,6 +34,7 @@ class DataManager: NSObject, GraphDelegate {
   var heroSelected    : String   = ""
   var graph           : Graph = Graph()
   var mainController  : HeroController!
+  var canLaunch       : Bool     = false
 
   
   func startGraph () {

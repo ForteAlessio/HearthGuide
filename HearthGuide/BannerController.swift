@@ -20,6 +20,9 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   @IBOutlet var heightCon: NSLayoutConstraint!
   @IBOutlet var topCon: NSLayoutConstraint!
   
+  
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -62,14 +65,11 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   func openLock() {
     
     UIView.animateWithDuration(1, delay: 0, options: [], animations: {
-      
-      // Open lock.
       let yDelta = self.lockBorder.frame.maxY
       
       print(yDelta)
@@ -81,7 +81,40 @@ class BannerController: UIViewController, GADBannerViewDelegate {
         self.topLock.removeFromSuperview()
         self.lockBorder.removeFromSuperview()
         self.bottomLock.removeFromSuperview()
+        self.notifyAlert ()
     })
+  }
+  
+  //ALLO START DELL'APP CHIEDIAMO ALL'UTENTE SE VUOLE LE NOTIFICHE DI AGGIORNAMENTO
+  func notifyAlert () {
+    //se è il primo avvio chiediamo l'autorizzazione per le notifiche
+    if DataManager.shared.Eroi.count == 0 {
+      
+      DataManager.shared.creaEroi()
+      
+      let alertVC = PMAlertController(title: "Notifiche Aggiornamenti",
+                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, potrai aggiornare manualmente i mazzi.",
+                                      image: UIImage(named: "permission.png"), style: .Alert)
+      
+      alertVC.addAction(PMAlertAction(title: "Avanti", style: .Cancel, action: { () -> Void in
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+          
+          _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
+          
+          DataManager.shared.startDataManager([])
+        });
+      }))
+      
+      presentViewController(alertVC, animated: true, completion: nil)
+    }
+    //altrimenti controlliamo se nelle impostazioni l'utente ha attivato le notifiche, se si impostiamo l'app per ricerverle
+    else {
+      let notificationType = UIApplication.sharedApplication().currentUserNotificationSettings()!.types
+      
+      if notificationType != UIUserNotificationType.None {
+        _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
+      }
+    }
   }
   
   //Serve per impostare la Status Bar Bianca
