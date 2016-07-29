@@ -72,11 +72,10 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     UIView.animateWithDuration(1, delay: 0, options: [], animations: {
       let yDelta = self.lockBorder.frame.maxY
       
-      print(yDelta)
-      
       self.topLock.center.y    -= yDelta
       self.lockBorder.center.y -= yDelta
       self.bottomLock.center.y += yDelta
+      
       }, completion: { _ in
         self.topLock.removeFromSuperview()
         self.lockBorder.removeFromSuperview()
