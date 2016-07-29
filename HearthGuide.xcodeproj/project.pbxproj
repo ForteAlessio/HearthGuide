@@ -25,6 +25,7 @@
 		E26779091D1D880700D9EABF /* GuideDeckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26779081D1D880700D9EABF /* GuideDeckController.swift */; };
 		E2782D911D2659C8003190C3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E2782D901D2659C8003190C3 /* Settings.bundle */; };
 		E27F0E0F1D267CCF00D4873C /* CardListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F0E0E1D267CCF00D4873C /* CardListHeader.swift */; };
+		E2825F421D4B85690043E27D /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2825F411D4B85690043E27D /* GuideCell.swift */; };
 		E296C97E1D13E40600EA6183 /* InfoCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296C97D1D13E40600EA6183 /* InfoCardController.swift */; };
 		E29D89601D192C5F0055B27E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D895F1D192C5E0055B27E /* UIColorExtension.swift */; };
 		E2B42A3E1D0177F9007775CC /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B42A3B1D0177F9007775CC /* PMAlertController.swift */; };
@@ -108,6 +109,7 @@
 		E26779081D1D880700D9EABF /* GuideDeckController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideDeckController.swift; sourceTree = "<group>"; };
 		E2782D901D2659C8003190C3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E27F0E0E1D267CCF00D4873C /* CardListHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListHeader.swift; sourceTree = "<group>"; };
+		E2825F411D4B85690043E27D /* GuideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		E28D5D301D22B7D30018FA9E /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		E296C97D1D13E40600EA6183 /* InfoCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCardController.swift; sourceTree = "<group>"; };
 		E29D895F1D192C5E0055B27E /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -211,8 +213,8 @@
 				E2154C671D339C6B004115DF /* BannerController.swift */,
 				E209CF9F1CF72B350069E9F0 /* HeroController.swift */,
 				E2D483E01CF8B41400D686FF /* DeckSlideController.swift */,
-				E26778F81D1D5B5900D9EABF /* ListDeckController.swift */,
 				E26779081D1D880700D9EABF /* GuideDeckController.swift */,
+				E26778F81D1D5B5900D9EABF /* ListDeckController.swift */,
 				E296C97D1D13E40600EA6183 /* InfoCardController.swift */,
 				E209CF8C1CF7092D0069E9F0 /* Main.storyboard */,
 				E2D47A691CF739660068756B /* DataManager.swift */,
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				E209CFA11CF72BAC0069E9F0 /* HeroCell.swift */,
+				E2825F411D4B85690043E27D /* GuideCell.swift */,
 				E2D483E21CF8B9E300D686FF /* CardSlideCell.swift */,
 				E2D483DE1CF8B37600D686FF /* DeckSlideCell.swift */,
 				E26778FC1D1D625100D9EABF /* CardListCell.swift */,
@@ -483,6 +486,7 @@
 				E2D483C81CF8755E00D686FF /* ManagedNode.swift in Sources */,
 				E2D483C01CF8755E00D686FF /* GraphSearch.swift in Sources */,
 				E2D4839B1CF83B2600D686FF /* DeckModel.swift in Sources */,
+				E2825F421D4B85690043E27D /* GuideCell.swift in Sources */,
 				E296C97E1D13E40600EA6183 /* InfoCardController.swift in Sources */,
 				E2D483CB1CF8755E00D686FF /* ManagedRelationship.swift in Sources */,
 				E26779091D1D880700D9EABF /* GuideDeckController.swift in Sources */,

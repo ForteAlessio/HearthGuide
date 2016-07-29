@@ -24,19 +24,18 @@ class DataManager: NSObject, GraphDelegate {
   }
   
   
-  var Eroi            : [Entity] = []
-  var Mazzi           : [Entity] = []
-  var Carte           : [Entity] = []
-  var nomiEroi        : [String] = []
-  var readNotify      : Bool     = false
+  var Eroi            : [Entity]    = []
+  var Mazzi           : [Entity]    = []
+  var Carte           : [Entity]    = []
+  var nomiEroi        : [String]    = []
+  var readNotify      : Bool        = false
+  var cardSelected    : UIImage     = UIImage()
+  var heroSelected    : String      = ""
+  var graph           : Graph       = Graph()
+  var canLaunch       : Bool        = false
   var option          : [NSObject: AnyObject]?
-  var cardSelected    : UIImage  = UIImage()
-  var heroSelected    : String   = ""
-  var graph           : Graph = Graph()
   var mainController  : HeroController!
-  var canLaunch       : Bool     = false
 
-  
   func startGraph () {
     graph.delegate = self
     

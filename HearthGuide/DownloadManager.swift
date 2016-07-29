@@ -95,6 +95,8 @@ class DownloadManager: NSObject {
           deck.addGroup(Heroes[x])
           DataManager.shared.Mazzi.append(deck)
           
+          
+          //SCARICO LE CARTE CHE DISTINGUONO IL MAZZO
           if let deckCards = jsonMazzi[i]["cards"].arrayObject {
             let jsonCard =  JSON(deckCards)
             
@@ -142,6 +144,9 @@ class DownloadManager: NSObject {
             }
           }
           
+          DataManager.shared.graph.save()
+          
+          //SCARICO LA LISTA COMPLETA DELLE CARTE
           if let listCards = jsonMazzi[i]["lista"].arrayObject {
             let jsonCard =  JSON(listCards)
             
@@ -190,6 +195,38 @@ class DownloadManager: NSObject {
               
               DataManager.shared.Carte.append(card)
               card.addGroup((deck["nome"] as! String) + "Info")
+              
+            }
+          }
+          
+          DataManager.shared.graph.save()
+          
+          //SCARICO LE CARTE PIU' FORTI PER MAZZO
+          if let topCards = jsonMazzi[i]["topcard"].arrayObject {
+            let jsonCard =  JSON(topCards)
+            
+            //ciclo le carte per le Carte più forti del Mazzo
+            for j in 0..<jsonCard.count {
+              let card = Entity(type: "Carta")
+              
+              if let cardName = jsonCard[j]["name"].string {
+                card["nome"] = cardName
+              }
+              
+              if let cardId = jsonCard[j]["id"].string {
+                card["id"] = cardId
+              }
+              
+              if let numCopie = jsonCard[j]["copie"].string {
+                card["copie"] = numCopie
+              }
+              
+              card["mazzo"] = deck["nome"] as! String
+              card["eroe"]  = Heroes[x]
+              
+              DataManager.shared.graph.save()
+              DataManager.shared.Carte.append(card)
+              card.addGroup((deck["nome"] as! String) + "TopCards")
             }
           }
           
@@ -220,6 +257,7 @@ class DownloadManager: NSObject {
       }
     }
   }
+  
   
   //cancella tutti i dati riguardanti l'eroe che gli passiamo
   func emptyDbFromHero(ANome: String) {

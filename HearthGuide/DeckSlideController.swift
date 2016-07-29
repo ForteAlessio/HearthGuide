@@ -107,6 +107,13 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
       let indexPath       = (sender as! UIButton).tag
       controller.deckName = deckName[indexPath]["nome"] as? String
       controller.guide    = deckName[indexPath]["guida"] as? String
+    
+      
+      let TopCard: Array<Entity> = graph.searchForEntity(groups: [deckName[indexPath]["nome"] as! String + "TopCards"])
+      controller.TopCards = TopCard
+      
+      let listCards: Array<Entity> = graph.searchForEntity(groups: [deckName[indexPath]["nome"] as! String + "Info"])
+      controller.listCards = listCards
     }
   }
 
