@@ -474,7 +474,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2019" y="489"/>
+            <point key="canvasLocation" x="2019" y="1288"/>
         </scene>
         <!--NavController-->
         <scene sceneID="bFP-zd-x5Z">
@@ -532,7 +532,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1660" y="1282"/>
+            <point key="canvasLocation" x="2019" y="489"/>
         </scene>
         <!--Guida-->
         <scene sceneID="JwC-gO-rsw">
@@ -547,7 +547,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-DE-3i8">
-                                <rect key="frame" x="0.0" y="84" width="600" height="271"/>
+                                <rect key="frame" x="8" y="84" width="584" height="271"/>
                                 <color key="backgroundColor" red="1" green="0.035181430239999999" blue="0.083293539589999993" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Guida Mazzo">
@@ -630,7 +630,7 @@
                                             <outlet property="delegate" destination="seB-RS-bjS" id="P3P-5F-Z1d"/>
                                         </connections>
                                     </collectionView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carte Importanti" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85K-xl-GWb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carte Chiave del Mazzo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85K-xl-GWb">
                                         <rect key="frame" x="8" y="5" width="576" height="28"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
@@ -664,22 +664,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6K-6E-jkb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6K-6E-jkb">
                                 <rect key="frame" x="8" y="52" width="584" height="29"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Zoolock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9W-9E-0QR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoolock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9W-9E-0QR">
                                         <rect key="frame" x="0.0" y="0.0" width="584" height="29"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.035181430239999999" blue="0.083293539589999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="f9W-9E-0QR" secondAttribute="bottom" id="EsZ-rA-slY"/>
-                                    <constraint firstItem="f9W-9E-0QR" firstAttribute="top" secondItem="y6K-6E-jkb" secondAttribute="top" id="I2n-RC-Wl4"/>
-                                    <constraint firstItem="f9W-9E-0QR" firstAttribute="leading" secondItem="y6K-6E-jkb" secondAttribute="leading" id="Rdb-jD-XWO"/>
-                                    <constraint firstAttribute="trailing" secondItem="f9W-9E-0QR" secondAttribute="trailing" id="whM-yd-otD"/>
+                                    <constraint firstItem="f9W-9E-0QR" firstAttribute="top" secondItem="y6K-6E-jkb" secondAttribute="top" id="9pQ-19-ckZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="f9W-9E-0QR" secondAttribute="trailing" id="ZQb-aX-jgt"/>
+                                    <constraint firstAttribute="bottom" secondItem="f9W-9E-0QR" secondAttribute="bottom" id="cCa-2r-Roo"/>
+                                    <constraint firstAttribute="height" constant="29" id="nWp-c3-3zf"/>
+                                    <constraint firstItem="f9W-9E-0QR" firstAttribute="leading" secondItem="y6K-6E-jkb" secondAttribute="leading" id="nry-eO-JEi"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -696,35 +697,44 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qYw-DE-3i8" secondAttribute="trailing" id="AwF-UR-AMk"/>
+                            <constraint firstAttribute="trailing" secondItem="qYw-DE-3i8" secondAttribute="trailing" constant="8" id="AwF-UR-AMk"/>
                             <constraint firstItem="Fky-P3-fie" firstAttribute="top" secondItem="qYw-DE-3i8" secondAttribute="bottom" constant="8" id="Ggq-ix-3Vw"/>
                             <constraint firstItem="y6K-6E-jkb" firstAttribute="leading" secondItem="x3c-FG-0op" secondAttribute="leading" constant="8" id="Gxs-nQ-9Xc"/>
                             <constraint firstItem="qYw-DE-3i8" firstAttribute="top" secondItem="Wel-hT-uc9" secondAttribute="bottom" constant="40" id="Kg5-O9-L6c"/>
                             <constraint firstAttribute="trailing" secondItem="y6K-6E-jkb" secondAttribute="trailing" constant="8" id="MHc-5n-n4x"/>
-                            <constraint firstItem="qYw-DE-3i8" firstAttribute="leading" secondItem="x3c-FG-0op" secondAttribute="leading" id="P8I-ZW-LMt"/>
+                            <constraint firstItem="qYw-DE-3i8" firstAttribute="leading" secondItem="x3c-FG-0op" secondAttribute="leading" constant="8" id="P8I-ZW-LMt"/>
+                            <constraint firstAttribute="trailing" secondItem="y6K-6E-jkb" secondAttribute="trailing" constant="8" id="Qem-0j-LfS"/>
                             <constraint firstAttribute="trailing" secondItem="Fky-P3-fie" secondAttribute="trailing" constant="8" id="R67-Wb-mVn"/>
                             <constraint firstItem="aiD-i9-pkE" firstAttribute="top" secondItem="qYw-DE-3i8" secondAttribute="bottom" constant="245" id="Uwd-xS-2T4"/>
+                            <constraint firstItem="y6K-6E-jkb" firstAttribute="leading" secondItem="x3c-FG-0op" secondAttribute="leading" constant="8" id="df5-zC-xb6"/>
                             <constraint firstItem="Fky-P3-fie" firstAttribute="leading" secondItem="x3c-FG-0op" secondAttribute="leading" constant="8" id="hwq-i4-JMG"/>
+                            <constraint firstItem="y6K-6E-jkb" firstAttribute="top" secondItem="Wel-hT-uc9" secondAttribute="bottom" constant="8" id="nVh-iv-VoK"/>
                             <constraint firstItem="aiD-i9-pkE" firstAttribute="top" secondItem="Fky-P3-fie" secondAttribute="bottom" constant="8" id="uqL-fu-svJ"/>
                             <constraint firstItem="y6K-6E-jkb" firstAttribute="top" secondItem="Wel-hT-uc9" secondAttribute="bottom" constant="8" id="wsA-pW-o4k"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Guida" id="Tjk-5r-dW5">
-                        <barButtonItem key="backBarButtonItem" title=" " id="hsL-8Q-lic"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="bbSegue" id="0EQ-i4-IbV">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="CeD-C5-Wmw" kind="presentation" identifier="showCardGuideImage" id="9tE-bg-L7N"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="CollectionView" destination="5I3-eJ-S0A" id="qTn-9T-ck3"/>
+                        <outlet property="bbSegue" destination="0EQ-i4-IbV" id="CjF-LW-7l0"/>
                         <outlet property="laNomeDeck" destination="f9W-9E-0QR" id="8jk-br-U3w"/>
                         <outlet property="tvGuide" destination="qYw-DE-3i8" id="2dJ-O6-5yf"/>
                         <outlet property="vwBackCollView" destination="Fky-P3-fie" id="wVq-zn-7Ri"/>
-                        <outlet property="vwHeader" destination="f9W-9E-0QR" id="Okl-ff-rvi"/>
-                        <outlet property="vwNoCorner" destination="08v-jn-VJS" id="e0M-G6-Ro5"/>
-                        <outlet property="vwNomeDeck" destination="y6K-6E-jkb" id="dKU-bf-btW"/>
+                        <outlet property="vwHeader" destination="i8k-ek-LsB" id="mhx-dC-qjI"/>
+                        <outlet property="vwNoCorner" destination="08v-jn-VJS" id="CsJ-Pq-SSe"/>
+                        <outlet property="vwNomeDeck" destination="y6K-6E-jkb" id="w0u-Ru-Oqt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNw-T6-1Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2019" y="-203"/>
+            <point key="canvasLocation" x="2019" y="-250"/>
         </scene>
         <!--Banner Controller-->
         <scene sceneID="hNr-IB-Ykl">
@@ -826,6 +836,6 @@
         <image name="refresh" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t64-wo-Azr"/>
+        <segue reference="9tE-bg-L7N"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GuideDeckController: UIViewController {
+class GuideDeckController: UIViewController, UIViewControllerTransitioningDelegate {
   
   var deckName  : String!
   var guide     : String!
@@ -19,10 +19,11 @@ class GuideDeckController: UIViewController {
   @IBOutlet var vwBackCollView: UIView!
   @IBOutlet var tvGuide: UITextView!
   @IBOutlet var CollectionView: UICollectionView!
+  @IBOutlet var laNomeDeck: UILabel!
   @IBOutlet var vwNoCorner: UIView!
   @IBOutlet var vwHeader: UIView!
-  @IBOutlet var laNomeDeck: UILabel!
   @IBOutlet var vwNomeDeck: UIView!
+  @IBOutlet var bbSegue: UIBarButtonItem!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,7 +46,8 @@ class GuideDeckController: UIViewController {
     vwBackCollView.backgroundColor  = UIColor(patternImage: UIImage(named: "cellBackground")!)
     vwHeader.backgroundColor        = UIColor(rgba: "#ecf0f1", alpha: 1)
     vwNoCorner.backgroundColor      = UIColor(rgba: "#ecf0f1", alpha: 1)
-
+    bbSegue.tintColor               = UIColor.clearColor()
+    
     navigationItem.titleView = UIImageView(image: UIImage(named: DataManager.shared.heroSelected + "Logo"))
   }
   
@@ -56,7 +58,36 @@ class GuideDeckController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     self.tvGuide.scrollRangeToVisible(NSMakeRange(0, 0))
   }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    if segue.identifier == "showCardGuideImage" {
+      let InfoCardView = segue.destinationViewController
+      InfoCardView.transitioningDelegate  = self
+      InfoCardView.modalPresentationStyle = .Custom
+    }
+  }
+  
+  //Metodi per Animazione Bubble
+  let transition    = BubbleTransition()
+  
+  func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .Present
+    transition.startingPoint  = self.view.center
+    transition.duration       = 0.35
+    transition.bubbleColor    = UIColor.blackColor().colorWithAlphaComponent(0.2)
+    return transition
+  }
+  
+  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .Dismiss
+    transition.startingPoint  = self.view.center
+    transition.bubbleColor    = UIColor.clearColor()
+    return transition
+  }
 }
+
+
 
 
 extension GuideDeckController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -82,20 +113,20 @@ extension GuideDeckController: UICollectionViewDelegate, UICollectionViewDataSou
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    /*
-    var CardList = mazzi[collectionView.tag] as! [Entity]
+    let contenuto = TopCards[indexPath.row]
     
-    let contenuto = CardList[indexPath.row]
-    
-    let imgCard = contenuto["immagine"] as? UIImage
-    
-    DataManager.shared.cardSelected = imgCard!
+    for carta in listCards {
+      if carta["nome"] as? String == contenuto["nome"] as? String {
+        DataManager.shared.cardSelected = (carta["immagine"] as? UIImage)!
+        break
+      }
+    }
     
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
     _ = storyBoard.instantiateViewControllerWithIdentifier("infoCard") as? InfoCardController
     
-    self.performSegueWithIdentifier("showCardImage", sender: self)
-   */
+    self.performSegueWithIdentifier("showCardGuideImage", sender: self)
+   
   }
 }
