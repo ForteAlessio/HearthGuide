@@ -32,6 +32,8 @@
 		E2B42A3F1D0177F9007775CC /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B42A3C1D0177F9007775CC /* PMAlertController.xib */; };
 		E2B42A401D0177F9007775CC /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B42A3D1D0177F9007775CC /* PMAlertAction.swift */; };
 		E2B839DA1CFDB71F0093616F /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B839D91CFDB71E0093616F /* Reach.swift */; };
+		E2CE05ED1D4F5AA80082CD64 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CE05EB1D4F5AA80082CD64 /* Fabric.framework */; };
+		E2CE05EE1D4F5AA80082CD64 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CE05EC1D4F5AA80082CD64 /* Crashlytics.framework */; };
 		E2D47A681CF739350068756B /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D47A671CF739350068756B /* HeroModel.swift */; };
 		E2D47A6A1CF739660068756B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D47A691CF739660068756B /* DataManager.swift */; };
 		E2D483861CF83ABC00D686FF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483721CF83ABC00D686FF /* SwiftyJSON.swift */; };
@@ -117,6 +119,8 @@
 		E2B42A3C1D0177F9007775CC /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
 		E2B42A3D1D0177F9007775CC /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
 		E2B839D91CFDB71E0093616F /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reach.swift; path = Graph/Reach.swift; sourceTree = "<group>"; };
+		E2CE05EB1D4F5AA80082CD64 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		E2CE05EC1D4F5AA80082CD64 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		E2D47A671CF739350068756B /* HeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
 		E2D47A691CF739660068756B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E2D483721CF83ABC00D686FF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 			files = (
 				E2EA27491D2BC4E60012331A /* GoogleMobileAds.framework in Frameworks */,
 				E26072D11CFEDBB4004C4ACD /* OneSignal.framework in Frameworks */,
+				E2CE05EE1D4F5AA80082CD64 /* Crashlytics.framework in Frameworks */,
+				E2CE05ED1D4F5AA80082CD64 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +291,8 @@
 		E2D483991CF83ABF00D686FF /* Librerie */ = {
 			isa = PBXGroup;
 			children = (
+				E2CE05EB1D4F5AA80082CD64 /* Fabric.framework */,
+				E2CE05EC1D4F5AA80082CD64 /* Crashlytics.framework */,
 				E24A251E1D216522006EA7D9 /* DecodeHTML.swift */,
 				E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */,
 				E29D895F1D192C5E0055B27E /* UIColorExtension.swift */,
@@ -363,6 +371,7 @@
 				E209CF811CF7092D0069E9F0 /* Sources */,
 				E209CF821CF7092D0069E9F0 /* Frameworks */,
 				E209CF831CF7092D0069E9F0 /* Resources */,
+				E2CE05EA1D4F5A710082CD64 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -432,6 +441,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E2CE05EA1D4F5A710082CD64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 579887a04755f01b8dfb7c76bb746e96ed815ecf 3679a233798ddc6c59b593744d4f5e44380d75f72fed631588881891600ab7ea";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E209CF811CF7092D0069E9F0 /* Sources */ = {
@@ -620,6 +645,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Giovanni Buccicone (U9RH2W7VTY)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HearthGuide",
