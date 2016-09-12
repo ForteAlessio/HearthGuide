@@ -12,7 +12,7 @@ class HeroModel: NSObject {
 
   var nome     : String!
   var immagine : UIImage!
-  var update   : NSDate!
+  var update   : Date!
   
   
   init(nomeIn:String, immagineIn:UIImage){

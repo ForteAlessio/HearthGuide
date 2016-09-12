@@ -10,18 +10,7 @@ import UIKit
 
 class DataManager: NSObject, GraphDelegate {
   
-  class var shared: DataManager {
-    get {
-      struct Static {
-        static var instance: DataManager? = nil
-        static var token: dispatch_once_t = 0
-      }
-      
-      dispatch_once(&Static.token) { Static.instance = DataManager() }
-      
-      return Static.instance!
-    }
-  }
+  static let shared = DataManager()
   
   
   var Eroi            : [Entity]    = []
@@ -33,7 +22,7 @@ class DataManager: NSObject, GraphDelegate {
   var heroSelected    : String      = ""
   var graph           : Graph       = Graph()
   var canLaunch       : Bool        = false
-  var option          : [NSObject: AnyObject]?
+  var option          : [AnyHashable: Any]?
   var mainController  : HeroController!
 
   func startGraph () {
@@ -47,44 +36,52 @@ class DataManager: NSObject, GraphDelegate {
   }
 
   
-  func startDataManager(updatedHero: [String]) {
+  func startDataManager(_ updatedHero: [String]) {
     
     startGraph()
     
-    if NSThread.isMainThread() {
+    if Thread.isMainThread {
       SwiftLoader.show("Caricamento", animated: true)
     }else {
-      dispatch_sync(dispatch_get_main_queue()) {
+      DispatchQueue.main.sync {
         SwiftLoader.show("Caricamento", animated: true)
       }
     }
     
     //controllo se l'iPhone è stato connesso ad internet
-    let status = Reach().connectionStatus()
     
-    switch status {
-    case .Unknown, .Offline:
-      let alertVC = PMAlertController(title: "Errore Connessione",
-                                      description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
-                                      image: UIImage(named: "warning.png"), style: .Alert)
+    let manager = NetworkReachabilityManager(host: "www.apple.com")
+    
+    manager?.listener = { status in
       
-      alertVC.addAction(PMAlertAction(title: "Ok", style: .Default, action: { () -> Void in
-        print("Nessuna Connessione")
-      }))
-      
-      if NSThread.isMainThread() {
-        SwiftLoader.hide()
-      }else {
-        dispatch_sync(dispatch_get_main_queue()) {
+      switch status {
+      case .unknown, .reachable:
+        let alertVC = PMAlertController(title: "Errore Connessione",
+                                        description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
+                                        image: UIImage(named: "warning.png"), style: .alert)
+        
+        alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
+          print("Nessuna Connessione")
+        }))
+        
+        if Thread.isMainThread {
           SwiftLoader.hide()
+        }else {
+          DispatchQueue.main.sync {
+            SwiftLoader.hide()
+          }
         }
+        
+        self.mainController.present(alertVC, animated: true, completion: nil)
+        
+        return
+      default: print("")
       }
-      
-      mainController.presentViewController(alertVC, animated: true, completion: nil)
-
-      return
-    default: print("")
     }
+    
+    //let status = Reach().connectionStatus()
+    
+    
     
     //se la richiesta proviene da notifica Cancello i dati solo gli eroi aggiornati
     //altrimenti li elimino tutti i dati
@@ -109,11 +106,7 @@ class DataManager: NSObject, GraphDelegate {
     }
 
     // salviamo il Database
-    graph.save { (success: Bool, error: NSError?) in
-      if let e = error {
-        print(e.localizedDescription)
-      }
-    }
+    graph.async()
   }
 
   func creaEroi () {
@@ -122,86 +115,86 @@ class DataManager: NSObject, GraphDelegate {
     graph.watchForEntity(types: ["Eroe"])
     Eroi  = graph.searchForEntity(types: ["Eroe"])
     
-    let Mage         = Entity(type: "Eroe")
-    Mage["nome"]     = "Mago"
+    let Mage: Entity = Entity(type: "Eroe")
+    Mage["nome"]     = "Mago" as AnyObject?
     Mage["img"]      = UIImage(named: "Mage")!
-    Mage["update"]   = NSDate()
+    Mage["update"]   = Date() as AnyObject?
     Eroi.append(Mage)
     nomiEroi.append("Mago")
-    Mage.addGroup("Eroi")
+    Mage.add(to: "Eroi")
     
     let Priest        = Entity(type: "Eroe")
-    Priest["nome"]    = "Sacerdote"
+    Priest["nome"]    = "Sacerdote" as AnyObject?
     Priest["img"]     = UIImage(named: "Priest")!
-    Priest["update"]  = NSDate()
+    Priest["update"]  = Date() as AnyObject?
     Eroi.append(Priest)
     nomiEroi.append("Sacerdote")
-    Priest.addGroup("Eroi")
+    Priest.add(to: "Eroi")
     
     let Hunter        = Entity(type: "Eroe")
-    Hunter["nome"]    = "Cacciatore"
+    Hunter["nome"]    = "Cacciatore" as AnyObject?
     Hunter["img"]     = UIImage(named: "Hunter")!
-    Hunter["update"]  = NSDate()
+    Hunter["update"]  = Date() as AnyObject?
     Eroi.append(Hunter)
     nomiEroi.append("Cacciatore")
-    Hunter.addGroup("Eroi")
+    Hunter.add(to: "Eroi")
 
     let Warrior       = Entity(type: "Eroe")
-    Warrior["nome"]   = "Guerriero"
+    Warrior["nome"]   = "Guerriero" as AnyObject?
     Warrior["img"]    = UIImage(named: "Warrior")!
-    Warrior["update"] = NSDate()
+    Warrior["update"] = Date() as AnyObject?
     Eroi.append(Warrior)
     nomiEroi.append("Guerriero")
-    Warrior.addGroup("Eroi")
+    Warrior.add(to: "Eroi")
 
     let Druid         = Entity(type: "Eroe")
-    Druid["nome"]     = "Druido"
+    Druid["nome"]     = "Druido" as AnyObject?
     Druid["img"]      = UIImage(named: "Druid")!
-    Druid["update"]   = NSDate()
+    Druid["update"]   = Date() as AnyObject?
     Eroi.append(Druid)
     nomiEroi.append("Druido")
-    Druid.addGroup("Eroi")
+    Druid.add(to: "Eroi")
     
     let Paladin       = Entity(type: "Eroe")
-    Paladin["nome"]   = "Paladino"
+    Paladin["nome"]   = "Paladino" as AnyObject?
     Paladin["img"]    = UIImage(named: "Paladin")!
-    Paladin["update"] = NSDate()
+    Paladin["update"] = Date() as AnyObject?
     Eroi.append(Paladin)
     nomiEroi.append("Paladino")
-    Paladin.addGroup("Eroi")
+    Paladin.add(to: "Eroi")
 
     let Warlock       = Entity(type: "Eroe")
-    Warlock["nome"]   = "Stregone"
+    Warlock["nome"]   = "Stregone" as AnyObject?
     Warlock["img"]    = UIImage(named: "Warlock")!
-    Warlock["update"] = NSDate()
+    Warlock["update"] = Date() as AnyObject?
     Eroi.append(Warlock)
     nomiEroi.append("Stregone")
-    Warlock.addGroup("Eroi")
+    Warlock.add(to: "Eroi")
     
     let Shaman        = Entity(type: "Eroe")
-    Shaman["nome"]    = "Sciamano"
+    Shaman["nome"]    = "Sciamano" as AnyObject?
     Shaman["img"]     = UIImage(named: "Shaman")!
-    Shaman["update"]  = NSDate()
+    Shaman["update"]  = Date() as AnyObject?
     Eroi.append(Shaman)
     nomiEroi.append("Sciamano")
-    Shaman.addGroup("Eroi")
+    Shaman.add(to: "Eroi")
     
     let Rogue         = Entity(type: "Eroe")
-    Rogue["nome"]     = "Ladro"
+    Rogue["nome"]     = "Ladro" as AnyObject?
     Rogue["img"]      = UIImage(named: "Rogue")!
-    Rogue["update"]   = NSDate()
+    Rogue["update"]   = Date() as AnyObject?
     Eroi.append(Rogue)
     nomiEroi.append("Ladro")
-    Rogue.addGroup("Eroi")
+    Rogue.add(to: "Eroi")
 
-    graph.save()
+    graph.async()
   }
   
-  func iconBadge(ANotify: String) {
+  func iconBadge(_ ANotify: String) {
     //ANotify = 0 : No  Badge
     //ANotify = 1 : "1" Badge
     mainController.bbRefresh.badgeString     = ANotify
-    mainController.bbRefresh.badgeTextColor  = UIColor.whiteColor()
+    mainController.bbRefresh.badgeTextColor  = UIColor.white
     mainController.bbRefresh.badgeEdgeInsets = UIEdgeInsetsMake(18, 5, 0, 15)
   }
 }

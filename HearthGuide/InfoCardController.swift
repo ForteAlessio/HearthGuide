@@ -16,7 +16,7 @@ class InfoCardController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+    self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
     
     imgCard.image = DataManager.shared.cardSelected
   }
@@ -26,8 +26,8 @@ class InfoCardController: UIViewController {
   }
 
   
-  @IBAction func acTapClose(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: {});
+  @IBAction func acTapClose(_ sender: AnyObject) {
+    self.dismiss(animated: true, completion: {});
   }
   
 }

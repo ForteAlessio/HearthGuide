@@ -10,33 +10,20 @@ import UIKit
 
 class DownloadManager: NSObject {
   
-  // questo è il codice speciale che lo rende un singleton
-  class var shared : DownloadManager {
-    get {
-      struct Static {
-        static var instance : DownloadManager? = nil
-        static var token : dispatch_once_t = 0
-      }
-      
-      dispatch_once(&Static.token) { Static.instance = DownloadManager() }
-      
-      return Static.instance!
-    }
-  }
+  static let shared = DownloadManager()
+
   
-  let group            = dispatch_group_create()
+  let group            = DispatchGroup()
   var numRequest       = 0
   var heroUpdated      = 0
-  var alamofireManager : Manager?
-  let configuration    = NSURLSessionConfiguration.defaultSessionConfiguration()
+  let configuration    = URLSessionConfiguration.default
   var Messaggio        : String!
   
   
   //Scarica e inserisce nel Database il Json dei Mazzo che gli passiamo
-  func downloadJson(Heroes : [String]) {
+  func downloadJson(_ Heroes : [String]) {
     //importo il timeout per le request
     configuration.timeoutIntervalForRequest = 999
-    alamofireManager = Manager(configuration: configuration)
     
     numRequest  = 0
     heroUpdated = 0
@@ -51,7 +38,13 @@ class DownloadManager: NSObject {
     let hero: Array<Entity> = DataManager.shared.graph.searchForEntity(groups: ["Eroi"])
     
     for x in 0..<Heroes.count {
-      alamofireManager!.request(.GET, "http://www.puntoesteticamonteverde.it/HearthGuide/" + Heroes[x].lowercaseString + ".json").responseJSON { response in
+      _ = request("http://www.puntoesteticamonteverde.it/HearthGuide/" + Heroes[x].lowercased() + ".json", method: .get).responseJSON { response in
+        
+        // come leggere i dati del response
+        //print(response.request)  // original URL request
+        //print(response.response) // URL response
+        //print(response.data)     // server data
+        //print(response.result)   // result of response serialization
         
         if let er = response.result.error {
           print(er.localizedDescription)
@@ -68,10 +61,10 @@ class DownloadManager: NSObject {
         
         //Aggiorno la data di ultimo aggiornamento dell'eroe
         for k in 0..<9 {
-          if (hero[k]["nome"] as! String).lowercaseString == Heroes[x].lowercaseString {
-            let date = NSDate()
+          if (hero[k]["nome"] as! String).lowercased() == Heroes[x].lowercased() {
+            let date = Date()
             hero[k]["update"] = date
-            DataManager.shared.graph.save()
+            DataManager.shared.graph.async()
             break
           }
         }
@@ -80,7 +73,7 @@ class DownloadManager: NSObject {
         
         //ciclo i mazzi
         for i in 0..<jsonMazzi.count {
-          let deck = Entity(type: "Mazzo")
+          let deck: Entity = Entity(type: "Mazzo")
           
           if let deckName = jsonMazzi[i]["name_deck"].string {
             deck["nome"] = deckName
@@ -92,7 +85,7 @@ class DownloadManager: NSObject {
           
           deck["eroe"] = Heroes[x]
           
-          deck.addGroup(Heroes[x])
+          deck.add(to: Heroes[x])
           DataManager.shared.Mazzi.append(deck)
           
           
@@ -102,7 +95,7 @@ class DownloadManager: NSObject {
             
             //ciclo le carte
             for j in 0..<jsonCard.count {
-              let card = Entity(type: "Carta")
+              let card: Entity = Entity(type: "Carta")
               
               if let cardName = jsonCard[j]["name"].string {
                 card["nome"] = cardName
@@ -115,36 +108,30 @@ class DownloadManager: NSObject {
               card["mazzo"] = deck["nome"] as! String
               card["eroe"]  = Heroes[x]
               
-              dispatch_group_enter(self.group)
+              self.group.enter()
               let url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
-              self.alamofireManager!.request(.GET, url).response { request, response, data, error in
+              _ = request(url, method: .get).responseJSON { response in
                 
-                if let er = error {
-                  print(er.localizedDescription)
-                }
-                
-                if error == nil && data != nil {
-                  card["immagine"] = UIImage(data: data!)!
-                  if NSThread.isMainThread() {
+                card["immagine"] = UIImage(data: response.data!)!
+                if Thread.isMainThread {
+                  SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                }else {
+                  DispatchQueue.main.sync {
                     SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
-                  }else {
-                    dispatch_sync(dispatch_get_main_queue()) {
-                      SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
-                    }
                   }
-                  self.Messaggio = self.formatMessage(self.Messaggio)
                 }
-                
-                DataManager.shared.graph.save()
-                dispatch_group_leave(self.group)
+                self.Messaggio = self.formatMessage(self.Messaggio)
+              
+                DataManager.shared.graph.async()
+                self.group.leave()
               }
               
               DataManager.shared.Carte.append(card)
-              card.addGroup(deck["nome"] as! String)
+              card.add(to: deck["nome"] as! String)
             }
           }
           
-          DataManager.shared.graph.save()
+          DataManager.shared.graph.async()
           
           //SCARICO LA LISTA COMPLETA DELLE CARTE
           if let listCards = jsonMazzi[i]["lista"].arrayObject {
@@ -152,7 +139,7 @@ class DownloadManager: NSObject {
             
             //ciclo le carte per le Info del Mazzo
             for j in 0..<jsonCard.count {
-              let card = Entity(type: "Carta")
+              let card: Entity = Entity(type: "Carta")
               
               if let cardName = jsonCard[j]["name"].string {
                 card["nome"] = cardName
@@ -169,37 +156,31 @@ class DownloadManager: NSObject {
               card["mazzo"] = deck["nome"] as! String
               card["eroe"]  = Heroes[x]
               
-              dispatch_group_enter(self.group)
+              self.group.enter()
               let url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
-              self.alamofireManager!.request(.GET, url).response { request, response, data, error in
+              _ = request(url, method: .get).responseJSON { response in
                 
-                if let er = error {
-                  print(er.localizedDescription)
-                }
-                
-                if error == nil && data != nil {
-                  card["immagine"] = UIImage(data: data!)!
-                  if NSThread.isMainThread() {
+                card["immagine"] = UIImage(data: response.data!)!
+                if Thread.isMainThread {
+                  SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                }else {
+                  DispatchQueue.main.sync {
                     SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
-                  }else {
-                    dispatch_sync(dispatch_get_main_queue()) {
-                      SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
-                    }
                   }
-                  self.Messaggio = self.formatMessage(self.Messaggio)
                 }
+                self.Messaggio = self.formatMessage(self.Messaggio)
                 
-                DataManager.shared.graph.save()
-                dispatch_group_leave(self.group)
+                DataManager.shared.graph.async()
+                self.group.leave()
               }
               
               DataManager.shared.Carte.append(card)
-              card.addGroup((deck["nome"] as! String) + "Info")
+              card.add(to: deck["nome"] as! String + "Info")
               
             }
           }
           
-          DataManager.shared.graph.save()
+          DataManager.shared.graph.async()
           
           //SCARICO LE CARTE PIU' FORTI PER MAZZO
           if let topCards = jsonMazzi[i]["topcard"].arrayObject {
@@ -207,7 +188,7 @@ class DownloadManager: NSObject {
             
             //ciclo le carte per le Carte più forti del Mazzo
             for j in 0..<jsonCard.count {
-              let card = Entity(type: "Carta")
+              let card: Entity = Entity(type: "Carta")
               
               if let cardName = jsonCard[j]["name"].string {
                 card["nome"] = cardName
@@ -224,31 +205,31 @@ class DownloadManager: NSObject {
               card["mazzo"] = deck["nome"] as! String
               card["eroe"]  = Heroes[x]
               
-              DataManager.shared.graph.save()
+              DataManager.shared.graph.async()
               DataManager.shared.Carte.append(card)
-              card.addGroup((deck["nome"] as! String) + "TopCards")
+              card.add(to: deck["nome"] as! String + "TopCards")
             }
           }
           
         }
-        DataManager.shared.graph.save()
+        DataManager.shared.graph.async()
         
         //alla fine delle 9 richieste principali fa sparire la view di caricamento
-        dispatch_group_notify(self.group, dispatch_get_main_queue()) {
+        self.group.notify(queue: DispatchQueue.main) {
           if self.numRequest == self.heroUpdated {
-            if NSThread.isMainThread() {
+            if Thread.isMainThread {
               SwiftLoader.hide()
               DataManager.shared.mainController.tableView.reloadData()
             }else {
-              dispatch_sync(dispatch_get_main_queue()) {
+              DispatchQueue.main.sync {
                 SwiftLoader.hide()
                 DataManager.shared.mainController.tableView.reloadData()
               }
             }
-            let defaults = NSUserDefaults.standardUserDefaults()
+            let defaults = UserDefaults.standard
             
-            defaults.setObject("", forKey: "alert")
-            if let alr = defaults.stringForKey("alert") {
+            defaults.set("", forKey: "alert")
+            if let alr = defaults.string(forKey: "alert") {
               DataManager.shared.iconBadge(alr)
             }
           }
@@ -260,7 +241,7 @@ class DownloadManager: NSObject {
   
   
   //cancella tutti i dati riguardanti l'eroe che gli passiamo
-  func emptyDbFromHero(ANome: String) {
+  func emptyDbFromHero(_ ANome: String) {
     DataManager.shared.graph.watchForEntity(types: ["Mazzo"])
     DataManager.shared.Mazzi = DataManager.shared.graph.searchForEntity(types: ["Mazzo"])
     
@@ -268,20 +249,20 @@ class DownloadManager: NSObject {
     DataManager.shared.Carte = DataManager.shared.graph.searchForEntity(types: ["Carta"])
     
     for mazzo in DataManager.shared.Mazzi {
-      if (mazzo["eroe"] as! String).lowercaseString == ANome.lowercaseString {
-        mazzo.removeGroup(ANome)
+      if (mazzo["eroe"] as! String).lowercased() == ANome.lowercased() {
+        mazzo.remove(tag: ANome)
         mazzo.delete()
       }
     }
     
     for carta in DataManager.shared.Carte {
-      if (carta["eroe"] as! String).lowercaseString == ANome.lowercaseString {
-        carta.removeGroup(carta["mazzo"] as! String)
+      if (carta["eroe"] as! String).lowercased() == ANome.lowercased() {
+        carta.remove(tag: carta["mazzo"] as! String)
         carta.delete()
       }
     }
     
-    DataManager.shared.graph.save()
+    DataManager.shared.graph.async()
   }
   
   //cancella tutti i dati nel database interno di graph
@@ -296,26 +277,26 @@ class DownloadManager: NSObject {
     DataManager.shared.Carte = DataManager.shared.graph.searchForEntity(types: ["Carta"])
     
     for eroe in DataManager.shared.Eroi {
-      eroe.removeGroup("Eroi")
+      eroe.remove(tag: "Eroi")
     }
     DataManager.shared.Eroi.removeAll()
     
     for mazzo in DataManager.shared.Mazzi {
-      mazzo.removeGroup(mazzo["eroe"] as! String)
+      mazzo.remove(tag: mazzo["eroe"] as! String)
     }
     DataManager.shared.Mazzi.removeAll()
     
     for carta in DataManager.shared.Carte {
-      carta.removeGroup(carta["mazzo"] as! String)
+      carta.remove(tag: carta["mazzo"] as! String)
     }
     DataManager.shared.Carte.removeAll()
     
     DataManager.shared.graph.clear()
     
-    DataManager.shared.graph.save()
+    DataManager.shared.graph.async()
   }
   
-  func formatMessage (AMessage : String) -> String {
+  func formatMessage (_ AMessage : String) -> String {
     switch AMessage {
     case "Caricamento."  : return "Caricamento.."
     case "Caricamento.." : return "Caricamento..."

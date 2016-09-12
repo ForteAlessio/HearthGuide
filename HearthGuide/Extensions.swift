@@ -2,35 +2,50 @@
 //  Extensions.swift
 //  Prova2
 //
-//  Created by Marcello Catelli on 07/06/14.
-//  Copyright (c) 2014 Objective C srl. All rights reserved.
+//  Created by Marcello Catelli on 07/06/16.
+//  Copyright (c) 2016 Objective C srl. All rights reserved.
 //
 
 import UIKit
 import Foundation
 
+// UITextField
+// decomentare questa riga per disabiltare il Paste (incolla) in TUTTI i textField di TUTTA l'App
+/*
+public extension UITextField {
+    override public func canPerformAction(_ action: Selector, withSender sender: AnyObject?) -> Bool {
+        return (action != #selector(NSObject.paste(_:)))
+    }
+}
+*/
+
 // NSObject
 public extension NSObject{
     public class var nameOfClass : String {
-        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+        return NSStringFromClass(self).components(separatedBy: ".").last!
     }
     
     public var nameOfClass : String {
-        return NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        return NSStringFromClass(type(of: self)).components(separatedBy: ".").last!
     }
 }
 
 // FileManager
-public extension NSFileManager {
+public extension FileManager {
     class func documentsDir() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as [String]
+        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
     class func cachesDir() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true) as [String]
+        var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
+}
+
+// UIButton - ControlState
+public extension UIControlState {
+    public static var Normal: UIControlState { return [] }
 }
 
 // UIView
@@ -38,11 +53,11 @@ public extension UIView {
     
     func addParallax(X horizontal:Float, Y vertical:Float) {
         
-        let parallaxOnX = UIInterpolatingMotionEffect(keyPath: "center.x", type: UIInterpolatingMotionEffectType.TiltAlongHorizontalAxis)
+        let parallaxOnX = UIInterpolatingMotionEffect(keyPath: "center.x", type: UIInterpolatingMotionEffectType.tiltAlongHorizontalAxis)
         parallaxOnX.minimumRelativeValue = -horizontal
         parallaxOnX.maximumRelativeValue = horizontal
         
-        let parallaxOnY = UIInterpolatingMotionEffect(keyPath: "center.y", type: UIInterpolatingMotionEffectType.TiltAlongVerticalAxis)
+        let parallaxOnY = UIInterpolatingMotionEffect(keyPath: "center.y", type: UIInterpolatingMotionEffectType.tiltAlongVerticalAxis)
         parallaxOnY.minimumRelativeValue = -vertical
         parallaxOnY.maximumRelativeValue = vertical
         
@@ -59,7 +74,7 @@ public extension UIView {
             }
         }
         
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let fxView = UIVisualEffectView(effect: blur)
         
         if b {
@@ -69,7 +84,7 @@ public extension UIView {
         fxView.frame = self.bounds
 
         self.addSubview(fxView)
-        self.sendSubviewToBack(fxView)
+        self.sendSubview(toBack: fxView)
     }
     
     func blurMyBackgroundLight() {
@@ -80,7 +95,7 @@ public extension UIView {
             }
         }
         
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
         let fxView = UIVisualEffectView(effect: blur)
         
         var rect = self.bounds
@@ -90,92 +105,33 @@ public extension UIView {
         
         self.addSubview(fxView)
         
-//        let viewsDictionary = ["view1":self,"view2":fxView]
-//        let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view2]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-//        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view2]-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
-//        
-//        self.addConstraints(view_constraint_H)
-//        self.addConstraints(view_constraint_V)
-        
-        self.sendSubviewToBack(fxView)
+        self.sendSubview(toBack: fxView)
     }
     
     func capture() -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, self.opaque, UIScreen.mainScreen().scale)
-        self.drawViewHierarchyInRect(self.frame, afterScreenUpdates: false)
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, self.isOpaque, UIScreen.main.scale)
+        self.drawHierarchy(in: self.frame, afterScreenUpdates: false)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
-    func convertRectCorrectly(rect: CGRect, toView view: UIView) -> CGRect {
-        if UIScreen.mainScreen().scale == 1 {
-            return self.convertRect(rect, toView: view)
+    func convertRectCorrectly(_ rect: CGRect, toView view: UIView) -> CGRect {
+        if UIScreen.main.scale == 1 {
+            return self.convert(rect, to: view)
         } else if self == view {
             return rect
         } else {
-            var rectInParent = self.convertRect(rect, toView: self.superview)
-            rectInParent.origin.x /= UIScreen.mainScreen().scale
-            rectInParent.origin.y /= UIScreen.mainScreen().scale
+            var rectInParent = self.convert(rect, to: self.superview)
+            rectInParent.origin.x /= UIScreen.main.scale
+            rectInParent.origin.y /= UIScreen.main.scale
             let superViewRect = self.superview!.convertRectCorrectly(self.superview!.frame, toView: view)
             rectInParent.origin.x += superViewRect.origin.x
             rectInParent.origin.y += superViewRect.origin.y
             return rectInParent
         }
-    }
-  
-    /**
-     Redefines the height of the view
-     
-     :param: height The new value for the view's height
-     */
-    func setHeight(height: CGFloat) {
-      
-      var frame: CGRect = self.frame
-      frame.size.height = height
-      
-      self.frame = frame
-    }
-    
-    /**
-     Redefines the width of the view
-     
-     :param: width The new value for the view's width
-     */
-    func setWidth(width: CGFloat) {
-      
-      var frame: CGRect = self.frame
-      frame.size.width = width
-      
-      self.frame = frame
-    }
-    
-    /**
-     Redefines X position of the view
-     
-     :param: x The new x-coordinate of the view's origin point
-     */
-    func setX(x: CGFloat) {
-      
-      var frame: CGRect = self.frame
-      frame.origin.x = x
-      
-      self.frame = frame
-    }
-    
-    /**
-     Redefines Y position of the view
-     
-     :param: y The new y-coordinate of the view's origin point
-     */
-    func setY(y: CGFloat) {
-      
-      var frame: CGRect = self.frame
-      frame.origin.y = y
-      
-      self.frame = frame
     }
     
     @IBInspectable
@@ -202,67 +158,67 @@ public extension UIView {
     var borderColor: UIColor? {
         get {
             guard let color = layer.borderColor else { return nil }
-            return UIColor(CGColor: color)
+            return UIColor(cgColor: color)
         }
         set {
-            layer.borderColor = newValue?.CGColor
+            layer.borderColor = newValue?.cgColor
         }
     }
 }
 
 // UIImage
 public extension UIImage {
-    func fromLandscapeToPortrait(rotate: Bool!) -> UIImage {
-        let container : UIImageView = UIImageView(frame: CGRectMake(0, 0, 320, 568))
-        container.contentMode = UIViewContentMode.ScaleAspectFill
+    func fromLandscapeToPortrait(_ rotate: Bool!) -> UIImage {
+        let container : UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
+        container.contentMode = UIViewContentMode.scaleAspectFill
         container.clipsToBounds = true
         container.image = self
         
         UIGraphicsBeginImageContextWithOptions(container.bounds.size, true, 0);
-        container.drawViewHierarchyInRect(container.bounds, afterScreenUpdates: true)
+        container.drawHierarchy(in: container.bounds, afterScreenUpdates: true)
         let normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
         if !rotate {
-            return normalizedImage
+            return normalizedImage!
         } else {
-            let rotatedImage = UIImage(CGImage: normalizedImage.CGImage!, scale: 1.0, orientation: UIImageOrientation.Left)
+            let rotatedImage = UIImage(cgImage: (normalizedImage?.cgImage!)!, scale: 1.0, orientation: UIImageOrientation.left)
             
             UIGraphicsBeginImageContextWithOptions(rotatedImage.size, true, 1);
-            rotatedImage.drawInRect(CGRectMake(0, 0, rotatedImage.size.width, rotatedImage.size.height))
+            rotatedImage.draw(in: CGRect(x: 0, y: 0, width: rotatedImage.size.width, height: rotatedImage.size.height))
             let normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
-            return normalizedImage
+            return normalizedImage!
         }
     }
     
-    func imageWithColor(color: UIColor) -> UIImage {
+    func imageWithColor(_ color: UIColor) -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextTranslateCTM(context, 0, self.size.height)
-        CGContextScaleCTM(context, 1.0, -1.0)
+        context?.translateBy(x: 0, y: self.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         
-        CGContextSetBlendMode(context, .Normal)
+        context?.setBlendMode(.normal)
         
-        let rect = CGRectMake(0, 0, self.size.width, self.size.height)
-        CGContextClipToMask(context, rect, self.CGImage)
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+        context?.clip(to: rect, mask: self.cgImage!)
         color.setFill()
-        CGContextFillRect(context, rect)
+        context?.fill(rect)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
 }
 
 // UITableView
 public extension UITableViewController {
     
-    func createNoPaintBlur(effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createNoPaintBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         let packView = UIView(frame: tableView.frame)
@@ -270,7 +226,7 @@ public extension UITableViewController {
         if let imageTest = image {
             
             let imVi = UIImageView(frame: packView.frame)
-            imVi.contentMode = .ScaleToFill
+            imVi.contentMode = .scaleToFill
             imVi.image = imageTest
             packView.addSubview(imVi)
     
@@ -280,54 +236,54 @@ public extension UITableViewController {
             
             tableView.backgroundView = packView
         } else {
-            tableView.backgroundColor = UIColor.clearColor()
+            tableView.backgroundColor = UIColor.clear
             tableView.backgroundView = UIVisualEffectView(effect: blurEffect)
         }
         
         if let popover = navigationController?.popoverPresentationController {
-            popover.backgroundColor = UIColor.clearColor()
+            popover.backgroundColor = UIColor.clear
         }
 
         if !lineVibrance { return }
-        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        tableView.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
     
-    func createBlur(effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
         
         if let imageTest = image {
             tableView.backgroundColor = UIColor(patternImage: imageTest)
         } else {
-            tableView.backgroundColor = UIColor.clearColor()
+            tableView.backgroundColor = UIColor.clear
         }
         
         if let popover = navigationController?.popoverPresentationController {
-            popover.backgroundColor = UIColor.clearColor()
+            popover.backgroundColor = UIColor.clear
         }
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         tableView.backgroundView = UIVisualEffectView(effect: blurEffect)
         if !lineVibrance { return }
-        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        tableView.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
 }
 
 public extension UITableView {
     
-    func createBlur(effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
         
         if let imageTest = image {
             self.backgroundColor = UIColor(patternImage: imageTest)
         } else {
-            self.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = UIColor.clear
         }
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         self.backgroundView = UIVisualEffectView(effect: blurEffect)
         if !lineVibrance { return }
-        self.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        self.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
     
-    func createNoPaintBlur(effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createNoPaintBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         let packView = UIView(frame: self.frame)
@@ -335,7 +291,7 @@ public extension UITableView {
         if let imageTest = image {
             
             let imVi = UIImageView(frame: packView.frame)
-            imVi.contentMode = .ScaleToFill
+            imVi.contentMode = .scaleToFill
             imVi.image = imageTest
             packView.addSubview(imVi)
             
@@ -345,19 +301,19 @@ public extension UITableView {
             
             self.backgroundView = packView
         } else {
-            self.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = UIColor.clear
             self.backgroundView = UIVisualEffectView(effect: blurEffect)
         }
         
         if !lineVibrance { return }
-        self.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        self.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
 }
 
 // UITableViewRowAction
 public extension UITableViewRowAction {
     
-    class func rowAction2(title title: String?, titleBorderMargin:Int, font:UIFont, fontColor:UIColor, verticalMargin:CGFloat, image: UIImage, forCellHeight cellHeight: CGFloat,  backgroundColor: UIColor, handler: (UITableViewRowAction, NSIndexPath) -> Void) -> UITableViewRowAction {
+    class func rowAction2(title: String?, titleBorderMargin:Int, font:UIFont, fontColor:UIColor, verticalMargin:CGFloat, image: UIImage, forCellHeight cellHeight: CGFloat,  backgroundColor: UIColor, handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
         
         // clacolo titolo
         var largezzaTesto : Int = 1
@@ -367,43 +323,43 @@ public extension UITableViewRowAction {
         } else {
             largezzaTesto = titleBorderMargin
         }
-        let titleSpaceString = "".stringByPaddingToLength(largezzaTesto, withString: "\u{3000}", startingAtIndex: 0)
+        let titleSpaceString = "".padding(toLength: largezzaTesto, withPad: "\u{3000}", startingAt: 0)
         
-        let rowAction = UITableViewRowAction(style: .Default, title: titleSpaceString, handler: handler)
+        let rowAction = UITableViewRowAction(style: .default, title: titleSpaceString, handler: handler)
         
-        let larghezzaTestoConSpazio = titleSpaceString.boundingRectWithSize(CGSizeMake(CGFloat.max, cellHeight),
-                                                                    options: .UsesLineFragmentOrigin,
+        let larghezzaTestoConSpazio = titleSpaceString.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: cellHeight),
+                                                                    options: .usesLineFragmentOrigin,
                                                                  attributes: [NSFontAttributeName: font],
                                                                     context: nil).size.width + 30
         // calcolo grandezza
-        let frameGuess: CGSize = CGSizeMake(larghezzaTestoConSpazio, cellHeight)
+        let frameGuess: CGSize = CGSize(width: larghezzaTestoConSpazio, height: cellHeight)
         
-        let tripleFrame: CGSize = CGSizeMake(frameGuess.width * 2.0, frameGuess.height * 2.0)
+        let tripleFrame: CGSize = CGSize(width: frameGuess.width * 2.0, height: frameGuess.height * 2.0)
         
         // trucco
-        UIGraphicsBeginImageContextWithOptions(tripleFrame, false, UIScreen.mainScreen().scale)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+        UIGraphicsBeginImageContextWithOptions(tripleFrame, false, UIScreen.main.scale)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
         
         backgroundColor.setFill()
-        CGContextFillRect(context, CGRectMake(0, 0, tripleFrame.width, tripleFrame.height))
+        context.fill(CGRect(x: 0, y: 0, width: tripleFrame.width, height: tripleFrame.height))
         
         if let _ = title {
-            image.drawAtPoint(CGPointMake((frameGuess.width / 2.0) - (image.size.width / 2.0),
-                                          (frameGuess.height / 2.0) - image.size.height - (verticalMargin / 2.0) + 4.0))
+            image.draw(at: CGPoint(x: (frameGuess.width / 2.0) - (image.size.width / 2.0),
+                                          y: (frameGuess.height / 2.0) - image.size.height - (verticalMargin / 2.0) + 4.0))
         } else {
-            image.drawAtPoint(CGPointMake( (frameGuess.width / 2.0) - (image.size.width / 2.0),
-                                           (frameGuess.height / 2.0) - image.size.height / 2.0) )
+            image.draw(at: CGPoint( x: (frameGuess.width / 2.0) - (image.size.width / 2.0),
+                                           y: (frameGuess.height / 2.0) - image.size.height / 2.0) )
         }
         
         if let titleTest = title {
-            let drawnTextSize: CGSize = titleTest.boundingRectWithSize(CGSizeMake(CGFloat.max, cellHeight), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil).size
+            let drawnTextSize: CGSize = titleTest.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: cellHeight), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil).size
             
-            let direction : CGFloat = UIApplication.sharedApplication().userInterfaceLayoutDirection == .RightToLeft ? -1 : 1
+            let direction : CGFloat = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? -1 : 1
             
-            titleTest.drawInRect(CGRectMake( ((frameGuess.width / 2.0) - (drawnTextSize.width / 2.0)) * direction, (frameGuess.height / 2.0) + (verticalMargin / 2.0) + 2.0, frameGuess.width, frameGuess.height), withAttributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: fontColor])
+            titleTest.draw(in: CGRect( x: ((frameGuess.width / 2.0) - (drawnTextSize.width / 2.0)) * direction, y: (frameGuess.height / 2.0) + (verticalMargin / 2.0) + 2.0, width: frameGuess.width, height: frameGuess.height), withAttributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: fontColor])
         }
 
-        rowAction.backgroundColor = UIColor(patternImage: UIGraphicsGetImageFromCurrentImageContext())
+        rowAction.backgroundColor = UIColor(patternImage: UIGraphicsGetImageFromCurrentImageContext()!)
         UIGraphicsEndImageContext()
         
         return rowAction
@@ -412,125 +368,125 @@ public extension UITableViewRowAction {
 }
 
 // NSDate
-let componentFlags : NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.WeekdayOrdinal, NSCalendarUnit.Hour,NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Weekday, NSCalendarUnit.WeekdayOrdinal]
+let componentFlags : Set<Calendar.Component>= [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekdayOrdinal, Calendar.Component.hour,Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal]
 
-public extension NSDate {
+public extension Date {
     
     //Crea una data direttamente dai valori passati
-    class func customDate(year ye:Int, month mo:Int, day da:Int, hour ho:Int, minute mi:Int, second se:Int) -> NSDate {
-        let comps = NSDateComponents()
+    static func customDate(year ye:Int, month mo:Int, day da:Int, hour ho:Int, minute mi:Int, second se:Int) -> Date {
+        var comps = DateComponents()
         comps.year = ye
         comps.month = mo
         comps.day = da
         comps.hour = ho
         comps.minute = mi
         comps.second = se
-        let date = NSCalendar.currentCalendar().dateFromComponents(comps)
+        let date = Calendar.current.date(from: comps)
         return date!
     }
     
-    class func customDateUInt(year ye:UInt, month mo:UInt, day da:UInt, hour ho:UInt, minute mi:UInt, second se:UInt) -> NSDate {
-        let comps = NSDateComponents()
+    static func customDateUInt(year ye:UInt, month mo:UInt, day da:UInt, hour ho:UInt, minute mi:UInt, second se:UInt) -> Date {
+        var comps = DateComponents()
         comps.year = Int(ye)
         comps.month = Int(mo)
         comps.day = Int(da)
         comps.hour = Int(ho)
         comps.minute = Int(mi)
         comps.second = Int(se)
-        let date = NSCalendar.currentCalendar().dateFromComponents(comps)
+        let date = Calendar.current.date(from: comps)
         return date!
     }
     
-    class func dateOfMonthAgo() -> NSDate {
-        return NSDate().dateByAddingTimeInterval(-24 * 30 * 60 * 60)
+    static func dateOfMonthAgo() -> Date {
+        return Date().addingTimeInterval(-24 * 30 * 60 * 60)
     }
     
-    class func dateOfWeekAgo() -> NSDate {
-        return NSDate().dateByAddingTimeInterval(-24 * 7 * 60 * 60)
+    static func dateOfWeekAgo() -> Date {
+        return Date().addingTimeInterval(-24 * 7 * 60 * 60)
     }
     
-    func sameDate(ofDate ofDate:NSDate) -> Bool {
-        let cal = NSCalendar.currentCalendar()
-        let dif = cal.compareDate(self, toDate: ofDate, toUnitGranularity: NSCalendarUnit.Day)
-        if dif == .OrderedSame {
+    func sameDate(ofDate:Date) -> Bool {
+        let cal = Calendar.current
+        let dif = cal.compare(self, to: ofDate, toGranularity: Calendar.Component.day)
+        if dif == .orderedSame {
             return true
         } else {
             return false
         }
     }
     
-    class func currentCalendar() -> NSCalendar {
+    static func currentCalendar() -> Calendar {
         
-        return NSCalendar.autoupdatingCurrentCalendar()
+        return Calendar.autoupdatingCurrent
     }
     
-    func isEqualToDateIgnoringTime(aDate:NSDate) -> Bool {
-        let components1 = NSDate.currentCalendar().components(componentFlags, fromDate: self)
-        let components2 = NSDate.currentCalendar().components(componentFlags, fromDate: aDate)
+    func isEqualToDateIgnoringTime(_ aDate:Date) -> Bool {
+        let components1 = Date.currentCalendar().dateComponents(componentFlags, from: self)
+        let components2 = Date.currentCalendar().dateComponents(componentFlags, from: aDate)
         
         return ((components1.year == components2.year) &&
             (components1.month == components2.month) &&
             (components1.day == components2.day))
     }
     
-    public func plusSeconds(s: UInt) -> NSDate {
+    public func plusSeconds(_ s: UInt) -> Date {
         return self.addComponentsToDate(seconds: Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusSeconds(s: UInt) -> NSDate {
+    public func minusSeconds(_ s: UInt) -> Date {
         return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusMinutes(m: UInt) -> NSDate {
+    public func plusMinutes(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusMinutes(m: UInt) -> NSDate {
+    public func minusMinutes(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusHours(h: UInt) -> NSDate {
+    public func plusHours(_ h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusHours(h: UInt) -> NSDate {
+    public func minusHours(_ h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusDays(d: UInt) -> NSDate {
+    public func plusDays(_ d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func minusDays(d: UInt) -> NSDate {
+    public func minusDays(_ d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func plusWeeks(w: UInt) -> NSDate {
+    public func plusWeeks(_ w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
     }
     
-    public func minusWeeks(w: UInt) -> NSDate {
+    public func minusWeeks(_ w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
     }
     
-    public func plusMonths(m: UInt) -> NSDate {
+    public func plusMonths(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
     }
     
-    public func minusMonths(m: UInt) -> NSDate {
+    public func minusMonths(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
     }
     
-    public func plusYears(y: UInt) -> NSDate {
+    public func plusYears(_ y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
     }
     
-    public func minusYears(y: UInt) -> NSDate {
+    public func minusYears(_ y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
     }
     
-    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> NSDate {
-        let dc:NSDateComponents = NSDateComponents()
+    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
+        var dc:DateComponents = DateComponents()
         dc.second = sec
         dc.minute = min
         dc.hour = hrs
@@ -538,117 +494,106 @@ public extension NSDate {
         dc.weekOfYear = wks
         dc.month = mts
         dc.year = yrs
-        return NSCalendar.currentCalendar().dateByAddingComponents(dc, toDate: self, options: [])!
+        return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
     }
     
-    public func midnightUTCDate() -> NSDate {
-        let dc:NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day], fromDate: self)
+    public func midnightUTCDate() -> Date {
+        var dc:DateComponents = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self)
         dc.hour = 0
         dc.minute = 0
         dc.second = 0
         dc.nanosecond = 0
-        dc.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        (dc as NSDateComponents).timeZone = TimeZone(secondsFromGMT: 0)
         
-        return NSCalendar.currentCalendar().dateFromComponents(dc)!
+        return Calendar.current.date(from: dc)!
     }
     
-    public class func secondsBetween(date1 d1:NSDate, date2 d2:NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Second, fromDate: d1, toDate: d2, options:[])
-        return dc.second
+    public static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.second!
     }
     
-    public class func minutesBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: d1, toDate: d2, options: [])
-        return dc.minute
+    public static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.minute!
     }
     
-    public class func hoursBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: d1, toDate: d2, options: [])
-        return dc.hour
+    public static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.hour!
     }
     
-    public class func daysBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: d1, toDate: d2, options: [])
-        return dc.day
+    public static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.day!
     }
     
-    public class func weeksBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.WeekOfYear, fromDate: d1, toDate: d2, options: [])
-        return dc.weekOfYear
+    public static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.weekOfYear!
     }
     
-    public class func monthsBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Month, fromDate: d1, toDate: d2, options: [])
-        return dc.month
+    public static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.month!
     }
     
-    public class func yearsBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Year, fromDate: d1, toDate: d2, options: [])
-        return dc.year
+    public static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
+        return dc.year!
     }
     
     //MARK- Comparison Methods
     
-    public func isGreaterThan(date: NSDate) -> Bool {
-        return (self.compare(date) == .OrderedDescending)
+    public func isGreaterThan(_ date: Date) -> Bool {
+        return (self.compare(date) == .orderedDescending)
     }
     
-    public func isLessThan(date: NSDate) -> Bool {
-        return (self.compare(date) == .OrderedAscending)
+    public func isLessThan(_ date: Date) -> Bool {
+        return (self.compare(date) == .orderedAscending)
     }
     
     //MARK- Computed Properties
     
     public var day: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Day, fromDate: self))
+        return UInt(Calendar.current.component(.day, from: self))
     }
     
     public var month: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Month, fromDate: self))
+        return UInt(Calendar.current.component(.month, from: self))
     }
     
     public var year: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Year, fromDate: self))
+        return UInt(Calendar.current.component(.year, from: self))
     }
     
     public var hour: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Hour, fromDate: self))
+        return UInt(Calendar.current.component(.hour, from: self))
     }
     
     public var minute: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Minute, fromDate: self))
+        return UInt(Calendar.current.component(.minute, from: self))
     }
     
     public var second: UInt {
-        return UInt(NSCalendar.currentCalendar().component(.Second, fromDate: self))
+        return UInt(Calendar.current.component(.second, from: self))
     }
 }
 
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
+public func ==(lhs: Date, rhs: Date) -> Bool {
+    let b = lhs.compare(rhs) == .orderedSame
+    return b
 }
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedAscending
+public func <(lhs: Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedAscending
 }
 
-public func >(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedDescending
+public func >(lhs: Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedDescending
 }
 
-extension NSDate: Comparable { }
-
-public extension UIAlertController {
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-}
-
-public extension UIImagePickerController {
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-}
+//extension Date: Comparable { }
 
 extension Array where Element : Equatable {
     var unique: [Element] {
@@ -663,13 +608,15 @@ extension Array where Element : Equatable {
 }
 
 // metodi utili
-func delay(delay:Double, closure:  ()->()) {
+func delay(_ delay:Double, closure: @escaping ()->()) {
+
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+        closure()
+    }
     
-    dispatch_after(
-        dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)) ), dispatch_get_main_queue(), closure)
 }
 
-func loc(localizedKey:String) -> String {
+func loc(_ localizedKey:String) -> String {
     return NSLocalizedString(localizedKey, comment: "")
 }
 

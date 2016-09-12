@@ -21,7 +21,7 @@ class DeckSlideCell: UITableViewCell {
 
 extension DeckSlideCell {
 
-  func setCollectionViewDataSourceDelegate<D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>(dataSourceDelegate: D, forRow row: Int) {
+  func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
         
     collectionView.delegate   = dataSourceDelegate
     collectionView.dataSource = dataSourceDelegate

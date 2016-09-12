@@ -13,7 +13,7 @@ class CardModel: NSObject {
   var nome     : String! = ""
   var id       : String! = ""
   var mazzo    : String! = ""
-  var immagine : NSData!
+  var immagine : Data!
   var eroe     : String! = ""
   var copie    : String! = ""
 }

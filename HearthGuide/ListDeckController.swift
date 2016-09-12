@@ -23,36 +23,36 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     self.collectionView!.backgroundView = UIImageView(image:UIImage(named:"background"))
     navigationItem.titleView = UIImageView(image: UIImage(named: DataManager.shared.heroSelected + "Logo"))
     
-    bbSegue.tintColor = UIColor.clearColor()
+    bbSegue.tintColor = UIColor.clear
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
   
-  override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
-  override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return mazzi.count
   }
   
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("InfoCardCell", forIndexPath: indexPath) as! CardListCell
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfoCardCell", for: indexPath) as! CardListCell
     
-    let card = mazzi[indexPath.row] as! Entity
+    let card = mazzi[(indexPath as NSIndexPath).row] as! Entity
         
     cell.imgCard.image   = card["immagine"] as? UIImage
     cell.imgCopie.image  = UIImage(named: (card["copie"] as? String)!) 
     
-    cell.backgroundColor = UIColor.clearColor()
+    cell.backgroundColor = UIColor.clear
     return cell
   }
   
-  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    let card = mazzi[indexPath.row] as! Entity
+    let card = mazzi[(indexPath as NSIndexPath).row] as! Entity
     
     let imgCard = card["immagine"] as? UIImage
     
@@ -60,47 +60,47 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
-    _ = storyBoard.instantiateViewControllerWithIdentifier("infoCard") as? InfoCardController
+    _ = storyBoard.instantiateViewController(withIdentifier: "infoCard") as? InfoCardController
     
-    self.performSegueWithIdentifier("showCardListImage", sender: self)
+    self.performSegue(withIdentifier: "showCardListImage", sender: self)
   }
   
-  override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+  override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
     switch kind {
       case UICollectionElementKindSectionHeader:
-        let hdCell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ListCardHeader", forIndexPath: indexPath) as! CardListHeader
+        let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath) as! CardListHeader
         hdCell.laNome.text            = deckName["nome"] as? String
-        hdCell.vwBack.backgroundColor = UIColor.clearColor()
+        hdCell.vwBack.backgroundColor = UIColor.clear
         return hdCell
       default:
         assert(false, "Unexpected element kind")
     }
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showCardListImage" {
-      let InfoCardView = segue.destinationViewController
+      let InfoCardView = segue.destination
       InfoCardView.transitioningDelegate = self
-      InfoCardView.modalPresentationStyle = .Custom
+      InfoCardView.modalPresentationStyle = .custom
     }
   }
   
   //Metodi per Animazione Bubble
   let transition    = BubbleTransition()
   
-  func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Present
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .present
     transition.startingPoint  = self.view.center
     transition.duration       = 0.35
-    transition.bubbleColor    = UIColor.blackColor().colorWithAlphaComponent(0.2)
+    transition.bubbleColor    = UIColor.black.withAlphaComponent(0.2)
     return transition
   }
   
-  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Dismiss
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .dismiss
     transition.startingPoint  = self.view.center
-    transition.bubbleColor    = UIColor.clearColor()
+    transition.bubbleColor    = UIColor.clear
     return transition
   }
   

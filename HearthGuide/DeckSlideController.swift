@@ -27,7 +27,7 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
     
     self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
     
-    bbSegue.tintColor = UIColor.clearColor()
+    bbSegue.tintColor = UIColor.clear
   }
   
   override func didReceiveMemoryWarning() {
@@ -35,25 +35,25 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
   }
   
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return deckName.count
   }
   
-  override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return deckName[section]["nome"] as? String
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DeckSlideCell
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DeckSlideCell
     
-    cell.collectionView.tag         = indexPath.section
-    cell.bbGuide.tag                = indexPath.section
-    cell.bbList.tag                 = indexPath.section
-    cell.laDeckName.text            = deckName[indexPath.section]["nome"] as? String
+    cell.collectionView.tag         = (indexPath as NSIndexPath).section
+    cell.bbGuide.tag                = (indexPath as NSIndexPath).section
+    cell.bbList.tag                 = (indexPath as NSIndexPath).section
+    cell.laDeckName.text            = deckName[(indexPath as NSIndexPath).section]["nome"] as? String
     cell.vwHeader.backgroundColor   = UIColor(rgba: "#ecf0f1", alpha: 1)
     cell.vwNoCorner.backgroundColor = UIColor(rgba: "#ecf0f1", alpha: 1)
     cell.vwBack.backgroundColor     = UIColor(patternImage: UIImage(named: "cellBackground")!)
@@ -61,40 +61,40 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
     return cell
   }
   
-  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
     guard let DeckSlideCell = cell as? DeckSlideCell else { return }
     
-    DeckSlideCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.section)//indexPath.row)
-    DeckSlideCell.collectionViewOffset = storedOffsets[indexPath.section] ?? 0//indexPath.row] ?? 0
+    DeckSlideCell.setCollectionViewDataSourceDelegate(self, forRow: (indexPath as NSIndexPath).section)//indexPath.row)
+    DeckSlideCell.collectionViewOffset = storedOffsets[(indexPath as NSIndexPath).section] ?? 0//indexPath.row] ?? 0
   }
   
-  override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
     guard let DeckSlideCell = cell as? DeckSlideCell else { return }
     
-    storedOffsets[indexPath.row] = DeckSlideCell.collectionViewOffset
+    storedOffsets[(indexPath as NSIndexPath).row] = DeckSlideCell.collectionViewOffset
   }
   
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  @objc(numberOfSectionsInCollectionView:) func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
 
-  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 0.0
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let graph: Graph = Graph()
     
     if segue.identifier == "showCardImage" {
-      let InfoCardView = segue.destinationViewController
+      let InfoCardView = segue.destination
       InfoCardView.transitioningDelegate = self
-      InfoCardView.modalPresentationStyle = .Custom
+      InfoCardView.modalPresentationStyle = .custom
     }
     
     if segue.identifier == "ListDeck" {
-      let controller      = segue.destinationViewController as! ListDeckController
+      let controller      = segue.destination as! ListDeckController
       let indexPath       = (sender as! UIButton).tag
       controller.deckName = deckName[indexPath]
       
@@ -103,7 +103,7 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
     }
     
     if segue.identifier == "GuideDeck" {
-      let controller      = segue.destinationViewController as! GuideDeckController
+      let controller      = segue.destination as! GuideDeckController
       let indexPath       = (sender as! UIButton).tag
       controller.deckName = deckName[indexPath]["nome"] as? String
       controller.guide    = deckName[indexPath]["guida"] as? String
@@ -120,18 +120,18 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
  //Metodi per Animazione Bubble
   let transition    = BubbleTransition()
   
-  func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Present
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .present
     transition.startingPoint  = self.view.center
     transition.duration       = 0.35
-    transition.bubbleColor    = UIColor.blackColor().colorWithAlphaComponent(0.2)
+    transition.bubbleColor    = UIColor.black.withAlphaComponent(0.2)
     return transition
   }
   
-  func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .Dismiss
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .dismiss
     transition.startingPoint  = self.view.center
-    transition.bubbleColor    = UIColor.clearColor()
+    transition.bubbleColor    = UIColor.clear
     return transition
   }
 }
@@ -141,18 +141,18 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
 
 extension DeckSlideController: UICollectionViewDelegate, UICollectionViewDataSource {
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     let listaCarte = mazzi[collectionView.tag] as! [Entity]
     
     return listaCarte.count
   }
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("slideCell", forIndexPath: indexPath) as! CardSlideCell
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "slideCell", for: indexPath) as! CardSlideCell
     
     var CardList = mazzi[collectionView.tag] as! [Entity]
     
-    let contenuto = CardList[indexPath.row]
+    let contenuto = CardList[(indexPath as NSIndexPath).row]
     
     cell.laNome.text = contenuto["nome"] as? String
     
@@ -161,10 +161,10 @@ extension DeckSlideController: UICollectionViewDelegate, UICollectionViewDataSou
     return cell
   }
   
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     var CardList = mazzi[collectionView.tag] as! [Entity]
     
-    let contenuto = CardList[indexPath.row]
+    let contenuto = CardList[(indexPath as NSIndexPath).row]
     
     let imgCard = contenuto["immagine"] as? UIImage
     
@@ -172,8 +172,8 @@ extension DeckSlideController: UICollectionViewDelegate, UICollectionViewDataSou
     
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
-    _ = storyBoard.instantiateViewControllerWithIdentifier("infoCard") as? InfoCardController
+    _ = storyBoard.instantiateViewController(withIdentifier: "infoCard") as? InfoCardController
     
-    self.performSegueWithIdentifier("showCardImage", sender: self)
+    self.performSegue(withIdentifier: "showCardImage", sender: self)
   }
 }
