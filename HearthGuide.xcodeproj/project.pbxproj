@@ -406,7 +406,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = RMH33MS8SY;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -680,8 +680,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlessioForte.HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cc562893-fd43-4d5d-9da2-2bc9b4038003";
+				PROVISIONING_PROFILE_SPECIFIER = HearthGuide2;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -704,7 +704,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlessioForte.HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cc562893-fd43-4d5d-9da2-2bc9b4038003";
+				PROVISIONING_PROFILE_SPECIFIER = HearthGuide2;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
