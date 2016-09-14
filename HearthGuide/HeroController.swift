@@ -125,6 +125,7 @@ class HeroController: UITableViewController {
   
   
   @IBAction func acRefresh(_ sender: MIBadgeButton) {
+    
     let alertVC = PMAlertController(title: "Aggiornamento Mazzi",
                                     description: "L'aggiornamento richiederà qualche minuto, non chiudere l'app.\rVuoi continuare?",
                                     image: UIImage(named: "updateDb.png"), style: .alert)
@@ -134,16 +135,17 @@ class HeroController: UITableViewController {
     }))
     
     alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () -> Void in
-      DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+      DispatchQueue.global().async(execute: {
         DataManager.shared.startDataManager([])
       });
     }))
     
     present(alertVC, animated: true, completion: nil)
+ 
   }
   
   
-  //CONFIGURA LA VIEW CHE GIRA PER IL LOADING 
+  //CONFIGURA LA VIEW CHE GIRA PER IL LOADING
   func configLoading() {
     config.size             = 140
     config.backgroundColor  = UIColor.darkGray

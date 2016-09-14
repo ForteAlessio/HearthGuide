@@ -40,6 +40,21 @@ class DataManager: NSObject, GraphDelegate {
     
     startGraph()
     
+    //controllo se l'iPhone è stato connesso ad internet
+    if !Reachability.isConnectedToNetwork() {
+      let alertVC = PMAlertController(title: "Errore Connessione",
+                                      description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
+                                      image: UIImage(named: "warning.png"), style: .alert)
+      
+      alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
+        print("Nessuna Connessione")
+      }))
+      
+      self.mainController.present(alertVC, animated: true, completion: nil)
+      
+      return
+    }
+    
     if Thread.isMainThread {
       SwiftLoader.show("Caricamento", animated: true)
     }else {
@@ -47,41 +62,6 @@ class DataManager: NSObject, GraphDelegate {
         SwiftLoader.show("Caricamento", animated: true)
       }
     }
-    
-    //controllo se l'iPhone è stato connesso ad internet
-    
-    let manager = NetworkReachabilityManager(host: "www.apple.com")
-    
-    manager?.listener = { status in
-      
-      switch status {
-      case .unknown, .reachable:
-        let alertVC = PMAlertController(title: "Errore Connessione",
-                                        description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
-                                        image: UIImage(named: "warning.png"), style: .alert)
-        
-        alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
-          print("Nessuna Connessione")
-        }))
-        
-        if Thread.isMainThread {
-          SwiftLoader.hide()
-        }else {
-          DispatchQueue.main.sync {
-            SwiftLoader.hide()
-          }
-        }
-        
-        self.mainController.present(alertVC, animated: true, completion: nil)
-        
-        return
-      default: print("")
-      }
-    }
-    
-    //let status = Reach().connectionStatus()
-    
-    
     
     //se la richiesta proviene da notifica Cancello i dati solo gli eroi aggiornati
     //altrimenti li elimino tutti i dati

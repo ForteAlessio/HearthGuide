@@ -81,7 +81,32 @@ class BannerController: UIViewController, GADBannerViewDelegate {
         self.lockBorder.removeFromSuperview()
         self.bottomLock.removeFromSuperview()
         self.notifyAlert ()
+        self.checkUpdate ()
     })
+  }
+  
+  //controlla se ci sono aggiornamenti da fare, se si chiede all'utente se vuole farli
+  func checkUpdate () {
+    let defaults = UserDefaults.standard
+    
+    if defaults.string(forKey: "alert") == "1" {
+      
+      let alertVC = PMAlertController(title: "Aggiornamento Database",
+                                      description: "Abbiamo aggiornato il nostro database dei mazzi, vuoi effettuare ora l'aggiornamento?",
+                                      image: UIImage(named: "update.png"), style: .alert)
+      
+      alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in
+        print("Annullato")
+      }))
+      
+      alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () -> Void in
+        DispatchQueue.global().async(execute: {
+          DataManager.shared.startDataManager([])
+        });
+      }))
+      
+      present(alertVC, animated: true, completion: nil)
+    }
   }
   
   //ALLO START DELL'APP CHIEDIAMO ALL'UTENTE SE VUOLE LE NOTIFICHE DI AGGIORNAMENTO
@@ -96,14 +121,13 @@ class BannerController: UIViewController, GADBannerViewDelegate {
                                       image: UIImage(named: "permission.png"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Avanti", style: .cancel, action: { () -> Void in
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
-          
-          _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
-          
+        DispatchQueue.global().async(execute: {
+        
+          _ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
+                    
           DataManager.shared.startDataManager([])
         });
       }))
-      
       present(alertVC, animated: true, completion: nil)
     }
     //altrimenti controlliamo se nelle impostazioni l'utente ha attivato le notifiche, se si impostiamo l'app per ricerverle
@@ -111,7 +135,8 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
       
       if notificationType != UIUserNotificationType() {
-        _ = OneSignal(launchOptions: DataManager.shared.option, appId: "7dbf6c05-34d0-4726-89b5-e79b4c1bf330", handleNotification: nil)
+        
+        _ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
       }
     }
   }

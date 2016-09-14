@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () in
       DataManager.shared.readNotify = false
 
-      DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+      DispatchQueue.global().async(execute: {
         var updateHero : [String] = []
         
         if let custom = userInfo["custom"] as? NSDictionary {
@@ -105,8 +105,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       presentedVC!.present(alertVC, animated: true, completion: nil)
       DataManager.shared.readNotify = true
     }
-    
-    completionHandler(.newData)
+  
+  completionHandler(.newData)
   }
   
 }

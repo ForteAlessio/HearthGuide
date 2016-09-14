@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA03082A1D894A1A00372AF0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0308291D894A1A00372AF0 /* StoreKit.framework */; };
+		CA03082C1D894B0E00372AF0 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA03082B1D894B0E00372AF0 /* OneSignal.framework */; };
+		CA03082E1D897D9800372AF0 /* isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA03082D1D897D9800372AF0 /* isConnected.swift */; };
 		CA30A4451D86A26C00B10E66 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4441D86A26C00B10E66 /* SwiftyJSON.swift */; };
 		CA30A4651D86A47D00B10E66 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4471D86A47C00B10E66 /* Action.swift */; };
 		CA30A4661D86A47D00B10E66 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4481D86A47C00B10E66 /* Container.swift */; };
@@ -68,7 +71,6 @@
 		E22A2BA61D056F39006628DF /* MIBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A2BA51D056F39006628DF /* MIBadgeButton.swift */; };
 		E233A3C51D058DF500E2F43E /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E233A3C41D058DF500E2F43E /* SwiftLoader.swift */; };
 		E24A251F1D216523006EA7D9 /* DecodeHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A251E1D216522006EA7D9 /* DecodeHTML.swift */; };
-		E26072D11CFEDBB4004C4ACD /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26072CF1CFEDBB4004C4ACD /* OneSignal.framework */; };
 		E26778F91D1D5B5A00D9EABF /* ListDeckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26778F81D1D5B5900D9EABF /* ListDeckController.swift */; };
 		E26778FD1D1D625100D9EABF /* CardListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26778FC1D1D625100D9EABF /* CardListCell.swift */; };
 		E26779091D1D880700D9EABF /* GuideDeckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26779081D1D880700D9EABF /* GuideDeckController.swift */; };
@@ -94,6 +96,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA0308291D894A1A00372AF0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CA03082B1D894B0E00372AF0 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = "<group>"; };
+		CA03082D1D897D9800372AF0 /* isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = isConnected.swift; sourceTree = "<group>"; };
 		CA30A4441D86A26C00B10E66 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		CA30A4471D86A47C00B10E66 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		CA30A4481D86A47C00B10E66 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		CA30A4931D86B51C00B10E66 /* TaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Alamofire/TaskDelegate.swift; sourceTree = "<group>"; };
 		CA30A4941D86B51C00B10E66 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Alamofire/Timeline.swift; sourceTree = "<group>"; };
 		CA30A4951D86B51C00B10E66 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Alamofire/Validation.swift; sourceTree = "<group>"; };
+		CAB0D8EB1D885709004154ED /* HearthGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HearthGuide.entitlements; sourceTree = "<group>"; };
 		E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
 		E209CF851CF7092D0069E9F0 /* HearthGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearthGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E209CF881CF7092D0069E9F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,7 +164,6 @@
 		E233A3C41D058DF500E2F43E /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		E24A251E1D216522006EA7D9 /* DecodeHTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeHTML.swift; sourceTree = "<group>"; };
 		E26072CD1CFEDAE1004C4ACD /* HearthGuide-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HearthGuide-Bridging-Header.h"; sourceTree = "<group>"; };
-		E26072CF1CFEDBB4004C4ACD /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = "<group>"; };
 		E26778F81D1D5B5900D9EABF /* ListDeckController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeckController.swift; sourceTree = "<group>"; };
 		E26778FC1D1D625100D9EABF /* CardListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListCell.swift; sourceTree = "<group>"; };
 		E26779081D1D880700D9EABF /* GuideDeckController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideDeckController.swift; sourceTree = "<group>"; };
@@ -189,14 +194,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA03082A1D894A1A00372AF0 /* StoreKit.framework in Frameworks */,
 				E2EA27491D2BC4E60012331A /* GoogleMobileAds.framework in Frameworks */,
-				E26072D11CFEDBB4004C4ACD /* OneSignal.framework in Frameworks */,
+				CA03082C1D894B0E00372AF0 /* OneSignal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA0308261D894A1100372AF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA0308291D894A1A00372AF0 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA30A41D1D86A1C000B10E66 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +277,7 @@
 			children = (
 				E209CF871CF7092D0069E9F0 /* HearthGuide */,
 				E209CF861CF7092D0069E9F0 /* Products */,
+				CA0308261D894A1100372AF0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -277,9 +292,10 @@
 		E209CF871CF7092D0069E9F0 /* HearthGuide */ = {
 			isa = PBXGroup;
 			children = (
+				CAB0D8EB1D885709004154ED /* HearthGuide.entitlements */,
 				E26072CD1CFEDAE1004C4ACD /* HearthGuide-Bridging-Header.h */,
+				CA03082B1D894B0E00372AF0 /* OneSignal.framework */,
 				E2EA27481D2BC4E60012331A /* GoogleMobileAds.framework */,
-				E26072CF1CFEDBB4004C4ACD /* OneSignal.framework */,
 				E2D483991CF83ABF00D686FF /* Librerie */,
 				E209CF9C1CF7236C0069E9F0 /* Font */,
 				E209CF881CF7092D0069E9F0 /* AppDelegate.swift */,
@@ -337,6 +353,7 @@
 				E24A251E1D216522006EA7D9 /* DecodeHTML.swift */,
 				CA30A4831D86B46E00B10E66 /* Extensions.swift */,
 				E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */,
+				CA03082D1D897D9800372AF0 /* isConnected.swift */,
 				E29D895F1D192C5E0055B27E /* UIColorExtension.swift */,
 				CA30A41D1D86A1C000B10E66 /* Alamofire */,
 				E22A2BA51D056F39006628DF /* MIBadgeButton.swift */,
@@ -404,11 +421,14 @@
 				TargetAttributes = {
 					E209CF841CF7092D0069E9F0 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = RMH33MS8SY;
+						DevelopmentTeam = JMAE6SWMQB;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -505,6 +525,7 @@
 				E209CFA01CF72B350069E9F0 /* HeroController.swift in Sources */,
 				E209CF891CF7092D0069E9F0 /* AppDelegate.swift in Sources */,
 				CA30A47B1D86A47D00B10E66 /* ManagedRelationshipTag.swift in Sources */,
+				CA03082E1D897D9800372AF0 /* isConnected.swift in Sources */,
 				E209CFA21CF72BAC0069E9F0 /* HeroCell.swift in Sources */,
 				CA30A49A1D86B51C00B10E66 /* NetworkReachabilityManager.swift in Sources */,
 				CA30A4A41D86B51C00B10E66 /* TaskDelegate.swift in Sources */,
@@ -577,6 +598,7 @@
 		E209CF951CF7092D0069E9F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -613,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -624,6 +646,7 @@
 		E209CF961CF7092D0069E9F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -654,7 +677,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -665,23 +688,25 @@
 		E209CF981CF7092D0069E9F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = HearthGuide/HearthGuide.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Giovanni Buccicone (U9RH2W7VTY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = RMH33MS8SY;
+				DEVELOPMENT_TEAM = JMAE6SWMQB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HearthGuide",
 				);
 				INFOPLIST_FILE = HearthGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlessioForte.HearthGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc562893-fd43-4d5d-9da2-2bc9b4038003";
-				PROVISIONING_PROFILE_SPECIFIER = HearthGuide2;
+				PROVISIONING_PROFILE = "0b1d8c17-41f1-41fe-b0bd-d957b89cd828";
+				PROVISIONING_PROFILE_SPECIFIER = com.AlessioForte.HearthGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -690,22 +715,24 @@
 		E209CF991CF7092D0069E9F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = HearthGuide/HearthGuide.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Giovanni Buccicone (U9RH2W7VTY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RMH33MS8SY;
+				DEVELOPMENT_TEAM = JMAE6SWMQB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HearthGuide",
 				);
 				INFOPLIST_FILE = HearthGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlessioForte.HearthGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc562893-fd43-4d5d-9da2-2bc9b4038003";
-				PROVISIONING_PROFILE_SPECIFIER = HearthGuide2;
+				PROVISIONING_PROFILE = "0b1d8c17-41f1-41fe-b0bd-d957b89cd828";
+				PROVISIONING_PROFILE_SPECIFIER = com.AlessioForte.HearthGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
