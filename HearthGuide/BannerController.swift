@@ -28,15 +28,9 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     
     vwBanner.delegate           = self
     
-    imgBack.isHidden              = true
+    imgBack.isHidden            = true
     vwBanner.adUnitID           = "ca-app-pub-3940256099942544/2934735716" // codice test da sostituire con quello vero
     vwBanner.rootViewController = self
-    let request                 = GADRequest()
-    
-    // necessario per fare i test con il simulatore
-    request.testDevices         = [kGADSimulatorID]
-    
-    vwBanner.load(request)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -51,7 +45,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     
     UIView.animate(withDuration: 0.5, animations: {
       self.view.layoutIfNeeded()
-    }) 
+    })
     print(error.localizedDescription)
   }
   
@@ -60,7 +54,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     
     UIView.animate(withDuration: 0.5, animations: {
       self.view.layoutIfNeeded()
-    }) 
+    })
   }
   
   override func didReceiveMemoryWarning() {
@@ -69,7 +63,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   
   func openLock() {
     
-    UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+    UIView.animate(withDuration: 1.5, delay: 0, options: [], animations: {
       let yDelta = self.lockBorder.frame.maxY
       
       self.topLock.center.y    -= yDelta
@@ -80,6 +74,13 @@ class BannerController: UIViewController, GADBannerViewDelegate {
         self.topLock.removeFromSuperview()
         self.lockBorder.removeFromSuperview()
         self.bottomLock.removeFromSuperview()
+        
+        let request                 = GADRequest()
+        
+        // necessario per fare i test con il simulatore
+        request.testDevices         = [kGADSimulatorID]
+        self.vwBanner.load(request)
+
         self.notifyAlert ()
         self.checkUpdate ()
     })
@@ -113,9 +114,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   func notifyAlert () {
     //se è il primo avvio chiediamo l'autorizzazione per le notifiche
     if DataManager.shared.Eroi.count == 0 {
-      
-      DataManager.shared.creaEroi()
-      
+            
       let alertVC = PMAlertController(title: "Notifiche Aggiornamenti",
                                       description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, potrai aggiornare manualmente i mazzi.",
                                       image: UIImage(named: "permission.png"), style: .alert)

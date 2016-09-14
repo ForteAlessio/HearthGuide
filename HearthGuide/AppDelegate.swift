@@ -57,10 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     print("Failed to register:", error)
   }
-
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
+    
     var presentedVC = self.window?.rootViewController
     
     let defaults = UserDefaults.standard
@@ -82,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () in
       DataManager.shared.readNotify = false
-
+      
       DispatchQueue.global().async(execute: {
         var updateHero : [String] = []
         
@@ -105,8 +104,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       presentedVC!.present(alertVC, animated: true, completion: nil)
       DataManager.shared.readNotify = true
     }
+    
+    completionHandler(.newData)
+  }
   
-  completionHandler(.newData)
+  
+  //Metodi per la ricerca spotlight indicizzata
+  func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
+    
+    // estraiamo l'identificatiore dell'attività
+    var nomeAct = userActivity.userInfo!["kCSSearchableItemActivityIdentifier"] as! String
+    
+    // tagliamo la parte iniziale dell'identifier
+    nomeAct = nomeAct.replacingOccurrences(of: "Eroe.", with: "")
+    
+    print("^^Continue Activity: " + nomeAct)
+    
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    let listController = storyBoard.instantiateViewController(withIdentifier: "Eroi") as! HeroController
+    
+    var contatore = 0
+    
+    for hero in DataManager.shared.Eroi {
+      // controlliamo se il nome dell'Eroe corrisponde al risultato toccato dall'utente
+      if hero["nome"] as! String == nomeAct {
+        // se corrisponde invochiamo il metodo showDetailFromSpotlightSearch() di HeroController e gli passiamo il contatore
+        listController.showDetailFromSpotlightSearch(contatore)
+        
+        break
+      }
+      contatore += 1
+    }
+    
+    return true
+  }
+  
+  func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+    return true
+  }
+  
+  func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+    
+    if (error as NSError).code != NSUserCancelledError {
+      
+      let message = "The connection to your other device may have been interrupted. Please try again. \(error.localizedDescription)"
+      print("--------")
+      print("")
+      print(message)
+      print("")
+      print("--------")
+    }
+  }
+  
+  func application(_ application: UIApplication, didUpdate userActivity: NSUserActivity) {
+    print("--------")
+    print("")
+    print("Update Activity: \(userActivity.title)")
+    print("")
+    print("--------")
   }
   
 }

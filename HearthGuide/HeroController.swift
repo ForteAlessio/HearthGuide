@@ -143,6 +143,32 @@ class HeroController: UITableViewController {
     present(alertVC, animated: true, completion: nil)
  
   }
+ 
+  // questo metodo serve per aprire il dettaglio (RicettaController) via codice
+  // lo usiamo per aprire la ricetta da un rislultato della ricerca di Spotlight inrenete alla nostra App
+  // affinche funzioni il controller nello storyboard è stato nominato "visoreRicette" (nella carta di identità, campo Storyboard ID)
+  func showDetailFromSpotlightSearch(_ index:Int) {
+    let graph      : Graph        = Graph()
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    let controller = storyBoard.instantiateViewController(withIdentifier: "DeckSlide") as! DeckSlideController
+    
+    
+    let nomeEroe    = DataManager.shared.Eroi[index]["nome"] as! String
+    DataManager.shared.heroSelected = nomeEroe
+    
+    let selectedDecks: Array<Entity> = graph.searchForEntity(groups: [nomeEroe])
+    controller.deckName = selectedDecks
+    
+    for deck in selectedDecks {
+      let cards: Array<Entity> = graph.searchForEntity(groups: [(deck["nome"] as! String)])
+      controller.mazzi.append(cards as AnyObject)
+    }
+    
+    print(self.navigationController?.title)
+    
+    self.navigationController?.pushViewController(controller, animated: true)
+    
+  }
   
   
   //CONFIGURA LA VIEW CHE GIRA PER IL LOADING

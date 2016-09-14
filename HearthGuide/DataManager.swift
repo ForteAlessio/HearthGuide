@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreSpotlight
+import MobileCoreServices
 
 class DataManager: NSObject, GraphDelegate {
   
@@ -101,6 +103,7 @@ class DataManager: NSObject, GraphDelegate {
     Mage["update"]   = Date() as AnyObject?
     Eroi.append(Mage)
     nomiEroi.append("Mago")
+    indicizza(Mage)
     Mage.add(to: "Eroi")
     
     let Priest        = Entity(type: "Eroe")
@@ -109,6 +112,7 @@ class DataManager: NSObject, GraphDelegate {
     Priest["update"]  = Date() as AnyObject?
     Eroi.append(Priest)
     nomiEroi.append("Sacerdote")
+    indicizza(Priest)
     Priest.add(to: "Eroi")
     
     let Hunter        = Entity(type: "Eroe")
@@ -117,6 +121,7 @@ class DataManager: NSObject, GraphDelegate {
     Hunter["update"]  = Date() as AnyObject?
     Eroi.append(Hunter)
     nomiEroi.append("Cacciatore")
+    indicizza(Hunter)
     Hunter.add(to: "Eroi")
 
     let Warrior       = Entity(type: "Eroe")
@@ -125,6 +130,7 @@ class DataManager: NSObject, GraphDelegate {
     Warrior["update"] = Date() as AnyObject?
     Eroi.append(Warrior)
     nomiEroi.append("Guerriero")
+    indicizza(Warrior)
     Warrior.add(to: "Eroi")
 
     let Druid         = Entity(type: "Eroe")
@@ -133,6 +139,7 @@ class DataManager: NSObject, GraphDelegate {
     Druid["update"]   = Date() as AnyObject?
     Eroi.append(Druid)
     nomiEroi.append("Druido")
+    indicizza(Druid)
     Druid.add(to: "Eroi")
     
     let Paladin       = Entity(type: "Eroe")
@@ -141,6 +148,7 @@ class DataManager: NSObject, GraphDelegate {
     Paladin["update"] = Date() as AnyObject?
     Eroi.append(Paladin)
     nomiEroi.append("Paladino")
+    indicizza(Paladin)
     Paladin.add(to: "Eroi")
 
     let Warlock       = Entity(type: "Eroe")
@@ -149,6 +157,7 @@ class DataManager: NSObject, GraphDelegate {
     Warlock["update"] = Date() as AnyObject?
     Eroi.append(Warlock)
     nomiEroi.append("Stregone")
+    indicizza(Warlock)
     Warlock.add(to: "Eroi")
     
     let Shaman        = Entity(type: "Eroe")
@@ -157,6 +166,7 @@ class DataManager: NSObject, GraphDelegate {
     Shaman["update"]  = Date() as AnyObject?
     Eroi.append(Shaman)
     nomiEroi.append("Sciamano")
+    indicizza(Shaman)
     Shaman.add(to: "Eroi")
     
     let Rogue         = Entity(type: "Eroe")
@@ -165,6 +175,7 @@ class DataManager: NSObject, GraphDelegate {
     Rogue["update"]   = Date() as AnyObject?
     Eroi.append(Rogue)
     nomiEroi.append("Ladro")
+    indicizza(Rogue)
     Rogue.add(to: "Eroi")
 
     graph.async()
@@ -176,5 +187,38 @@ class DataManager: NSObject, GraphDelegate {
     mainController.bbRefresh.badgeString     = ANotify
     mainController.bbRefresh.badgeTextColor  = UIColor.white
     mainController.bbRefresh.badgeEdgeInsets = UIEdgeInsetsMake(18, 5, 0, 15)
+  }
+}
+
+// metodo per indicizzare in spotlight gli eori
+func indicizza(_ Hero: Entity) {
+  // creiamo gli attributi dell'elemento cercabile in Spotlight
+  let attributi = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+  
+  // diamogli un nome
+  attributi.title = Hero["nome"] as? String
+  
+  // diamogli una descrizione
+  attributi.contentDescription = "Apri il Mazzi dell'Eroe"
+  
+  // creiamo la CSSearchableItem
+  let item = CSSearchableItem(uniqueIdentifier: "Eroe." + (Hero["nome"] as? String)!,
+                              domainIdentifier: "com.AlessioForte.HearthGuide",
+                              attributeSet: attributi)
+  
+  // indicizziamo in Spotlight
+  CSSearchableIndex.default().indexSearchableItems([item]) { (error:Error?) -> Void in
+    print("^^Eroe indicizzato")
+  }
+}
+
+// metodo per eliminate le ricette indicizzate
+func eliminaRicettaDaSpotlight(_ Hero: Entity) {
+  // ricostruiamo l'identifier
+  let identifier = "Eroe." + (Hero["nome"] as? String)!
+  
+  // cancelliamo da Spotlight
+  CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
+    print("^^Eroe deleted")
   }
 }
