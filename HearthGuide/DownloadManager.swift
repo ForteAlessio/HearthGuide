@@ -232,6 +232,17 @@ class DownloadManager: NSObject {
             if let alr = defaults.string(forKey: "alert") {
               DataManager.shared.iconBadge(alr)
             }
+            
+            let alertVC = PMAlertController(title: "Aggiornamento Eseguito",
+                                            description: "L'aggiornamento dei Mazzi è stato terminato correttamente.",
+                                            image: UIImage(named: "endUpdate.png"), style: .alert)
+            
+            alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
+              print("^^Fine Aggiornamento")
+            }))
+            
+            DataManager.shared.mainController.present(alertVC, animated: true, completion: nil)
+
           }
           self.numRequest += 1
         }

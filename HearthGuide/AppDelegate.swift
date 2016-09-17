@@ -108,34 +108,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     completionHandler(.newData)
   }
   
-  
-  //Metodi per la ricerca spotlight indicizzata
+  //METODI SPOTLIGHT
+
+  //metodo evocato al tocco della ricerca di spotlight
   func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
     
     // estraiamo l'identificatiore dell'attività
     var nomeAct = userActivity.userInfo!["kCSSearchableItemActivityIdentifier"] as! String
-    
+
     // tagliamo la parte iniziale dell'identifier
     nomeAct = nomeAct.replacingOccurrences(of: "Eroe.", with: "")
     
     print("^^Continue Activity: " + nomeAct)
     
-    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    let listController = storyBoard.instantiateViewController(withIdentifier: "Eroi") as! HeroController
-    
     var contatore = 0
-    
-    for hero in DataManager.shared.Eroi {
-      // controlliamo se il nome dell'Eroe corrisponde al risultato toccato dall'utente
-      if hero["nome"] as! String == nomeAct {
-        // se corrisponde invochiamo il metodo showDetailFromSpotlightSearch() di HeroController e gli passiamo il contatore
-        listController.showDetailFromSpotlightSearch(contatore)
+
+    for eroe in DataManager.shared.Eroi {
+      
+      if eroe["nome"] as! String == nomeAct {
+        //Impostiamo l'indice trovato che useremo per cercare i Mazzi dell'eroe
+        DataManager.shared.SpotLightIndex = contatore
         
+        DataManager.shared.mainController.navigationController?.popToRootViewController(animated: false)
+        DataManager.shared.mainController.performSegue(withIdentifier: "detail", sender: self)
+
         break
       }
       contatore += 1
     }
-    
+
     return true
   }
   

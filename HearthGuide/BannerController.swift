@@ -21,16 +21,28 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   @IBOutlet var topCon: NSLayoutConstraint!
   
   
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    vwBanner.delegate           = self
+    DataManager.shared.viewBannerCon = topCon
     
-    imgBack.isHidden            = true
-    vwBanner.adUnitID           = "ca-app-pub-3940256099942544/2934735716" // codice test da sostituire con quello vero
-    vwBanner.rootViewController = self
+    let defaults = UserDefaults.standard
+    
+    if defaults.string(forKey: "NoAds") != "99" {
+      vwBanner.delegate           = self
+
+      //id Banner Pubblicitario
+      //ca-app-pub-7772743643397664/9778396030
+      
+      //id App AdMob
+      //ca-app-pub-7772743643397664~6824929634
+      
+      //id Test AdMob
+      //ca-app-pub-3940256099942544/2934735716
+      imgBack.isHidden            = true
+      vwBanner.adUnitID           =  "ca-app-pub-3940256099942544/2934735716"
+      vwBanner.rootViewController = self
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +75,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   
   func openLock() {
     
-    UIView.animate(withDuration: 1.5, delay: 0, options: [], animations: {
+    UIView.animate(withDuration: 1.2, delay: 0, options: [], animations: {
       let yDelta = self.lockBorder.frame.maxY
       
       self.topLock.center.y    -= yDelta
@@ -131,6 +143,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     }
     //altrimenti controlliamo se nelle impostazioni l'utente ha attivato le notifiche, se si impostiamo l'app per ricerverle
     else {
+      
       let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
       
       if notificationType != UIUserNotificationType() {

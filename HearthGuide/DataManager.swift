@@ -9,6 +9,8 @@
 import UIKit
 import CoreSpotlight
 import MobileCoreServices
+import GoogleMobileAds
+
 
 class DataManager: NSObject, GraphDelegate {
   
@@ -23,9 +25,15 @@ class DataManager: NSObject, GraphDelegate {
   var cardSelected    : UIImage     = UIImage()
   var heroSelected    : String      = ""
   var graph           : Graph       = Graph()
-  var canLaunch       : Bool        = false
+  var SpotLightIndex  : Int         = -99
   var option          : [AnyHashable: Any]?
+  let userCalendar    = Calendar.current
+  var viewBannerCon   : NSLayoutConstraint!
+  
   var mainController  : HeroController!
+  var NavController   : UINavigationController!
+  
+
 
   func startGraph () {
     graph.delegate = self
@@ -48,7 +56,7 @@ class DataManager: NSObject, GraphDelegate {
                                       description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
                                       image: UIImage(named: "warning.png"), style: .alert)
       
-      alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
+      alertVC.addAction(PMAlertAction(title: "Chiudi", style: .default, action: { () -> Void in
         print("Nessuna Connessione")
       }))
       
@@ -188,37 +196,56 @@ class DataManager: NSObject, GraphDelegate {
     mainController.bbRefresh.badgeTextColor  = UIColor.white
     mainController.bbRefresh.badgeEdgeInsets = UIEdgeInsetsMake(18, 5, 0, 15)
   }
-}
-
-// metodo per indicizzare in spotlight gli eori
-func indicizza(_ Hero: Entity) {
-  // creiamo gli attributi dell'elemento cercabile in Spotlight
-  let attributi = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
   
-  // diamogli un nome
-  attributi.title = Hero["nome"] as? String
-  
-  // diamogli una descrizione
-  attributi.contentDescription = "Apri il Mazzi dell'Eroe"
-  
-  // creiamo la CSSearchableItem
-  let item = CSSearchableItem(uniqueIdentifier: "Eroe." + (Hero["nome"] as? String)!,
-                              domainIdentifier: "com.AlessioForte.HearthGuide",
-                              attributeSet: attributi)
-  
-  // indicizziamo in Spotlight
-  CSSearchableIndex.default().indexSearchableItems([item]) { (error:Error?) -> Void in
-    print("^^Eroe indicizzato")
+  // metodo per indicizzare in spotlight gli eori
+  func indicizza(_ Hero: Entity) {
+    // creiamo gli attributi dell'elemento cercabile in Spotlight
+    let attributi = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+    
+    attributi.title = Hero["nome"] as? String
+    attributi.contentDescription = "Vai ai mazzi dell'Eroe. \n"
+    attributi.pageHeight = 100
+    attributi.thumbnailData = UIImagePNGRepresentation((Hero["img"] as? UIImage)!)
+    
+    // creiamo la CSSearchableItem
+    let item = CSSearchableItem(uniqueIdentifier: "Eroe." + (Hero["nome"] as? String)!,
+                                domainIdentifier: "com.AlessioForte.HearthGuide",
+                                attributeSet: attributi)
+    
+    // indicizziamo in Spotlight
+    CSSearchableIndex.default().indexSearchableItems([item]) { (error:Error?) -> Void in
+      print("^^Eroe indicizzato")
+    }
   }
-}
-
-// metodo per eliminate le ricette indicizzate
-func eliminaRicettaDaSpotlight(_ Hero: Entity) {
-  // ricostruiamo l'identifier
-  let identifier = "Eroe." + (Hero["nome"] as? String)!
   
-  // cancelliamo da Spotlight
-  CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
-    print("^^Eroe deleted")
+  // metodo per eliminate gli Eori indicizzati
+  func eliminaRicettaDaSpotlight(_ Hero: Entity) {
+    // ricostruiamo l'identifier
+    let identifier = "Eroe." + (Hero["nome"] as? String)!
+    
+    // cancelliamo da Spotlight
+    CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
+      print("^^Eroe cancellato")
+    }
+  }
+  
+  // metodo che riporta la stringa da visualizzare per l'aggiornamento
+  func getlastUpdate(_ ADate: Date) -> String {
+    let today = Date()
+    
+    let dayCalendarUnit: NSCalendar.Unit = [.day]
+    let dayDifference = (userCalendar as NSCalendar).components(
+      dayCalendarUnit,
+      from: ADate,
+      to: today,
+      options: [])
+    
+    if dayDifference.day == 0 {
+      return  "Ultimo Aggiornamento: oggi"
+    } else if dayDifference.day == 1 {
+        return  "Ultimo Aggiornamento: ieri"
+      } else {
+          return  "Ultimo Aggiornamento: " + String(describing: dayDifference.day!) + " giorni fa"
+        }
   }
 }

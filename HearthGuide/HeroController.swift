@@ -8,16 +8,21 @@
 
 import UIKit
 
-class HeroController: UITableViewController {
-
+class HeroController: UITableViewController, StoreKitManagerDelegate {
+  
+  
   @IBOutlet var bbRefresh: MIBadgeButton!
+  @IBOutlet var bbInApp: UIBarButtonItem!
   
   var config       : SwiftLoader.Config = SwiftLoader.Config()
-  let userCalendar = Calendar.current
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //Inizializzaione dell'In App Purchase
+    StoreKitManager.shared.delegate = self
+    StoreKitManager.shared.startStoreKitManager(product: "NoPubblicita", viewController: self)
+
     configLoading()
     
     DataManager.shared.mainController = self
@@ -41,6 +46,7 @@ class HeroController: UITableViewController {
     navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
     
     self.tableView.backgroundView = UIImageView(image:UIImage(named:"background"))
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -68,21 +74,7 @@ class HeroController: UITableViewController {
     cell.laHero.text   = hero["nome"] as? String
     cell.imgHero.image = hero["img"]  as? UIImage
   
-    let today = Date()
-    
-    let dayCalendarUnit: NSCalendar.Unit = [.day]
-    let dayDifference = (userCalendar as NSCalendar).components(
-      dayCalendarUnit,
-      from: (hero["update"] as? Date)!,
-      to: today,
-      options: [])
-    
-    if dayDifference.day == 0 {
-      cell.laUpdate.text = "Ultimo Aggiornamento: oggi"
-    }
-    else {
-      cell.laUpdate.text = "Ultimo Aggiornamento: " + String(describing: dayDifference.day) + " giorni fa"
-    }
+    cell.laUpdate.text = DataManager.shared.getlastUpdate((hero["update"] as? Date)!)
     
     cell.vwBack.backgroundColor = UIColor(rgba: "#ecf0f1", alpha: 1)
     
@@ -125,7 +117,6 @@ class HeroController: UITableViewController {
   
   
   @IBAction func acRefresh(_ sender: MIBadgeButton) {
-    
     let alertVC = PMAlertController(title: "Aggiornamento Mazzi",
                                     description: "L'aggiornamento richiederà qualche minuto, non chiudere l'app.\rVuoi continuare?",
                                     image: UIImage(named: "updateDb.png"), style: .alert)
@@ -141,33 +132,59 @@ class HeroController: UITableViewController {
     }))
     
     present(alertVC, animated: true, completion: nil)
- 
+    
   }
- 
-  // questo metodo serve per aprire il dettaglio (RicettaController) via codice
-  // lo usiamo per aprire la ricetta da un rislultato della ricerca di Spotlight inrenete alla nostra App
-  // affinche funzioni il controller nello storyboard è stato nominato "visoreRicette" (nella carta di identità, campo Storyboard ID)
-  func showDetailFromSpotlightSearch(_ index:Int) {
-    let graph      : Graph        = Graph()
-    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-    let controller = storyBoard.instantiateViewController(withIdentifier: "DeckSlide") as! DeckSlideController
+  
+  
+  @IBAction func InAppPurchase(_ sender: UIBarButtonItem) {
+    let alertVC = PMAlertController(title: "Rimuovi Pubblicità",
+                                    description: "Rimuovi la pubblicità dall'App.",
+                                    image: UIImage(named: "InAppPurchase.png"), style: .alert)
     
+    alertVC.addAction(PMAlertAction(title: "Rimuovi Pubblicità", style: .default, action: { () -> Void in
+      StoreKitManager.shared.acquista(product: "NoPubblicita")
+    }))
     
-    let nomeEroe    = DataManager.shared.Eroi[index]["nome"] as! String
-    DataManager.shared.heroSelected = nomeEroe
+    alertVC.addAction(PMAlertAction(title: "Ripristina Acquisti", style: .default, action: { () -> Void in
+      StoreKitManager.shared.ripristina()
+    }))
     
-    let selectedDecks: Array<Entity> = graph.searchForEntity(groups: [nomeEroe])
-    controller.deckName = selectedDecks
+    alertVC.addAction(PMAlertAction(title: "Chiudi", style: .cancel, action: { () -> Void in
+      print("Annullato")
+    }))
     
-    for deck in selectedDecks {
-      let cards: Array<Entity> = graph.searchForEntity(groups: [(deck["nome"] as! String)])
-      controller.mazzi.append(cards as AnyObject)
-    }
+    present(alertVC, animated: true, completion: nil)
     
-    print(self.navigationController?.title)
+  }
+  
+  internal func acquistoEffettuato() {
+    let defaults = UserDefaults.standard
+    defaults.set("99", forKey: "NoAds")
     
-    self.navigationController?.pushViewController(controller, animated: true)
+    DataManager.shared.viewBannerCon.constant = 0
     
+    UIView.animate(withDuration: 5, animations: {
+      self.view.layoutIfNeeded()
+    })
+  }
+  
+  internal func acquistoFallito() {
+    
+    let alertVC = PMAlertController(title: "Errore Acquisto",
+                                    description: "Ci spiace ma non siamo riusciti a completare l'acquisto.",
+                                    image: UIImage(named: "InAppDenied.png"), style: .alert)
+    
+    alertVC.addAction(PMAlertAction(title: "Chiudi", style: .default, action: { () -> Void in
+      print("Acquisto Fallito")
+    }))
+    
+    present(alertVC, animated: true, completion: nil)
+    
+  }
+  
+  
+  internal func acquistoPronto() {
+    //do nothing
   }
   
   
@@ -183,4 +200,6 @@ class HeroController: UITableViewController {
     
     SwiftLoader.setConfig(config)
   }
+
 }
+

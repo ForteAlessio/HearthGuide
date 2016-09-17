@@ -21,6 +21,22 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    if DataManager.shared.SpotLightIndex >= 0 {
+      let graph      : Graph        = Graph()
+      
+      let nomeEroe    = DataManager.shared.Eroi[DataManager.shared.SpotLightIndex]["nome"] as! String
+      DataManager.shared.heroSelected = nomeEroe
+      
+      let selectedDecks: Array<Entity> = graph.searchForEntity(groups: [nomeEroe])
+      self.deckName = selectedDecks
+      
+      for deck in selectedDecks {
+        let cards: Array<Entity> = graph.searchForEntity(groups: [(deck["nome"] as! String)])
+        self.mazzi.append(cards as AnyObject)
+      }
+      DataManager.shared.SpotLightIndex = -99
+    }
+    
     navigationItem.titleView = UIImageView(image: UIImage(named: DataManager.shared.heroSelected + "Logo"))
     
     self.clearsSelectionOnViewWillAppear = true
@@ -173,7 +189,7 @@ extension DeckSlideController: UICollectionViewDelegate, UICollectionViewDataSou
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
     _ = storyBoard.instantiateViewController(withIdentifier: "infoCard") as? InfoCardController
-    
+
     self.performSegue(withIdentifier: "showCardImage", sender: self)
   }
 }
