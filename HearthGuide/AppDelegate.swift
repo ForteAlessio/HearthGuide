@@ -60,6 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     
+    DataManager.shared.mainController.navigationController?.popToRootViewController(animated: false)
+    
     var presentedVC = self.window?.rootViewController
     
     let defaults = UserDefaults.standard

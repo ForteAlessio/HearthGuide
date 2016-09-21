@@ -68,7 +68,6 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
     
     cell.collectionView.tag         = (indexPath as NSIndexPath).section
     cell.bbGuide.tag                = (indexPath as NSIndexPath).section
-    cell.bbList.tag                 = (indexPath as NSIndexPath).section
     cell.laDeckName.text            = deckName[(indexPath as NSIndexPath).section]["nome"] as? String
     cell.vwHeader.backgroundColor   = UIColor(rgba: "#ecf0f1", alpha: 1)
     cell.vwNoCorner.backgroundColor = UIColor(rgba: "#ecf0f1", alpha: 1)
@@ -109,6 +108,7 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
       InfoCardView.modalPresentationStyle = .custom
     }
     
+    /*
     if segue.identifier == "ListDeck" {
       let controller      = segue.destination as! ListDeckController
       let indexPath       = (sender as! UIButton).tag
@@ -117,7 +117,7 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
       let listCards: Array<Entity> = graph.searchForEntity(groups: [deckName[indexPath]["nome"] as! String + "Info"])
       controller.mazzi = listCards
     }
-    
+    */
     if segue.identifier == "GuideDeck" {
       let controller      = segue.destination as! GuideDeckController
       let indexPath       = (sender as! UIButton).tag

@@ -17,7 +17,6 @@ class DownloadManager: NSObject {
   var numRequest       = 0
   var heroUpdated      = 0
   let configuration    = URLSessionConfiguration.default
-  var Messaggio        : String!
   
   
   //Scarica e inserisce nel Database il Json dei Mazzo che gli passiamo
@@ -27,7 +26,6 @@ class DownloadManager: NSObject {
     
     numRequest  = 0
     heroUpdated = 0
-    Messaggio   = "Caricamento."
     
     DataManager.shared.graph.watchForEntity(types: ["Mazzo"])
     DataManager.shared.Mazzi = DataManager.shared.graph.searchForEntity(types: ["Mazzo"])
@@ -113,15 +111,14 @@ class DownloadManager: NSObject {
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
+                
                 if Thread.isMainThread {
-                  SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                  SwiftLoader.show("Aggiorno Mazzi", animated: true)
                 }else {
                   DispatchQueue.main.sync {
-                    SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                    SwiftLoader.show("Aggiorno Mazzi", animated: true)
                   }
                 }
-                self.Messaggio = self.formatMessage(self.Messaggio)
-              
                 DataManager.shared.graph.async()
                 self.group.leave()
               }
@@ -161,14 +158,14 @@ class DownloadManager: NSObject {
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
+                                
                 if Thread.isMainThread {
-                  SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                  SwiftLoader.show("Aggiorno Mazzi", animated: true)
                 }else {
                   DispatchQueue.main.sync {
-                    SwiftLoader.show("Carico " + (card["eroe"] as! String), animated: true)//self.formatMessage(self.Messaggio), animated: true)
+                    SwiftLoader.show("Aggiorno Mazzi", animated: true)
                   }
                 }
-                self.Messaggio = self.formatMessage(self.Messaggio)
                 
                 DataManager.shared.graph.async()
                 self.group.leave()
@@ -305,15 +302,5 @@ class DownloadManager: NSObject {
     DataManager.shared.graph.clear()
     
     DataManager.shared.graph.async()
-  }
-  
-  func formatMessage (_ AMessage : String) -> String {
-    switch AMessage {
-    case "Caricamento."  : return "Caricamento.."
-    case "Caricamento.." : return "Caricamento..."
-    case "Caricamento...": return "Caricamento."
-      
-    default: return "Caricamento."
-    }
   }
 }

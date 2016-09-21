@@ -60,6 +60,9 @@
 		CA30A4A51D86B51C00B10E66 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4941D86B51C00B10E66 /* Timeline.swift */; };
 		CA30A4A61D86B51C00B10E66 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4951D86B51C00B10E66 /* Validation.swift */; };
 		CA5DE45E1D8FDCC200D015CE /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE45D1D8FDCC200D015CE /* StoreKitManager.swift */; };
+		CA5DE4621D90139400D015CE /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE45F1D90139400D015CE /* CardModel.swift */; };
+		CA5DE4631D90139400D015CE /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE4601D90139400D015CE /* HeroModel.swift */; };
+		CA5DE4641D90139400D015CE /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE4611D90139400D015CE /* DeckModel.swift */; };
 		E200B94B1D1BF16D00B83FDA /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */; };
 		E209CF891CF7092D0069E9F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209CF881CF7092D0069E9F0 /* AppDelegate.swift */; };
 		E209CF8E1CF7092D0069E9F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E209CF8C1CF7092D0069E9F0 /* Main.storyboard */; };
@@ -83,11 +86,8 @@
 		E2B42A3E1D0177F9007775CC /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B42A3B1D0177F9007775CC /* PMAlertController.swift */; };
 		E2B42A3F1D0177F9007775CC /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B42A3C1D0177F9007775CC /* PMAlertController.xib */; };
 		E2B42A401D0177F9007775CC /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B42A3D1D0177F9007775CC /* PMAlertAction.swift */; };
-		E2D47A681CF739350068756B /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D47A671CF739350068756B /* HeroModel.swift */; };
 		E2D47A6A1CF739660068756B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D47A691CF739660068756B /* DataManager.swift */; };
 		E2D483871CF83ABC00D686FF /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483731CF83ABC00D686FF /* DownloadManager.swift */; };
-		E2D4839B1CF83B2600D686FF /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4839A1CF83B2600D686FF /* DeckModel.swift */; };
-		E2D4839F1CF83BF500D686FF /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4839E1CF83BF500D686FF /* CardModel.swift */; };
 		E2D483DF1CF8B37600D686FF /* DeckSlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483DE1CF8B37600D686FF /* DeckSlideCell.swift */; };
 		E2D483E11CF8B41400D686FF /* DeckSlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483E01CF8B41400D686FF /* DeckSlideController.swift */; };
 		E2D483E31CF8B9E300D686FF /* CardSlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483E21CF8B9E300D686FF /* CardSlideCell.swift */; };
@@ -150,6 +150,9 @@
 		CA30A4941D86B51C00B10E66 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Alamofire/Timeline.swift; sourceTree = "<group>"; };
 		CA30A4951D86B51C00B10E66 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Alamofire/Validation.swift; sourceTree = "<group>"; };
 		CA5DE45D1D8FDCC200D015CE /* StoreKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
+		CA5DE45F1D90139400D015CE /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		CA5DE4601D90139400D015CE /* HeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
+		CA5DE4611D90139400D015CE /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
 		CAB0D8EB1D885709004154ED /* HearthGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HearthGuide.entitlements; sourceTree = "<group>"; };
 		E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
 		E209CF851CF7092D0069E9F0 /* HearthGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearthGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,11 +181,8 @@
 		E2B42A3B1D0177F9007775CC /* PMAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertController.swift; sourceTree = "<group>"; };
 		E2B42A3C1D0177F9007775CC /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
 		E2B42A3D1D0177F9007775CC /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
-		E2D47A671CF739350068756B /* HeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
 		E2D47A691CF739660068756B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E2D483731CF83ABC00D686FF /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
-		E2D4839A1CF83B2600D686FF /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
-		E2D4839E1CF83BF500D686FF /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		E2D483DE1CF8B37600D686FF /* DeckSlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckSlideCell.swift; sourceTree = "<group>"; };
 		E2D483E01CF8B41400D686FF /* DeckSlideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckSlideController.swift; sourceTree = "<group>"; };
 		E2D483E21CF8B9E300D686FF /* CardSlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSlideCell.swift; sourceTree = "<group>"; };
@@ -371,9 +371,9 @@
 		E2D4839C1CF83B7400D686FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E2D47A671CF739350068756B /* HeroModel.swift */,
-				E2D4839A1CF83B2600D686FF /* DeckModel.swift */,
-				E2D4839E1CF83BF500D686FF /* CardModel.swift */,
+				CA5DE45F1D90139400D015CE /* CardModel.swift */,
+				CA5DE4601D90139400D015CE /* HeroModel.swift */,
+				CA5DE4611D90139400D015CE /* DeckModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -508,6 +508,7 @@
 				CA30A49C1D86B51C00B10E66 /* ParameterEncoding.swift in Sources */,
 				CA30A4811D86A47D00B10E66 /* Storage.swift in Sources */,
 				CA30A49B1D86B51C00B10E66 /* Notifications.swift in Sources */,
+				CA5DE4641D90139400D015CE /* DeckModel.swift in Sources */,
 				E2D483871CF83ABC00D686FF /* DownloadManager.swift in Sources */,
 				CA30A4791D86A47D00B10E66 /* ManagedRelationshipGroup.swift in Sources */,
 				CA30A4651D86A47D00B10E66 /* Action.swift in Sources */,
@@ -544,7 +545,6 @@
 				E2B42A401D0177F9007775CC /* PMAlertAction.swift in Sources */,
 				CA30A46E1D86A47D00B10E66 /* ManagedActionProperty.swift in Sources */,
 				CA30A46A1D86A47D00B10E66 /* File.swift in Sources */,
-				E2D4839B1CF83B2600D686FF /* DeckModel.swift in Sources */,
 				CA30A49F1D86B51C00B10E66 /* ResponseSerialization.swift in Sources */,
 				CA30A4821D86A47D00B10E66 /* Watch.swift in Sources */,
 				CA30A4761D86A47D00B10E66 /* ManagedObject.swift in Sources */,
@@ -556,7 +556,9 @@
 				E296C97E1D13E40600EA6183 /* InfoCardController.swift in Sources */,
 				CA30A4681D86A47D00B10E66 /* Coordinator.swift in Sources */,
 				CA30A4451D86A26C00B10E66 /* SwiftyJSON.swift in Sources */,
+				CA5DE4621D90139400D015CE /* CardModel.swift in Sources */,
 				E26779091D1D880700D9EABF /* GuideDeckController.swift in Sources */,
+				CA5DE4631D90139400D015CE /* HeroModel.swift in Sources */,
 				CA30A47F1D86A47D00B10E66 /* Relationship.swift in Sources */,
 				CA30A46B1D86A47D00B10E66 /* Graph.swift in Sources */,
 				E29D89601D192C5F0055B27E /* UIColorExtension.swift in Sources */,
@@ -568,12 +570,10 @@
 				CA30A4751D86A47D00B10E66 /* ManagedNode.swift in Sources */,
 				CA30A47C1D86A47D00B10E66 /* ManagedTag.swift in Sources */,
 				CA30A4A51D86B51C00B10E66 /* Timeline.swift in Sources */,
-				E2D4839F1CF83BF500D686FF /* CardModel.swift in Sources */,
 				CA30A4841D86B46E00B10E66 /* Extensions.swift in Sources */,
 				CA5DE45E1D8FDCC200D015CE /* StoreKitManager.swift in Sources */,
 				CA30A4671D86A47D00B10E66 /* Context.swift in Sources */,
 				CA30A4741D86A47D00B10E66 /* ManagedGroup.swift in Sources */,
-				E2D47A681CF739350068756B /* HeroModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,8 +695,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = HearthGuide/HearthGuide.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Giovanni Buccicone (U9RH2W7VTY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: alessio forte (46595UQVS8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = JMAE6SWMQB;
@@ -704,14 +705,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HearthGuide",
 				);
+				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = HearthGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0b1d8c17-41f1-41fe-b0bd-d957b89cd828";
 				PROVISIONING_PROFILE_SPECIFIER = com.AlessioForte.HearthGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -722,22 +725,27 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = HearthGuide/HearthGuide.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Giovanni Buccicone (U9RH2W7VTY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: alessio forte (JMAE6SWMQB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = JMAE6SWMQB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HearthGuide",
 				);
+				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = HearthGuide/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b1d8c17-41f1-41fe-b0bd-d957b89cd828";
-				PROVISIONING_PROFILE_SPECIFIER = com.AlessioForte.HearthGuide;
+				PROVISIONING_PROFILE = "e8656a13-1306-4805-98b7-18f84f69a685";
+				PROVISIONING_PROFILE_SPECIFIER = HearthGuide.Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

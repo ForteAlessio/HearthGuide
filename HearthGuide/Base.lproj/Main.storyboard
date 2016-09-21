@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gRn-PW-fWK">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -168,32 +167,20 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJx-4S-Dtc">
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="XyM-hq-yko"/>
-                                                                <constraint firstAttribute="width" constant="30" id="kgG-wN-kik"/>
+                                                                <constraint firstAttribute="height" constant="34" id="XyM-hq-yko"/>
+                                                                <constraint firstAttribute="width" constant="34" id="kgG-wN-kik"/>
                                                             </constraints>
-                                                            <state key="normal" image="guide"/>
+                                                            <state key="normal" image="arrowRight"/>
                                                             <connections>
                                                                 <segue destination="seB-RS-bjS" kind="show" identifier="GuideDeck" id="lHk-h5-UhE"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1v-3U-bBX">
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="32" id="LCa-dm-XA7"/>
-                                                                <constraint firstAttribute="height" constant="32" id="cFq-CQ-WRE"/>
-                                                            </constraints>
-                                                            <state key="normal" image="cardBackIcon"/>
-                                                            <connections>
-                                                                <segue destination="xPe-v3-N4c" kind="show" identifier="ListDeck" id="FHB-bU-kEn"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="QkR-1p-YH2"/>
-                                                        <constraint firstItem="NJx-4S-Dtc" firstAttribute="leading" secondItem="k1v-3U-bBX" secondAttribute="trailing" constant="8" id="RzG-DV-BYV"/>
-                                                        <constraint firstItem="k1v-3U-bBX" firstAttribute="top" secondItem="gCK-f4-VZi" secondAttribute="top" constant="4" id="Yxc-qI-aUc"/>
                                                         <constraint firstAttribute="trailing" secondItem="NJx-4S-Dtc" secondAttribute="trailing" constant="8" id="r3y-AM-5HA"/>
-                                                        <constraint firstItem="NJx-4S-Dtc" firstAttribute="top" secondItem="gCK-f4-VZi" secondAttribute="top" constant="4" id="uEy-DF-LbA"/>
+                                                        <constraint firstItem="NJx-4S-Dtc" firstAttribute="top" secondItem="gCK-f4-VZi" secondAttribute="top" constant="3" id="uEy-DF-LbA"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -303,7 +290,6 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="bbGuide" destination="NJx-4S-Dtc" id="lLd-0t-Vkt"/>
-                                    <outlet property="bbList" destination="k1v-3U-bBX" id="NoG-hs-x7N"/>
                                     <outlet property="collectionView" destination="D2A-TP-Bwz" id="vt7-F7-2GG"/>
                                     <outlet property="laDeckName" destination="b4W-MQ-H0D" id="E5z-P0-lFf"/>
                                     <outlet property="vwBack" destination="jpw-u8-ksf" id="W1F-da-Ral"/>
@@ -402,7 +388,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boW-IU-uCq">
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoolock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTz-5S-55f">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lista Completa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTz-5S-55f">
                                             <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -445,7 +431,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Lista Mazzo" id="Rtj-HP-z6U">
-                        <barButtonItem key="backBarButtonItem" title=" " id="jHg-5w-eoq"/>
+                        <barButtonItem key="backBarButtonItem" title="  " id="jHg-5w-eoq"/>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="bbSegue" id="S0A-4k-VF0">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -466,7 +452,7 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3650" y="1190"/>
+            <point key="canvasLocation" x="4888" y="-205"/>
         </scene>
         <!--NavController-->
         <scene sceneID="bFP-zd-x5Z">
@@ -526,7 +512,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4889.6000000000004" y="487.55622188905551"/>
+            <point key="canvasLocation" x="3650" y="488"/>
         </scene>
         <!--Guida-->
         <scene sceneID="JwC-gO-rsw">
@@ -678,6 +664,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbn-TU-JDf">
+                                <frame key="frameInset" minX="427" minY="129" width="104" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="bbSegue"/>
+                                <connections>
+                                    <segue destination="CeD-C5-Wmw" kind="presentation" identifier="showCardGuideImage" id="3zQ-FJ-phV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -697,19 +691,21 @@
                             <constraint firstItem="y6K-6E-jkb" firstAttribute="top" secondItem="Wel-hT-uc9" secondAttribute="bottom" constant="8" id="wsA-pW-o4k"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Guida" id="Tjk-5r-dW5">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="bbSegue" id="0EQ-i4-IbV">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="dte-My-NwB"/>
+                        <barButtonItem key="rightBarButtonItem" image="cardBackIcon2" id="Ndx-gD-P5p">
+                            <color key="tintColor" red="0.94290539464599621" green="1" blue="0.92829844813741258" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="CeD-C5-Wmw" kind="presentation" identifier="showCardGuideImage" id="9tE-bg-L7N"/>
+                                <segue destination="xPe-v3-N4c" kind="show" identifier="ListDeck" id="Nb3-xh-QA4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="CollectionView" destination="5I3-eJ-S0A" id="qTn-9T-ck3"/>
-                        <outlet property="bbSegue" destination="0EQ-i4-IbV" id="CjF-LW-7l0"/>
                         <outlet property="laNomeDeck" destination="f9W-9E-0QR" id="8jk-br-U3w"/>
                         <outlet property="tvGuide" destination="qYw-DE-3i8" id="2dJ-O6-5yf"/>
                         <outlet property="vwBackCollView" destination="Fky-P3-fie" id="wVq-zn-7Ri"/>
@@ -720,7 +716,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNw-T6-1Ue" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3650" y="-205"/>
+            <point key="canvasLocation" x="3649.5999999999999" y="-205.09745127436284"/>
         </scene>
         <!--Banner Controller-->
         <scene sceneID="hNr-IB-Ykl">
@@ -810,8 +806,7 @@
         <image name="NoAds" width="33" height="33"/>
         <image name="TopLaunch" width="750" height="667"/>
         <image name="arrowRight" width="33" height="33"/>
-        <image name="cardBackIcon" width="33" height="33"/>
-        <image name="guide" width="33" height="33"/>
+        <image name="cardBackIcon2" width="33" height="33"/>
         <image name="legend" width="307" height="465"/>
         <image name="refresh" width="33" height="33"/>
     </resources>

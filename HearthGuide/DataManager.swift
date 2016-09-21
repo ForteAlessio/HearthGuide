@@ -66,10 +66,10 @@ class DataManager: NSObject, GraphDelegate {
     }
     
     if Thread.isMainThread {
-      SwiftLoader.show("Caricamento", animated: true)
+      SwiftLoader.show("Download in corso", animated: true)
     }else {
       DispatchQueue.main.sync {
-        SwiftLoader.show("Caricamento", animated: true)
+        SwiftLoader.show("Download in corso", animated: true)
       }
     }
     
@@ -231,14 +231,7 @@ class DataManager: NSObject, GraphDelegate {
   
   // metodo che riporta la stringa da visualizzare per l'aggiornamento
   func getlastUpdate(_ ADate: Date) -> String {
-    let today = Date()
-    
-    let dayCalendarUnit: NSCalendar.Unit = [.day]
-    let dayDifference = (userCalendar as NSCalendar).components(
-      dayCalendarUnit,
-      from: ADate,
-      to: today,
-      options: [])
+    let dayDifference = (userCalendar as NSCalendar).components([.day], from: ADate, to: Date(), options: [])
     
     if dayDifference.day == 0 {
       return  "Ultimo Aggiornamento: oggi"

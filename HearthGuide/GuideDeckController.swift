@@ -23,12 +23,11 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
   @IBOutlet var vwNoCorner: UIView!
   @IBOutlet var vwHeader: UIView!
   @IBOutlet var vwNomeDeck: UIView!
-  @IBOutlet var bbSegue: UIBarButtonItem!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //tvGuide.text = "La Guida sarà presto disponibile."
+    tvGuide.text = "La Guida sarà presto disponibile."
     
     if (guide != nil) && (guide != "") {
       tvGuide.text = guide.html2String + " "
@@ -40,13 +39,12 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
     tvGuide.textAlignment     = .justified
     
     
-    laNomeDeck.text                 = "Guida " + deckName
+    laNomeDeck.text                 = "Come Affrontare: " + deckName
     vwNomeDeck.backgroundColor      = UIColor.clear
     self.view.backgroundColor       = UIColor(patternImage: UIImage(named: "background")!)
     vwBackCollView.backgroundColor  = UIColor(patternImage: UIImage(named: "cellBackground")!)
     vwHeader.backgroundColor        = UIColor(rgba: "#ecf0f1", alpha: 1)
     vwNoCorner.backgroundColor      = UIColor(rgba: "#ecf0f1", alpha: 1)
-    bbSegue.tintColor               = UIColor.clear
     
     navigationItem.titleView = UIImageView(image: UIImage(named: DataManager.shared.heroSelected + "Logo"))
   }
@@ -60,13 +58,23 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
+    let graph: Graph = Graph()
+
     if segue.identifier == "showCardGuideImage" {
       let InfoCardView = segue.destination
       InfoCardView.transitioningDelegate  = self
       InfoCardView.modalPresentationStyle = .custom
     }
+    
+    if segue.identifier == "ListDeck" {
+      let controller      = segue.destination as! ListDeckController
+      controller.deckName = deckName
+      
+      let listCards: Array<Entity> = graph.searchForEntity(groups: [deckName + "Info"])
+      controller.mazzi = listCards
+    }
   }
+  
   
   //Metodi per Animazione Bubble
   let transition    = BubbleTransition()

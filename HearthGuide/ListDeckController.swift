@@ -12,7 +12,7 @@ private let reuseIdentifier = "InfoCardCell"
 
 class ListDeckController: UICollectionViewController, UIViewControllerTransitioningDelegate {
   
-  var deckName : Entity!
+  var deckName : String!
   var mazzi    : [AnyObject] = []
   
   @IBOutlet var bbSegue: UIBarButtonItem!
@@ -64,17 +64,17 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     
     self.performSegue(withIdentifier: "showCardListImage", sender: self)
   }
-  
+ 
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
     switch kind {
-      case UICollectionElementKindSectionHeader:
-        let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath) as! CardListHeader
-        hdCell.laNome.text            = deckName["nome"] as? String
-        hdCell.vwBack.backgroundColor = UIColor.clear
-        return hdCell
-      default:
-        assert(false, "Unexpected element kind")
+    case UICollectionElementKindSectionHeader:
+      let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath) as! CardListHeader
+      hdCell.laNome.text            = "Lista " + deckName
+      hdCell.vwBack.backgroundColor = UIColor.clear
+      return hdCell
+    default:
+       let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath)
+      return hdCell
     }
   }
   

@@ -129,7 +129,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     if DataManager.shared.Eroi.count == 0 {
             
       let alertVC = PMAlertController(title: "Notifiche Aggiornamenti",
-                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, potrai aggiornare manualmente i mazzi.",
+                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, dovrai aggiornare manualmente i mazzi.",
                                       image: UIImage(named: "permission.png"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Avanti", style: .cancel, action: { () -> Void in
