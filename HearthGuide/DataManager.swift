@@ -132,10 +132,10 @@ class DataManager: NSObject, GraphDelegate {
     indicizza(Hunter)
     Hunter.add(to: "Eroi")
 
-    let Warrior       = Entity(type: "Eroe")
-    Warrior["nome"]   = "Guerriero" as AnyObject?
-    Warrior["img"]    = UIImage(named: "Warrior")!
-    Warrior["update"] = Date() as AnyObject?
+    let Warrior        = Entity(type: "Eroe")
+    Warrior["nome"]    = "Guerriero" as AnyObject?
+    Warrior["img"]     = UIImage(named: "Warrior")!
+    Warrior["update"]  = Date() as AnyObject?
     Eroi.append(Warrior)
     nomiEroi.append("Guerriero")
     indicizza(Warrior)
@@ -150,19 +150,19 @@ class DataManager: NSObject, GraphDelegate {
     indicizza(Druid)
     Druid.add(to: "Eroi")
     
-    let Paladin       = Entity(type: "Eroe")
-    Paladin["nome"]   = "Paladino" as AnyObject?
-    Paladin["img"]    = UIImage(named: "Paladin")!
-    Paladin["update"] = Date() as AnyObject?
+    let Paladin        = Entity(type: "Eroe")
+    Paladin["nome"]    = "Paladino" as AnyObject?
+    Paladin["img"]     = UIImage(named: "Paladin")!
+    Paladin["update"]  = Date() as AnyObject?
     Eroi.append(Paladin)
     nomiEroi.append("Paladino")
     indicizza(Paladin)
     Paladin.add(to: "Eroi")
 
-    let Warlock       = Entity(type: "Eroe")
-    Warlock["nome"]   = "Stregone" as AnyObject?
-    Warlock["img"]    = UIImage(named: "Warlock")!
-    Warlock["update"] = Date() as AnyObject?
+    let Warlock        = Entity(type: "Eroe")
+    Warlock["nome"]    = "Stregone" as AnyObject?
+    Warlock["img"]     = UIImage(named: "Warlock")!
+    Warlock["update"]  = Date() as AnyObject?
     Eroi.append(Warlock)
     nomiEroi.append("Stregone")
     indicizza(Warlock)

@@ -332,7 +332,7 @@
         <scene sceneID="FPC-OD-yIL">
             <objects>
                 <collectionViewController title="Lista Mazzo" id="xPe-v3-N4c" customClass="ListDeckController" customModule="HearthGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="rVh-K0-KWF">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rVh-K0-KWF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="613-Oe-d9v">
@@ -695,7 +695,7 @@
                     <navigationItem key="navigationItem" title="Guida" id="Tjk-5r-dW5">
                         <barButtonItem key="backBarButtonItem" title=" " id="dte-My-NwB"/>
                         <barButtonItem key="rightBarButtonItem" image="cardBackIcon2" id="Ndx-gD-P5p">
-                            <color key="tintColor" red="0.94290539464599621" green="1" blue="0.92829844813741258" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="xPe-v3-N4c" kind="show" identifier="ListDeck" id="Nb3-xh-QA4"/>
                             </connections>
@@ -811,6 +811,6 @@
         <image name="refresh" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t64-wo-Azr"/>
+        <segue reference="3zQ-FJ-phV"/>
     </inferredMetricsTieBreakers>
 </document>

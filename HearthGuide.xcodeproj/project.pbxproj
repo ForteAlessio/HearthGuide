@@ -10,6 +10,7 @@
 		CA03082A1D894A1A00372AF0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0308291D894A1A00372AF0 /* StoreKit.framework */; };
 		CA03082C1D894B0E00372AF0 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA03082B1D894B0E00372AF0 /* OneSignal.framework */; };
 		CA03082E1D897D9800372AF0 /* isConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA03082D1D897D9800372AF0 /* isConnected.swift */; };
+		CA25BD5E1D95562600F4C3BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA25BD5D1D95562600F4C3BE /* Assets.xcassets */; };
 		CA30A4451D86A26C00B10E66 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4441D86A26C00B10E66 /* SwiftyJSON.swift */; };
 		CA30A4651D86A47D00B10E66 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4471D86A47C00B10E66 /* Action.swift */; };
 		CA30A4661D86A47D00B10E66 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30A4481D86A47C00B10E66 /* Container.swift */; };
@@ -92,7 +93,6 @@
 		E2D483E11CF8B41400D686FF /* DeckSlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483E01CF8B41400D686FF /* DeckSlideController.swift */; };
 		E2D483E31CF8B9E300D686FF /* CardSlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D483E21CF8B9E300D686FF /* CardSlideCell.swift */; };
 		E2EA27491D2BC4E60012331A /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA27481D2BC4E60012331A /* GoogleMobileAds.framework */; };
-		E2ED29001D018FF7005B02F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2ED28FF1D018FF7005B02F5 /* Assets.xcassets */; };
 		E2F29A6D1D266A4500D95F6F /* Crediti.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E2F29A6C1D266A4500D95F6F /* Crediti.rtf */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +100,7 @@
 		CA0308291D894A1A00372AF0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CA03082B1D894B0E00372AF0 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = "<group>"; };
 		CA03082D1D897D9800372AF0 /* isConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = isConnected.swift; sourceTree = "<group>"; };
+		CA25BD5D1D95562600F4C3BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA30A4441D86A26C00B10E66 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		CA30A4471D86A47C00B10E66 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		CA30A4481D86A47C00B10E66 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		E2D483E01CF8B41400D686FF /* DeckSlideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckSlideController.swift; sourceTree = "<group>"; };
 		E2D483E21CF8B9E300D686FF /* CardSlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSlideCell.swift; sourceTree = "<group>"; };
 		E2EA27481D2BC4E60012331A /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
-		E2ED28FF1D018FF7005B02F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2F29A6C1D266A4500D95F6F /* Crediti.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Crediti.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,9 +310,9 @@
 				E209CF8C1CF7092D0069E9F0 /* Main.storyboard */,
 				E2D47A691CF739660068756B /* DataManager.swift */,
 				E2D483731CF83ABC00D686FF /* DownloadManager.swift */,
+				CA25BD5D1D95562600F4C3BE /* Assets.xcassets */,
 				E2D4839C1CF83B7400D686FF /* Models */,
 				E2D4839D1CF83B8900D686FF /* Cells */,
-				E2ED28FF1D018FF7005B02F5 /* Assets.xcassets */,
 				E209CF911CF7092D0069E9F0 /* LaunchScreen.storyboard */,
 				E209CF941CF7092D0069E9F0 /* Info.plist */,
 				E2172AFA1D26544D00ADC7C9 /* Crediti */,
@@ -470,7 +470,7 @@
 				E2106CD01D184574001B70A4 /* Lato-Light.ttf in Resources */,
 				E2B42A3F1D0177F9007775CC /* PMAlertController.xib in Resources */,
 				E209CF8E1CF7092D0069E9F0 /* Main.storyboard in Resources */,
-				E2ED29001D018FF7005B02F5 /* Assets.xcassets in Resources */,
+				CA25BD5E1D95562600F4C3BE /* Assets.xcassets in Resources */,
 				E2106CD11D184574001B70A4 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
