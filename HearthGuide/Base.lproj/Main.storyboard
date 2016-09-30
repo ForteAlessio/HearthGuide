@@ -167,8 +167,8 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJx-4S-Dtc">
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="34" id="XyM-hq-yko"/>
-                                                                <constraint firstAttribute="width" constant="34" id="kgG-wN-kik"/>
+                                                                <constraint firstAttribute="height" constant="20" id="XyM-hq-yko"/>
+                                                                <constraint firstAttribute="width" constant="20" id="kgG-wN-kik"/>
                                                             </constraints>
                                                             <state key="normal" image="arrowRight"/>
                                                             <connections>
@@ -180,7 +180,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="QkR-1p-YH2"/>
                                                         <constraint firstAttribute="trailing" secondItem="NJx-4S-Dtc" secondAttribute="trailing" constant="8" id="r3y-AM-5HA"/>
-                                                        <constraint firstItem="NJx-4S-Dtc" firstAttribute="top" secondItem="gCK-f4-VZi" secondAttribute="top" constant="3" id="uEy-DF-LbA"/>
+                                                        <constraint firstItem="NJx-4S-Dtc" firstAttribute="top" secondItem="gCK-f4-VZi" secondAttribute="top" constant="11" id="uEy-DF-LbA"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -189,7 +189,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nome Mazzo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4W-MQ-H0D">
-                                                    <frame key="frameInset" minX="8" minY="5" width="490" height="30"/>
+                                                    <frame key="frameInset" minX="8" minY="5" width="537" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
                                                     <nil key="highlightedColor"/>
@@ -326,13 +326,13 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2389" y="488"/>
+            <point key="canvasLocation" x="2388.8000000000002" y="487.55622188905551"/>
         </scene>
         <!--Lista Mazzo-->
         <scene sceneID="FPC-OD-yIL">
             <objects>
                 <collectionViewController title="Lista Mazzo" id="xPe-v3-N4c" customClass="ListDeckController" customModule="HearthGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rVh-K0-KWF">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="rVh-K0-KWF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="613-Oe-d9v">
@@ -355,20 +355,20 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="r4Q-n6-Qij">
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="e5M-ga-yZg"/>
-                                                <constraint firstAttribute="height" constant="25" id="wRL-lh-hwG"/>
+                                                <constraint firstAttribute="width" constant="25" id="gup-D4-lS5"/>
+                                                <constraint firstAttribute="height" constant="25" id="vhc-1c-hgt"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="r4Q-n6-Qij" firstAttribute="top" secondItem="HKV-Zq-eLf" secondAttribute="top" constant="9" id="1Zd-4n-rHx"/>
-                                    <constraint firstAttribute="trailing" secondItem="DU3-V0-S8V" secondAttribute="trailing" constant="-28" id="HFk-B5-fr8"/>
-                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="leading" secondItem="HKV-Zq-eLf" secondAttribute="leading" constant="-28" id="Ucg-cQ-kwv"/>
-                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="top" secondItem="HKV-Zq-eLf" secondAttribute="top" constant="-5" id="VL4-ef-gLa"/>
-                                    <constraint firstAttribute="bottom" secondItem="DU3-V0-S8V" secondAttribute="bottom" constant="-4" id="juA-4r-6I2"/>
-                                    <constraint firstAttribute="trailing" secondItem="r4Q-n6-Qij" secondAttribute="trailing" constant="9" id="waR-r5-g2Q"/>
+                                    <constraint firstItem="r4Q-n6-Qij" firstAttribute="top" secondItem="HKV-Zq-eLf" secondAttribute="topMargin" id="LUi-r9-4g7"/>
+                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="top" secondItem="HKV-Zq-eLf" secondAttribute="topMargin" constant="-13" id="TMX-Oh-dDU"/>
+                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="centerY" secondItem="HKV-Zq-eLf" secondAttribute="centerY" id="cnd-4T-hBc"/>
+                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="leading" secondItem="HKV-Zq-eLf" secondAttribute="leadingMargin" constant="-36" id="gPB-t1-ElA"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="r4Q-n6-Qij" secondAttribute="trailing" constant="-5" id="oOR-fE-MFf"/>
+                                    <constraint firstItem="DU3-V0-S8V" firstAttribute="centerX" secondItem="HKV-Zq-eLf" secondAttribute="centerX" id="zlv-lH-YLz"/>
                                 </constraints>
                                 <size key="customSize" width="120" height="160"/>
                                 <userDefinedRuntimeAttributes>
@@ -693,6 +693,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Guida" id="Tjk-5r-dW5">
+                        <barButtonItem key="backBarButtonItem" title=" " id="RTY-XQ-hL5"/>
                         <barButtonItem key="rightBarButtonItem" image="cardBackIcon2" id="Ndx-gD-P5p">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -810,6 +811,6 @@
         <image name="refresh" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3zQ-FJ-phV"/>
+        <segue reference="t64-wo-Azr"/>
     </inferredMetricsTieBreakers>
 </document>

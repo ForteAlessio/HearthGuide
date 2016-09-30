@@ -24,6 +24,15 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     navigationItem.titleView = UIImageView(image: UIImage(named: DataManager.shared.heroSelected + "Logo"))
     
     bbSegue.tintColor = UIColor.clear
+    
+    //se il device su cui è installata l'app è vecchio (scehrmo piccolo) allora riduciamo la grandezza delle carte
+    if DataManager.shared.oldDevice.contains(DataManager.shared.myDevice) {
+      let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+      layout.itemSize = CGSize(width: 100, height: 160)
+      
+      self.collectionView?.collectionViewLayout = layout
+      self.collectionView?.layoutIfNeeded()
+    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -53,7 +62,13 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
       cell.imgCopie.image  = UIImage(named: copie!)
     }
     
+    //se il device su cui è installata l'app è vecchio (scehrmo piccolo) allora riduciamo la grandezza delle carte
+    if DataManager.shared.oldDevice.contains(DataManager.shared.myDevice) {
+      cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: 100, height: cell.frame.height)
+    }
+    
     cell.backgroundColor = UIColor.clear
+    
     return cell
   }
   

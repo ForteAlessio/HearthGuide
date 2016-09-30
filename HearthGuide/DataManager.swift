@@ -21,9 +21,11 @@ class DataManager: NSObject, GraphDelegate {
   var Mazzi           : [Entity]    = []
   var Carte           : [Entity]    = []
   var nomiEroi        : [String]    = []
+  var oldDevice       : [String]    = ["iPhone 5", "iPhone 5c", "iPhone 5s"]
   var readNotify      : Bool        = false
   var cardSelected    : UIImage     = UIImage()
   var heroSelected    : String      = ""
+  var myDevice        : String      = ""
   var graph           : Graph       = Graph()
   var SpotLightIndex  : Int         = -99
   var option          : [AnyHashable: Any]?
@@ -51,7 +53,7 @@ class DataManager: NSObject, GraphDelegate {
     if !Reachability.isConnectedToNetwork() {
       let alertVC = PMAlertController(title: "Errore Connessione",
                                       description: "Per poter aggiornare i Mazzi devi essere connesso ad Internet",
-                                      image: UIImage(named: "warning.png"), style: .alert)
+                                      image: #imageLiteral(resourceName: "warning"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Chiudi", style: .default, action: { () -> Void in
         print("Nessuna Connessione")
@@ -65,7 +67,7 @@ class DataManager: NSObject, GraphDelegate {
     if Thread.isMainThread {
       SwiftLoader.show("Download in corso", animated: true)
     }else {
-      DispatchQueue.main.sync {
+      DispatchQueue.main.async {
         SwiftLoader.show("Download in corso", animated: true)
       }
     }

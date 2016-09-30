@@ -41,8 +41,9 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       //ca-app-pub-3940256099942544/2934735716
       
       imgBack.isHidden            = true
-      vwBanner.adUnitID           =  "ca-app-pub-3940256099942544/2934735716"
+      vwBanner.adUnitID           = "ca-app-pub-3940256099942544/2934735716"
       vwBanner.rootViewController = self
+      DataManager.shared.myDevice = UIDevice.current.modelName
     }
   }
   
@@ -96,7 +97,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
 
         self.notifyAlert ()
         self.checkUpdate ()
-    })
+      })
   }
   
   //controlla se ci sono aggiornamenti da fare, se si chiede all'utente se vuole farli
@@ -107,7 +108,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       
       let alertVC = PMAlertController(title: "Aggiornamento Database",
                                       description: "Abbiamo aggiornato il nostro database dei mazzi, vuoi effettuare ora l'aggiornamento?",
-                                      image: UIImage(named: "update.png"), style: .alert)
+                                      image: #imageLiteral(resourceName: "update"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in
         print("Annullato")
@@ -129,18 +130,18 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     if DataManager.shared.Eroi.count == 0 {
             
       let alertVC = PMAlertController(title: "Notifiche Aggiornamenti",
-                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento?\rSe non accetti, dovrai aggiornare manualmente i mazzi.",
-                                      image: UIImage(named: "permission.png"), style: .alert)
+                                      description: "Vuoi essere avvertito quando effettueremo un aggiornamento dei mazzi?\rSe non accetti, dovrai aggiornare manualmente i mazzi.",
+                                      image: #imageLiteral(resourceName: "permission"), style: .alert)
       
-      alertVC.addAction(PMAlertAction(title: "Avanti", style: .cancel, action: { () -> Void in
+      alertVC.addAction(PMAlertAction(title: "Avanti", style: .default, action: { () -> Void in
         DispatchQueue.global().async(execute: {
-        
           _ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
-                    
-          DataManager.shared.startDataManager([])
+          
+          self.initialDownload()
         });
       }))
       present(alertVC, animated: true, completion: nil)
+      
     }
     //altrimenti controlliamo se nelle impostazioni l'utente ha attivato le notifiche, se si impostiamo l'app per ricerverle
     else {
@@ -153,6 +154,26 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       }
     }
   }
+  
+  //dopo la richiesta di notifiche avverto dell'inizio del download iniziale dei mazzi
+  func initialDownload () {
+    if DataManager.shared.Eroi.count == 0 {
+      
+      let alertVC = PMAlertController(title: "Download Dati Iniziali",
+                                      description: "Stiamo per scaricare i dati iniziali per il corretto funzionamento dell'app\rRichiederà qualche minuto, non chiudere.",
+                                      image: #imageLiteral(resourceName: "startDownload"), style: .alert)
+      
+      alertVC.addAction(PMAlertAction(title: "Avanti", style: .default, action: { () -> Void in
+        DispatchQueue.global().async(execute: {
+          DataManager.shared.startDataManager([])
+        });
+      }))
+      
+      self.present(alertVC, animated: true, completion: nil)
+    }
+  }
+
+
   
   //Serve per impostare la Status Bar Bianca
   override var preferredStatusBarStyle : UIStatusBarStyle {

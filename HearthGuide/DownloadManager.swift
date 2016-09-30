@@ -44,6 +44,7 @@ class DownloadManager: NSObject {
         //print(response.data)     // server data
         //print(response.result)   // result of response serialization
         
+        
         if let er = response.result.error {
           print(er.localizedDescription)
         }
@@ -122,13 +123,6 @@ class DownloadManager: NSObject {
                 
                 card["immagine"] = UIImage(data: response.data!)!
                 
-                if Thread.isMainThread {
-                  SwiftLoader.show("Aggiorno Mazzi", animated: true)
-                }else {
-                  DispatchQueue.main.sync {
-                    SwiftLoader.show("Aggiorno Mazzi", animated: true)
-                  }
-                }
                 DataManager.shared.graph.async()
                 self.group.leave()
               }
@@ -175,7 +169,15 @@ class DownloadManager: NSObject {
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
-                                
+                
+                if Thread.isMainThread {
+                  SwiftLoader.show("Aggiornamento Mazzi", animated: true)
+                }else {
+                  DispatchQueue.main.async {
+                    SwiftLoader.show("Aggiorno " + Heroes[x], animated: true)
+                  }
+                }
+                
                 DataManager.shared.graph.async()
                 self.group.leave()
               }
@@ -223,6 +225,7 @@ class DownloadManager: NSObject {
         //alla fine delle 9 richieste principali fa sparire la view di caricamento
         self.group.notify(queue: DispatchQueue.main) {
           if self.numRequest == self.heroUpdated {
+            
             if Thread.isMainThread {
               SwiftLoader.hide()
               DataManager.shared.mainController.tableView.reloadData()
@@ -232,6 +235,7 @@ class DownloadManager: NSObject {
                 DataManager.shared.mainController.tableView.reloadData()
               }
             }
+          
             let defaults = UserDefaults.standard
             
             defaults.set("", forKey: "alert")
@@ -241,7 +245,7 @@ class DownloadManager: NSObject {
             
             let alertVC = PMAlertController(title: "Aggiornamento Eseguito",
                                             description: "L'aggiornamento dei Mazzi è stato terminato correttamente.",
-                                            image: UIImage(named: "endUpdate.png"), style: .alert)
+                                            image: #imageLiteral(resourceName: "endUpdate"), style: .alert)
             
             alertVC.addAction(PMAlertAction(title: "Ok", style: .default, action: { () -> Void in
               print("^^Fine Aggiornamento")

@@ -119,7 +119,7 @@ class HeroController: UITableViewController, StoreKitManagerDelegate {
   @IBAction func acRefresh(_ sender: MIBadgeButton) {
     let alertVC = PMAlertController(title: "Aggiornamento Mazzi",
                                     description: "L'aggiornamento richiederà qualche minuto, non chiudere l'app.\rVuoi continuare?",
-                                    image: UIImage(named: "updateDb.png"), style: .alert)
+                                    image: #imageLiteral(resourceName: "updateDb"), style: .alert)
     
     alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in
       print("Annullato")
@@ -139,7 +139,7 @@ class HeroController: UITableViewController, StoreKitManagerDelegate {
   @IBAction func InAppPurchase(_ sender: UIBarButtonItem) {
     let alertVC = PMAlertController(title: "Rimuovi Pubblicità",
                                     description: "Rimuovi la pubblicità dall'App.",
-                                    image: UIImage(named: "InAppPurchase.png"), style: .alert)
+                                    image: #imageLiteral(resourceName: "InAppPurchase"), style: .alert)
     
     alertVC.addAction(PMAlertAction(title: "Rimuovi Pubblicità", style: .default, action: { () -> Void in
       StoreKitManager.shared.acquista(product: "NoPubblicita")
@@ -172,7 +172,7 @@ class HeroController: UITableViewController, StoreKitManagerDelegate {
     
     let alertVC = PMAlertController(title: "Errore Acquisto",
                                     description: "Ci spiace ma non siamo riusciti a completare l'acquisto.",
-                                    image: UIImage(named: "InAppDenied.png"), style: .alert)
+                                    image: #imageLiteral(resourceName: "InAppDenied"), style: .alert)
     
     alertVC.addAction(PMAlertAction(title: "Chiudi", style: .default, action: { () -> Void in
       print("Acquisto Fallito")

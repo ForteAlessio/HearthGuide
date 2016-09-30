@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let alertVC = PMAlertController(title: "Aggiornamento Database",
                                     description: "Abbiamo aggiornato il nostro database dei mazzi, vuoi effettuare ora l'aggiornamento?",
-                                    image: UIImage(named: "update.png"), style: .alert)
+                                    image: #imageLiteral(resourceName: "update"), style: .alert)
     
     alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in
       DataManager.shared.readNotify = false
