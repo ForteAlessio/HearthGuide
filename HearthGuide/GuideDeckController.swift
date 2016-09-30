@@ -58,8 +58,6 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let graph: Graph = Graph()
-
     if segue.identifier == "showCardGuideImage" {
       let InfoCardView = segue.destination
       InfoCardView.transitioningDelegate  = self
@@ -69,9 +67,7 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
     if segue.identifier == "ListDeck" {
       let controller      = segue.destination as! ListDeckController
       controller.deckName = deckName
-      
-      let listCards: Array<Entity> = graph.searchForEntity(groups: [deckName + "Info"])
-      controller.mazzi = listCards
+      controller.mazzi    = listCards
     }
   }
   

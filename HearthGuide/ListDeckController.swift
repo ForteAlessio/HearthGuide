@@ -42,9 +42,16 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfoCardCell", for: indexPath) as! CardListCell
     
     let card = mazzi[(indexPath as NSIndexPath).row] as! Entity
-        
-    cell.imgCard.image   = card["immagine"] as? UIImage
-    cell.imgCopie.image  = UIImage(named: (card["copie"] as? String)!) 
+    
+    if card["immagine"] as? UIImage != nil {
+      cell.imgCard.image  = card["immagine"] as? UIImage
+    }
+    
+    let copie = card["copie"] as? String
+    
+    if (copie == "1") || (copie == "2") {
+      cell.imgCopie.image  = UIImage(named: copie!)
+    }
     
     cell.backgroundColor = UIColor.clear
     return cell

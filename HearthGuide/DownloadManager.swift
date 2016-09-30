@@ -107,7 +107,17 @@ class DownloadManager: NSObject {
               card["eroe"]  = Heroes[x]
               
               self.group.enter()
-              let url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
+              
+              var url = ""
+              
+              if (card["id"] as! String).range(of: "KAR_") != nil {
+                url = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + (card["id"] as! String) + ".png"
+              }
+              else {
+                url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
+              }
+              
+              
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
@@ -134,7 +144,6 @@ class DownloadManager: NSObject {
           if let listCards = jsonMazzi[i]["lista"].arrayObject {
             let jsonCard =  JSON(listCards)
             
-            //ciclo le carte per le Info del Mazzo
             for j in 0..<jsonCard.count {
               let card: Entity = Entity(type: "Carta")
               
@@ -154,19 +163,19 @@ class DownloadManager: NSObject {
               card["eroe"]  = Heroes[x]
               
               self.group.enter()
-              let url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
+             
+              var url = ""
+              
+              if (card["id"] as! String).range(of: "KHA_") != nil {
+                url = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + (card["id"] as! String) + ".png"
+              }
+              else {
+                url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
+              }
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
                                 
-                if Thread.isMainThread {
-                  SwiftLoader.show("Aggiorno Mazzi", animated: true)
-                }else {
-                  DispatchQueue.main.sync {
-                    SwiftLoader.show("Aggiorno Mazzi", animated: true)
-                  }
-                }
-                
                 DataManager.shared.graph.async()
                 self.group.leave()
               }

@@ -29,11 +29,8 @@ class DataManager: NSObject, GraphDelegate {
   var option          : [AnyHashable: Any]?
   let userCalendar    = Calendar.current
   var viewBannerCon   : NSLayoutConstraint!
-  
   var mainController  : HeroController!
-  var NavController   : UINavigationController!
-  
-
+  var infoController  : InfoCardController!
 
   func startGraph () {
     graph.delegate = self
@@ -214,7 +211,7 @@ class DataManager: NSObject, GraphDelegate {
     
     // indicizziamo in Spotlight
     CSSearchableIndex.default().indexSearchableItems([item]) { (error:Error?) -> Void in
-      print("^^Eroe indicizzato")
+      //print("^^Eroe indicizzato")
     }
   }
   
@@ -225,7 +222,7 @@ class DataManager: NSObject, GraphDelegate {
     
     // cancelliamo da Spotlight
     CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
-      print("^^Eroe cancellato")
+      //print("^^Eroe cancellato")
     }
   }
   

@@ -57,8 +57,8 @@
                                                 </label>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s1-b2-ohI">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="Opa-np-8Hi"/>
-                                                        <constraint firstAttribute="width" constant="35" id="xdQ-1N-cZv"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Opa-np-8Hi"/>
+                                                        <constraint firstAttribute="width" constant="25" id="xdQ-1N-cZv"/>
                                                     </constraints>
                                                     <state key="normal" image="arrowRight"/>
                                                 </button>
@@ -66,10 +66,10 @@
                                             <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="HfH-N0-azY" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="-3" id="727-MD-ZbB"/>
-                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="oGB-Lw-D0D" secondAttribute="trailing" constant="8" id="Ckb-8j-iRJ"/>
-                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="gTz-1A-60E" secondAttribute="trailing" constant="8" id="EzC-yY-cSZ"/>
+                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="oGB-Lw-D0D" secondAttribute="trailing" constant="18" id="Ckb-8j-iRJ"/>
+                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="gTz-1A-60E" secondAttribute="trailing" constant="18" id="EzC-yY-cSZ"/>
                                                 <constraint firstItem="oGB-Lw-D0D" firstAttribute="leading" secondItem="HfH-N0-azY" secondAttribute="trailing" constant="10" id="Foc-SH-4CR"/>
-                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="12" id="KPm-4X-Ueo"/>
+                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="18" id="KPm-4X-Ueo"/>
                                                 <constraint firstAttribute="trailing" secondItem="2s1-b2-ohI" secondAttribute="trailing" constant="8" id="O5y-2f-8T6"/>
                                                 <constraint firstItem="HfH-N0-azY" firstAttribute="leading" secondItem="55n-bT-Wzj" secondAttribute="leading" constant="7" id="RTP-Wo-tmN"/>
                                                 <constraint firstItem="gTz-1A-60E" firstAttribute="leading" secondItem="HfH-N0-azY" secondAttribute="trailing" constant="10" id="WIS-CJ-zQ9"/>
@@ -693,7 +693,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Guida" id="Tjk-5r-dW5">
-                        <barButtonItem key="backBarButtonItem" title=" " id="dte-My-NwB"/>
                         <barButtonItem key="rightBarButtonItem" image="cardBackIcon2" id="Ndx-gD-P5p">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

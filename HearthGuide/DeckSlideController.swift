@@ -107,17 +107,7 @@ class DeckSlideController: UITableViewController, UIViewControllerTransitioningD
       InfoCardView.transitioningDelegate = self
       InfoCardView.modalPresentationStyle = .custom
     }
-    
-    /*
-    if segue.identifier == "ListDeck" {
-      let controller      = segue.destination as! ListDeckController
-      let indexPath       = (sender as! UIButton).tag
-      controller.deckName = deckName[indexPath]
-      
-      let listCards: Array<Entity> = graph.searchForEntity(groups: [deckName[indexPath]["nome"] as! String + "Info"])
-      controller.mazzi = listCards
-    }
-    */
+
     if segue.identifier == "GuideDeck" {
       let controller      = segue.destination as! GuideDeckController
       let indexPath       = (sender as! UIButton).tag

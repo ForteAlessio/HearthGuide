@@ -19,6 +19,8 @@ class InfoCardController: UIViewController {
     self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
     
     imgCard.image = DataManager.shared.cardSelected
+    
+    DataManager.shared.infoController = self
   }
   
   override func didReceiveMemoryWarning() {

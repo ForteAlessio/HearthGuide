@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     
-    DataManager.shared.mainController.navigationController?.popToRootViewController(animated: false)
+    DataManager.shared.mainController.navigationController!.popToRootViewController(animated: false)
     
     var presentedVC = self.window?.rootViewController
     
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // tagliamo la parte iniziale dell'identifier
     nomeAct = nomeAct.replacingOccurrences(of: "Eroe.", with: "")
     
-    print("^^Continue Activity: " + nomeAct)
+    //print("^^Continue Activity: " + nomeAct)
     
     var contatore = 0
 
@@ -131,7 +131,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Impostiamo l'indice trovato che useremo per cercare i Mazzi dell'eroe
         DataManager.shared.SpotLightIndex = contatore
         
-        DataManager.shared.mainController.navigationController?.popToRootViewController(animated: false)
+        
+        //chiudo il controller InfoCard
+        DataManager.shared.infoController?.dismiss(animated: false, completion: {});
+        
+        //torno al controller primario
+        DataManager.shared.mainController.navigationController!.popToRootViewController(animated: false)
+        
+        //vado al controller scelto dall'utente
         DataManager.shared.mainController.performSegue(withIdentifier: "detail", sender: self)
 
         break
