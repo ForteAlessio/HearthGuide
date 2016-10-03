@@ -160,7 +160,7 @@ class DownloadManager: NSObject {
              
               var url = ""
               
-              if (card["id"] as! String).range(of: "KHA_") != nil {
+              if (card["id"] as! String).range(of: "KAR_") != nil {
                 url = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + (card["id"] as! String) + ".png"
               }
               else {
