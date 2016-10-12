@@ -31,9 +31,13 @@ class HeroController: UITableViewController, StoreKitManagerDelegate {
     
     //controlla se ci sono aggiornamenti da fare, se si, imposta il badge sul button refresh
     let defaults = UserDefaults.standard
-    if let alr = defaults.string(forKey: "alert") {
-      DataManager.shared.iconBadge(alr)
+    let alr      = defaults.string(forKey: "alert") 
+    if alr == "1" {
+      DataManager.shared.iconBadge(alr!)
     }
+    
+    navigationController?.progressHeight    = 4
+    navigationController?.progressTintColor = UIColor.white
     
     self.clearsSelectionOnViewWillAppear = true
     
@@ -118,7 +122,7 @@ class HeroController: UITableViewController, StoreKitManagerDelegate {
   
   @IBAction func acRefresh(_ sender: MIBadgeButton) {
     let alertVC = PMAlertController(title: "Aggiornamento Mazzi",
-                                    description: "L'aggiornamento richiederà qualche minuto, non chiudere l'app.\rVuoi continuare?",
+                                    description: "L'aggiornamento richiederà qualche minuto, attendere il completamento.\rVuoi continuare?",
                                     image: #imageLiteral(resourceName: "updateDb"), style: .alert)
     
     alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in

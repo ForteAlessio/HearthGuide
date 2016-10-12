@@ -41,7 +41,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       //ca-app-pub-3940256099942544/2934735716
       
       imgBack.isHidden            = true
-      vwBanner.adUnitID           = "ca-app-pub-3940256099942544/2934735716"
+      vwBanner.adUnitID           = "ca-app-pub-7772743643397664/9778396030"
       vwBanner.rootViewController = self
       DataManager.shared.myDevice = UIDevice.current.modelName
     }
@@ -95,8 +95,8 @@ class BannerController: UIViewController, GADBannerViewDelegate {
         request.testDevices         = [kGADSimulatorID]
         self.vwBanner.load(request)
 
-        self.notifyAlert ()
         self.checkUpdate ()
+        self.notifyAlert ()
       })
   }
   
@@ -113,6 +113,21 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       alertVC.addAction(PMAlertAction(title: "Annulla", style: .cancel, action: { () -> Void in
         print("Annullato")
       }))
+      
+      alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () -> Void in
+        DispatchQueue.global().async(execute: {
+          DataManager.shared.startDataManager([])
+        });
+      }))
+      
+      present(alertVC, animated: true, completion: nil)
+    }
+    
+    if defaults.string(forKey: "alert") == "5" {
+      
+      let alertVC = PMAlertController(title: "Errore Aggiornamento",
+                                      description: "Abbiamo riscontrato un errore nell'ultimo aggiornamento, effettuare un nuovo aggiornemento ora.",
+                                      image: #imageLiteral(resourceName: "warning"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Aggiorna", style: .default, action: { () -> Void in
         DispatchQueue.global().async(execute: {
@@ -160,7 +175,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
     if DataManager.shared.Eroi.count == 0 {
       
       let alertVC = PMAlertController(title: "Download Dati Iniziali",
-                                      description: "Stiamo per scaricare i dati iniziali per il corretto funzionamento dell'app\rRichiederà qualche minuto, non chiudere.",
+                                      description: "Stiamo per scaricare i dati iniziali per il corretto funzionamento dell'app\rRichiederà qualche minuto, attendere completamento.",
                                       image: #imageLiteral(resourceName: "startDownload"), style: .alert)
       
       alertVC.addAction(PMAlertAction(title: "Avanti", style: .default, action: { () -> Void in

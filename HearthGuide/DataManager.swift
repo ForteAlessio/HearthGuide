@@ -49,6 +49,9 @@ class DataManager: NSObject, GraphDelegate {
     
     startGraph()
     
+    let defaults = UserDefaults.standard
+    defaults.set("5", forKey: "alert")
+    
     //controllo se l'iPhone è stato connesso ad internet
     if !Reachability.isConnectedToNetwork() {
       let alertVC = PMAlertController(title: "Errore Connessione",
@@ -65,25 +68,25 @@ class DataManager: NSObject, GraphDelegate {
     }
     
     if Thread.isMainThread {
-      SwiftLoader.show("Download in corso", animated: true)
+      SwiftLoader.show("Download in corso..", animated: true)
     }else {
       DispatchQueue.main.async {
-        SwiftLoader.show("Download in corso", animated: true)
+        SwiftLoader.show("Download in corso..", animated: true)
       }
     }
+    
+    DataManager.shared.mainController.navigationController!.progress = 0.0
     
     //se la richiesta proviene da notifica Cancello i dati solo gli eroi aggiornati
     //altrimenti li elimino tutti i dati
     if updatedHero.count > 0 {
       for i in 0..<updatedHero.count {
-        DownloadManager.shared.emptyDbFromHero(updatedHero[i])
+        DownloadManager.shared.emptyDbFromHero(updatedHero[i], last: i == (updatedHero.count - 1))
       }
-    }else {
-      DownloadManager.shared.emptyLocalDb()
-      
-      nomiEroi.removeAll()
-      
-      creaEroi()
+    }else{
+        DownloadManager.shared.emptyLocalDb()
+        nomiEroi.removeAll()        
+        creaEroi()
     }
 
     //se la richiesta proviene da notifica aggiorno solo gli eroi aggiornati

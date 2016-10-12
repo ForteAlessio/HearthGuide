@@ -64,6 +64,8 @@
 		CA5DE4621D90139400D015CE /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE45F1D90139400D015CE /* CardModel.swift */; };
 		CA5DE4631D90139400D015CE /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE4601D90139400D015CE /* HeroModel.swift */; };
 		CA5DE4641D90139400D015CE /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5DE4611D90139400D015CE /* DeckModel.swift */; };
+		CA66AAB01DAE44F10034B0B2 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66AAAE1DAE44F10034B0B2 /* ProgressView.swift */; };
+		CA66AAB11DAE44F10034B0B2 /* UINavigationController+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66AAAF1DAE44F10034B0B2 /* UINavigationController+Progress.swift */; };
 		E200B94B1D1BF16D00B83FDA /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */; };
 		E209CF891CF7092D0069E9F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209CF881CF7092D0069E9F0 /* AppDelegate.swift */; };
 		E209CF8E1CF7092D0069E9F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E209CF8C1CF7092D0069E9F0 /* Main.storyboard */; };
@@ -154,6 +156,9 @@
 		CA5DE45F1D90139400D015CE /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		CA5DE4601D90139400D015CE /* HeroModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
 		CA5DE4611D90139400D015CE /* DeckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
+		CA66AAAD1DAE44F10034B0B2 /* KYNavigationProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYNavigationProgress.h; sourceTree = "<group>"; };
+		CA66AAAE1DAE44F10034B0B2 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		CA66AAAF1DAE44F10034B0B2 /* UINavigationController+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Progress.swift"; sourceTree = "<group>"; };
 		CAB0D8EB1D885709004154ED /* HearthGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HearthGuide.entitlements; sourceTree = "<group>"; };
 		E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
 		E209CF851CF7092D0069E9F0 /* HearthGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearthGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +279,16 @@
 			name = Graph;
 			sourceTree = "<group>";
 		};
+		CA66AAAC1DAE449A0034B0B2 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				CA66AAAD1DAE44F10034B0B2 /* KYNavigationProgress.h */,
+				CA66AAAE1DAE44F10034B0B2 /* ProgressView.swift */,
+				CA66AAAF1DAE44F10034B0B2 /* UINavigationController+Progress.swift */,
+			);
+			name = ProgressBar;
+			sourceTree = "<group>";
+		};
 		E209CF7C1CF7092C0069E9F0 = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				CA5DE45D1D8FDCC200D015CE /* StoreKitManager.swift */,
+				CA66AAAC1DAE449A0034B0B2 /* ProgressBar */,
 				E24A251E1D216522006EA7D9 /* DecodeHTML.swift */,
 				CA30A4831D86B46E00B10E66 /* Extensions.swift */,
 				E200B94A1D1BF16D00B83FDA /* BubbleTransition.swift */,
@@ -530,6 +546,7 @@
 				E209CF891CF7092D0069E9F0 /* AppDelegate.swift in Sources */,
 				CA30A47B1D86A47D00B10E66 /* ManagedRelationshipTag.swift in Sources */,
 				CA03082E1D897D9800372AF0 /* isConnected.swift in Sources */,
+				CA66AAB01DAE44F10034B0B2 /* ProgressView.swift in Sources */,
 				E209CFA21CF72BAC0069E9F0 /* HeroCell.swift in Sources */,
 				CA30A49A1D86B51C00B10E66 /* NetworkReachabilityManager.swift in Sources */,
 				CA30A4A41D86B51C00B10E66 /* TaskDelegate.swift in Sources */,
@@ -545,6 +562,7 @@
 				E2B42A401D0177F9007775CC /* PMAlertAction.swift in Sources */,
 				CA30A46E1D86A47D00B10E66 /* ManagedActionProperty.swift in Sources */,
 				CA30A46A1D86A47D00B10E66 /* File.swift in Sources */,
+				CA66AAB11DAE44F10034B0B2 /* UINavigationController+Progress.swift in Sources */,
 				CA30A49F1D86B51C00B10E66 /* ResponseSerialization.swift in Sources */,
 				CA30A4821D86A47D00B10E66 /* Watch.swift in Sources */,
 				CA30A4761D86A47D00B10E66 /* ManagedObject.swift in Sources */,

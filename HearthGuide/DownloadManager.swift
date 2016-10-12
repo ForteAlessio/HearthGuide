@@ -17,6 +17,7 @@ class DownloadManager: NSObject {
   var numRequest       = 0
   var heroUpdated      = 0
   let configuration    = URLSessionConfiguration.default
+  var valueBar:Float   = 0.0
   
   
   //Scarica e inserisce nel Database il Json dei Mazzo che gli passiamo
@@ -34,6 +35,15 @@ class DownloadManager: NSObject {
     DataManager.shared.Carte = DataManager.shared.graph.searchForEntity(types: ["Carta"])
     
     let hero: Array<Entity> = DataManager.shared.graph.searchForEntity(groups: ["Eroi"])
+    
+    if Thread.isMainThread {
+      SwiftLoader.show("Update Mazzi..", animated: true)
+    }else {
+      DispatchQueue.main.async {
+        SwiftLoader.show("Update Mazzi..", animated: true)
+      }
+    }
+    valueBar = 0.0
     
     for x in 0..<Heroes.count {
       _ = request("http://www.puntoesteticamonteverde.it/HearthGuide/" + Heroes[x].lowercased() + ".json", method: .get).responseJSON { response in
@@ -96,6 +106,16 @@ class DownloadManager: NSObject {
             for j in 0..<jsonCard.count {
               let card: Entity = Entity(type: "Carta")
               
+              if Thread.isMainThread {
+                self.valueBar += 0.001
+                DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
+              }else {
+                DispatchQueue.main.async {
+                  self.valueBar += 0.001
+                  DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
+                }
+              }
+              
               if let cardName = jsonCard[j]["name"].string {
                 card["nome"] = cardName
               }
@@ -118,7 +138,6 @@ class DownloadManager: NSObject {
                 url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
               }
               
-              
               _ = request(url, method: .get).responseJSON { response in
                 
                 card["immagine"] = UIImage(data: response.data!)!
@@ -140,6 +159,16 @@ class DownloadManager: NSObject {
             
             for j in 0..<jsonCard.count {
               let card: Entity = Entity(type: "Carta")
+              
+              if Thread.isMainThread {
+                self.valueBar += 0.001
+                DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
+              }else {
+                DispatchQueue.main.async {
+                  self.valueBar += 0.001
+                  DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
+                }
+              }
               
               if let cardName = jsonCard[j]["name"].string {
                 card["nome"] = cardName
@@ -168,15 +197,17 @@ class DownloadManager: NSObject {
               }
               _ = request(url, method: .get).responseJSON { response in
                 
-                card["immagine"] = UIImage(data: response.data!)!
-                
                 if Thread.isMainThread {
-                  SwiftLoader.show("Aggiornamento Mazzi", animated: true)
+                  self.valueBar += 0.001
+                  DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
                 }else {
                   DispatchQueue.main.async {
-                    SwiftLoader.show("Aggiorno " + Heroes[x], animated: true)
+                    self.valueBar += 0.001
+                    DataManager.shared.mainController.navigationController!.setProgress(self.valueBar, animated: true)
                   }
                 }
+                
+                card["immagine"] = UIImage(data: response.data!)!
                 
                 DataManager.shared.graph.async()
                 self.group.leave()
@@ -228,10 +259,12 @@ class DownloadManager: NSObject {
             
             if Thread.isMainThread {
               SwiftLoader.hide()
+              DataManager.shared.mainController.navigationController!.finishProgress()
               DataManager.shared.mainController.tableView.reloadData()
             }else {
-              DispatchQueue.main.sync {
+              DispatchQueue.main.async {
                 SwiftLoader.hide()
+                DataManager.shared.mainController.navigationController!.finishProgress()
                 DataManager.shared.mainController.tableView.reloadData()
               }
             }
@@ -262,14 +295,21 @@ class DownloadManager: NSObject {
   
   
   //cancella tutti i dati riguardanti l'eroe che gli passiamo
-  func emptyDbFromHero(_ ANome: String) {
+  func emptyDbFromHero(_ ANome: String, last: Bool) {
     DataManager.shared.graph.watchForEntity(types: ["Mazzo"])
     DataManager.shared.Mazzi = DataManager.shared.graph.searchForEntity(types: ["Mazzo"])
     
     DataManager.shared.graph.watchForEntity(types: ["Carta"])
     DataManager.shared.Carte = DataManager.shared.graph.searchForEntity(types: ["Carta"])
     
+    let val: Float = 0.0002
+    
     for mazzo in DataManager.shared.Mazzi {
+      DispatchQueue.main.async {
+        print(DataManager.shared.mainController.navigationController!.progress + val)
+        DataManager.shared.mainController.navigationController!.setProgress(DataManager.shared.mainController.navigationController!.progress + val, animated: true)
+      }
+      
       if (mazzo["eroe"] as! String).lowercased() == ANome.lowercased() {
         mazzo.remove(tag: ANome)
         mazzo.delete()
@@ -277,6 +317,11 @@ class DownloadManager: NSObject {
     }
     
     for carta in DataManager.shared.Carte {
+      DispatchQueue.main.async {
+        print(DataManager.shared.mainController.navigationController!.progress + val)
+        DataManager.shared.mainController.navigationController!.setProgress(DataManager.shared.mainController.navigationController!.progress + val, animated: true)
+      }
+      
       if (carta["eroe"] as! String).lowercased() == ANome.lowercased() {
         carta.remove(tag: carta["mazzo"] as! String)
         carta.delete()
@@ -284,6 +329,12 @@ class DownloadManager: NSObject {
     }
     
     DataManager.shared.graph.async()
+    
+    if last {
+      DispatchQueue.main.async {
+        DataManager.shared.mainController.navigationController!.finishProgress()
+      }
+    }
   }
   
   //cancella tutti i dati nel database interno di graph
@@ -297,17 +348,28 @@ class DownloadManager: NSObject {
     DataManager.shared.graph.watchForEntity(types: ["Carta"])
     DataManager.shared.Carte = DataManager.shared.graph.searchForEntity(types: ["Carta"])
     
+    DataManager.shared.mainController.navigationController!.progress = 0.0
+    let val: Float = 1 / Float(DataManager.shared.Mazzi.count + DataManager.shared.Carte.count + 20)
+
     for eroe in DataManager.shared.Eroi {
       eroe.remove(tag: "Eroi")
     }
     DataManager.shared.Eroi.removeAll()
     
     for mazzo in DataManager.shared.Mazzi {
+      DispatchQueue.main.async {
+        DataManager.shared.mainController.navigationController!.setProgress(DataManager.shared.mainController.navigationController!.progress + val, animated: true)
+      }
+
       mazzo.remove(tag: mazzo["eroe"] as! String)
     }
     DataManager.shared.Mazzi.removeAll()
     
     for carta in DataManager.shared.Carte {
+      DispatchQueue.main.async {
+        DataManager.shared.mainController.navigationController!.setProgress(DataManager.shared.mainController.navigationController!.progress + val, animated: true)
+      }
+
       carta.remove(tag: carta["mazzo"] as! String)
     }
     DataManager.shared.Carte.removeAll()
@@ -315,5 +377,11 @@ class DownloadManager: NSObject {
     DataManager.shared.graph.clear()
     
     DataManager.shared.graph.async()
+    
+    if val != 0.05 {
+      DispatchQueue.main.async {
+        DataManager.shared.mainController.navigationController!.finishProgress()
+      }
+    }
   }
 }
