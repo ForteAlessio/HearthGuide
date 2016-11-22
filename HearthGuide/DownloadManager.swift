@@ -131,12 +131,7 @@ class DownloadManager: NSObject {
               
               var url = ""
               
-              if (card["id"] as! String).range(of: "KAR_") != nil {
-                url = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + (card["id"] as! String) + ".png"
-              }
-              else {
-                url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
-              }
+                url = "http://www.puntoesteticamonteverde.it/HearthGuide/images/" + (card["id"] as! String) + ".png"
               
               _ = request(url, method: .get).responseJSON { response in
                 
@@ -189,12 +184,8 @@ class DownloadManager: NSObject {
              
               var url = ""
               
-              if (card["id"] as! String).range(of: "KAR_") != nil {
-                url = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/" + (card["id"] as! String) + ".png"
-              }
-              else {
-                url = "http://wow.zamimg.com/images/hearthstone/cards/itit/original/" + (card["id"] as! String) + ".png"
-              }
+                url = "http://www.puntoesteticamonteverde.it/HearthGuide/images/" + (card["id"] as! String) + ".png"
+
               _ = request(url, method: .get).responseJSON { response in
                 
                 if Thread.isMainThread {

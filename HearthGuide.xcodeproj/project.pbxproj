@@ -746,7 +746,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = HearthGuide/HearthGuide.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: alessio forte (JMAE6SWMQB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = JMAE6SWMQB;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -760,8 +760,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = HearthGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8656a13-1306-4805-98b7-18f84f69a685";
-				PROVISIONING_PROFILE_SPECIFIER = HearthGuide.Distribution;
+				PROVISIONING_PROFILE = "14351ba8-6a59-49aa-abbe-bd3bc94e30ab";
+				PROVISIONING_PROFILE_SPECIFIER = com.AlessioForte.HearthGuide;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearthGuide/HearthGuide-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;

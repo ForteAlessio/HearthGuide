@@ -55,7 +55,7 @@ class BannerController: UIViewController, GADBannerViewDelegate {
   
   func adView(_ bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
     self.imgBack.isHidden  = false
-    self.topCon.constant = 50
+    self.topCon.constant   = 50
     
     UIView.animate(withDuration: 0.5, animations: {
       self.view.layoutIfNeeded()
