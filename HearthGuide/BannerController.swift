@@ -150,7 +150,8 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       
       alertVC.addAction(PMAlertAction(title: "Avanti", style: .default, action: { () -> Void in
         DispatchQueue.global().async(execute: {
-          _ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
+          OneSignal.registerForPushNotifications()
+          //_ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
           
           self.initialDownload()
         });
@@ -164,8 +165,8 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
       
       if notificationType != UIUserNotificationType() {
-        
-        _ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
+        OneSignal.registerForPushNotifications()
+        //_ = OneSignal(launchOptions: DataManager.shared.option, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotification: nil)
       }
     }
   }

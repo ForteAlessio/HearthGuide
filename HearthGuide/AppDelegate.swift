@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
+    OneSignal.initWithLaunchOptions(launchOptions, appId: "0653bede-a40a-44b8-949a-f0395e48a075", handleNotificationReceived:nil, handleNotificationAction:nil, settings:[kOSSettingsKeyInFocusDisplayOption : OSNotificationDisplayType.none.rawValue, kOSSettingsKeyAutoPrompt: false])
+    
     DataManager.shared.option = launchOptions as [NSObject : AnyObject]?
     
     if application.applicationIconBadgeNumber == 1 {
