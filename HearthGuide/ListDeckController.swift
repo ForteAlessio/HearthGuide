@@ -91,8 +91,8 @@ class ListDeckController: UICollectionViewController, UIViewControllerTransition
     switch kind {
     case UICollectionElementKindSectionHeader:
       let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath) as! CardListHeader
-      hdCell.laNome.text            = "Lista " + deckName
-      hdCell.vwBack.backgroundColor = UIColor.clear
+      hdCell.laNome.text            = "Lista: " + deckName
+      hdCell.vwBack.backgroundColor = UIColor(rgba: "#ecf0f1", alpha: 1)
       return hdCell
     default:
        let hdCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ListCardHeader", for: indexPath)

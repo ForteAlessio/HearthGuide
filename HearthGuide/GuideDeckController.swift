@@ -33,14 +33,14 @@ class GuideDeckController: UIViewController, UIViewControllerTransitioningDelega
       tvGuide.text = guide.html2String + " "
     }
     
-    tvGuide.textColor         = UIColor.white
-    tvGuide.backgroundColor   = UIColor.clear
-    tvGuide.font              = UIFont(name: "Lato", size: 18)
-    tvGuide.textAlignment     = .justified
+    tvGuide.textColor               = UIColor.white
+    tvGuide.backgroundColor         = UIColor.clear
+    tvGuide.font                    = UIFont(name: "Lato", size: 18)
+    tvGuide.textAlignment           = .justified
     
-    
-    laNomeDeck.text                 = "Come Affrontare: " + deckName
-    vwNomeDeck.backgroundColor      = UIColor.clear
+    laNomeDeck.text                 = deckName
+    vwNomeDeck.backgroundColor      = UIColor(rgba: "#ecf0f1", alpha: 1)
+    vwNomeDeck.borderColor          = UIColor(rgba: "#ecf0f1", alpha: 1)
     self.view.backgroundColor       = UIColor(patternImage: UIImage(named: "background")!)
     vwBackCollView.backgroundColor  = UIColor(patternImage: UIImage(named: "cellBackground")!)
     vwHeader.backgroundColor        = UIColor(rgba: "#ecf0f1", alpha: 1)
