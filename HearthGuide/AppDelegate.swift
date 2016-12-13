@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let defaults = UserDefaults.standard
       defaults.set("1", forKey: "alert")
     }
-      
+    
     return true
   }
 
