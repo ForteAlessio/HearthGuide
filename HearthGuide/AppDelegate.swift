@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       defaults.set("1", forKey: "alert")
     }
     
+    //Eliminare la Pubblicità dal Simulatore per i Screen
+    //let defaults = UserDefaults.standard
+    //defaults.set("99", forKey: "NoAds")
+    
     return true
   }
 

@@ -127,7 +127,8 @@ class StoreKitManager: NSObject, SKPaymentTransactionObserver, SKProductsRequest
 			
 			let prodID = t.payment.productIdentifier as String
 			
-			switch prodID {	//aggiungere un caso per ogni product
+      //aggiungere un caso per ogni product
+			switch prodID {
 			case productId:
 				print("Acquistato")
 				delegate?.acquistoEffettuato()
