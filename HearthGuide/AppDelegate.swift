@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     DataManager.shared.option = launchOptions as [NSObject : AnyObject]?
     
+    //codice per eliminare la cache dell'app
+    let sharedCache = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
+    URLCache.shared = sharedCache
+    
     if application.applicationIconBadgeNumber == 1 {
       let defaults = UserDefaults.standard
       defaults.set("1", forKey: "alert")
