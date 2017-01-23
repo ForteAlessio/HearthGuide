@@ -32,16 +32,13 @@ class BannerController: UIViewController, GADBannerViewDelegate {
       vwBanner.delegate           = self
 
       //id Banner Pubblicitario
-      //ca-app-pub-7772743643397664/9778396030
-      
-      //id App AdMob
-      //ca-app-pub-7772743643397664~6824929634
+      //ca-app-pub-3784223401458249/7662837617
       
       //id Test AdMob
       //ca-app-pub-3940256099942544/2934735716
       
       imgBack.isHidden            = true
-      vwBanner.adUnitID           = "ca-app-pub-7772743643397664/9778396030"
+      vwBanner.adUnitID           = "ca-app-pub-3784223401458249/7662837617"
       vwBanner.rootViewController = self
       DataManager.shared.myDevice = UIDevice.current.modelName
     }

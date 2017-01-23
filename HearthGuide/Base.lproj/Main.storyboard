@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gRn-PW-fWK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gRn-PW-fWK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -53,15 +53,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Druido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGB-Lw-D0D">
-                                                    <rect key="frame" x="72" y="4" width="461" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="2UH-cb-v1G"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2s1-b2-ohI">
                                                     <rect key="frame" x="551" y="18" width="25" height="25"/>
                                                     <constraints>
@@ -70,25 +61,39 @@
                                                     </constraints>
                                                     <state key="normal" image="arrowRight"/>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Druido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGB-Lw-D0D">
+                                                    <rect key="frame" x="70" y="16" width="461" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="2UH-cb-v1G"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="HfH-N0-azY" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="-3" id="727-MD-ZbB"/>
-                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="oGB-Lw-D0D" secondAttribute="trailing" constant="18" id="Ckb-8j-iRJ"/>
+                                                <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="oGB-Lw-D0D" secondAttribute="trailing" constant="20" id="Ckb-8j-iRJ"/>
                                                 <constraint firstItem="2s1-b2-ohI" firstAttribute="leading" secondItem="gTz-1A-60E" secondAttribute="trailing" constant="18" id="EzC-yY-cSZ"/>
-                                                <constraint firstItem="oGB-Lw-D0D" firstAttribute="leading" secondItem="HfH-N0-azY" secondAttribute="trailing" constant="10" id="Foc-SH-4CR"/>
+                                                <constraint firstItem="oGB-Lw-D0D" firstAttribute="leading" secondItem="HfH-N0-azY" secondAttribute="trailing" constant="8" id="Foc-SH-4CR"/>
                                                 <constraint firstItem="2s1-b2-ohI" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="18" id="KPm-4X-Ueo"/>
                                                 <constraint firstAttribute="trailing" secondItem="2s1-b2-ohI" secondAttribute="trailing" constant="8" id="O5y-2f-8T6"/>
                                                 <constraint firstItem="HfH-N0-azY" firstAttribute="leading" secondItem="55n-bT-Wzj" secondAttribute="leading" constant="7" id="RTP-Wo-tmN"/>
                                                 <constraint firstItem="gTz-1A-60E" firstAttribute="leading" secondItem="HfH-N0-azY" secondAttribute="trailing" constant="10" id="WIS-CJ-zQ9"/>
                                                 <constraint firstAttribute="bottom" secondItem="gTz-1A-60E" secondAttribute="bottom" constant="6" id="erv-wQ-PFa"/>
-                                                <constraint firstItem="oGB-Lw-D0D" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="4" id="mS5-N5-Fka"/>
+                                                <constraint firstItem="oGB-Lw-D0D" firstAttribute="top" secondItem="55n-bT-Wzj" secondAttribute="top" constant="16" id="mS5-N5-Fka"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                     <real key="value" value="5"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="gTz-1A-60E"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                     </subviews>
                                     <constraints>
@@ -631,7 +636,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carte Chiave del Mazzo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85K-xl-GWb">
-                                        <rect key="frame" x="8" y="5" width="576" height="28"/>
+                                        <rect key="frame" x="8" y="5" width="576" height="27"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
